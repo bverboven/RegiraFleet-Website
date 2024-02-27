@@ -1,0 +1,16 @@
+{
+  "clientId": "crm-client",
+  "api": {
+    "development": "https://localhost:7193/",
+    "production": "https://fleet.regira.com/api"
+  },
+  "includeCredentials": false,
+  "isDebug": true,
+  "isDemo": true,
+
+  "title": "Regira Fleet Manager",
+
+  "entities": [],
+  "dashboard": [],
+  "navbar": []
+}

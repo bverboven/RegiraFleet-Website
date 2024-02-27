@@ -1,0 +1,23 @@
+@import './base.css';
+
+#app {
+  height: 100vh;
+  overflow: auto;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin: 0.25rem 0 0.75rem 0;
+}
+h2 {
+  font-size: 1.15rem;
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.is-archived {
+  background-color: rgba(220, 53, 69, 0.4);
+  color: #fff;
+}
+.is-selected {
+  background-color: rgba(248, 249, 250, 1);
+}
