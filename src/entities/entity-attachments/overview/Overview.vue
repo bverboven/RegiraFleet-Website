@@ -1,0 +1,36 @@
+<template>
+    <FormSection title="Attachments">
+        <List v-model="items" />
+        <FileDropZone @drop-files="handleBrowse" @click="triggerBrowse()">
+            <template #default="{ isDropping }">
+                <div class="file-drop-zone row align-items-center justify-content-center m-2 mb-3" :class="{ dropping: isDropping }" style="min-height: 20rem">
+                    <div class="col-auto">
+                        <span class="italic-muted text-info">Add new file(s)</span>
+                    </div>
+                </div>
+            </template>
+        </FileDropZone>
+        <!-- <BrowseButton class="btn btn-info" @browse="handleBrowse">Add new file</BrowseButton> -->
+        <Debug :modelValue="items" />
+    </FormSection>
+</template>
+
+<script setup lang="ts">
+import { FileDropZone } from "@/regira_modules/vue/ui"
+import { type Entity, List, BrowseButton, useEntityAttachments } from "../"
+
+const emit = defineEmits<{
+    (e: "update:modelValue", args: Array<Entity>): void
+    (e: "sort", args: any): void
+}>()
+const props = withDefaults(
+    defineProps<{
+        modelValue?: Array<Entity>
+    }>(),
+    {
+        modelValue: () => [],
+    }
+)
+
+const { items, triggerBrowse, handleBrowse } = useEntityAttachments({ props, emit })
+</script>

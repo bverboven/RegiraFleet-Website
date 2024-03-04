@@ -92,7 +92,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
         // auth
         app.use(authPlugin, {
             enabled: true,
-            clientId: processedConfig.clientId,
+            clientApp: processedConfig.clientApp,
             tokenManager: new CookieTokenManager(),
             axios,
             onAuthenticationChange: async (auth) => {

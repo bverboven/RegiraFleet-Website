@@ -5,6 +5,7 @@ import Dummy from '@/views/Dummy.vue'
 
 import Login from '@/views/Login.vue'
 import AccountView from '@/views/AccountView.vue'
+import AccountHome from "@/components/user/Account.vue"
 import ForgotPassword from '@/views/ForgotPassword.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
 import Unauthorized from '@/views/Unauthorized.vue'
@@ -47,6 +48,11 @@ export const routes: Array<RouteRecordRaw> = [
     redirect: { name: 'accountHome' },
     children: [
       {
+          name: "accountHome",
+          path: "",
+          component: AccountHome,
+      },
+      {
         name: 'login',
         path: 'login',
         component: Login,
@@ -57,11 +63,6 @@ export const routes: Array<RouteRecordRaw> = [
           allowAnonymous: true
         }
       },
-      // {
-      //   name: "invoiceTemplate-home",
-      //   path: "my-defaults",
-      //   component: InvoiceTemplateOverview,
-      // },
       {
         name: 'forgotPassword',
         path: 'forgot-password',

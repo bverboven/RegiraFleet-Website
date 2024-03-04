@@ -4,18 +4,18 @@ import { AuthService, type IAuthService } from "./auth-service"
 
 interface IAuth {
     enabled: boolean
-    clientId?: string
+    clientApp?: string
     tokenManager: ITokenManager
     service: IAuthService
 }
 
-type Input = { enabled: boolean; clientId?: string; tokenManager: ITokenManager; axios: AxiosInstance }
+type Input = { enabled: boolean; clientApp?: string; tokenManager: ITokenManager; axios: AxiosInstance }
 
 let auth: IAuth
-export function createAuth({ enabled, clientId, tokenManager, axios }: Input): IAuth {
+export function createAuth({ enabled, clientApp, tokenManager, axios }: Input): IAuth {
     auth = {
         enabled,
-        clientId,
+        clientApp,
         tokenManager,
         service: new AuthService(axios, tokenManager),
     }

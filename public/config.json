@@ -1,16 +1,17 @@
 {
-  "clientId": "crm-client",
-  "api": {
-    "development": "https://localhost:7193/",
-    "production": "https://fleet.regira.com/api"
-  },
-  "includeCredentials": false,
-  "isDebug": true,
-  "isDemo": true,
+    "clientApp": "fleet-client&clientId=1b615c0096c04eb2975ef84463aa8257",
+    "clientId": "1b615c0096c04eb2975ef84463aa8257",
+    "api": {
+        "development": "https://localhost:7193/",
+        "production": "https://fleet.regira.com/api"
+    },
+    "includeCredentials": false,
+    "isDebug": true,
+    "isDemo": true,
 
-  "title": "Regira Fleet Manager",
+    "title": "Regira Fleet Manager",
 
-  "entities": [],
-  "dashboard": [],
-  "navbar": []
+    "entities": ["intervention-operators", "brands", "intervention-types"],
+    "dashboard": ["intervention-operators", "brands", "intervention-types"],
+    "navbar": ["intervention-operators"]
 }

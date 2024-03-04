@@ -8,7 +8,7 @@ import { createAuth } from "./auth"
 import type { IAuthData } from "./AuthData"
 
 type Input = {
-    clientId?: string
+    clientApp?: string
     tokenManager: ITokenManager
     axios: AxiosInstance
     enableRouteGuard?: boolean
@@ -18,12 +18,12 @@ type Input = {
 
 export default {
     async install(app: App, options: Input) {
-        const { clientId, tokenManager, axios, enableRouteGuard = true, enabled = true, onAuthenticationChange = () => {} } = options
+        const { clientApp, tokenManager, axios, enableRouteGuard = true, enabled = true, onAuthenticationChange = () => {} } = options
         const { $router: router } = app.config.globalProperties
 
         const auth = createAuth({
             enabled,
-            clientId,
+            clientApp,
             tokenManager,
             axios,
         })
@@ -50,8 +50,8 @@ export default {
                 },
             }
 
-            if (clientId) {
-                store.$patch({ clientId, enabled })
+            if (clientApp) {
+                store.$patch({ clientApp, enabled })
             }
         } else {
             app.config.globalProperties.$auth = { enabled: false }

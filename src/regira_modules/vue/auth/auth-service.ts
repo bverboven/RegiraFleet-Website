@@ -10,7 +10,7 @@ export type IResetPasswordInput = { token: string; password: string }
 
 export interface IAuthService {
     authenticate({ token, isAuthenticated }: IAuthenticateInput): IAuthData
-    login(username: string, password: string, clientId?: string): Promise<IAuthData>
+    login(username: string, password: string, clientApp?: string): Promise<IAuthData>
     refresh(o?: Record<string, any>): Promise<IAuthData>
     validateToken(): Promise<IAuthData>
     logout(): void
@@ -50,8 +50,8 @@ export class AuthService implements IAuthService {
         this.tokenManager.token = undefined
         return emptyAuthData()
     }
-    async login(username: string, password: string, clientId?: string): Promise<IAuthData> {
-        const url = `auth/?clientId=${clientId || ""}`
+    async login(username: string, password: string, clientApp?: string): Promise<IAuthData> {
+        const url = `auth/?clientApp=${clientApp || ""}`
         const response = await this.axios.post(url, { username, password })
         console.debug("login", { response })
         return this.authenticate(response.data)

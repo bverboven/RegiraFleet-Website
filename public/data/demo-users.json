@@ -1,0 +1,10 @@
+[
+    {
+        "username": "bwr_read",
+        "title": "Brandweer (readonly)"
+    },
+    {
+        "username": "bwr_write",
+        "title": "Brandweer (can write)"
+    }
+]
