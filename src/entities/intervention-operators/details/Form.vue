@@ -43,6 +43,15 @@
 
                         <!-- Addresses -->
                         <Addresses v-model="item.addresses" :stakeholder="item" />
+
+                        <FormSection title="Intervention types">
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <InterventionTypeSelector v-model="item.interventionTypes" placeholder="select type" />
+                                    <FormLabel label="Intervention type(s)" />
+                                </div>
+                            </div>
+                        </FormSection>
                     </template>
 
                     <template #files>
@@ -70,10 +79,12 @@ import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
 import { FormButtonsRow } from "@/components/input"
+import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { Overview as ContactData } from "../operator-contact-data"
 import { Overview as Addresses } from "../operator-addresses"
-import { Entity, useEntityStore } from "../"
+import Entity from "../data/Entity"
+import useEntityStore from "../data/store"
 
 interface Emits extends /* @vue-ignore */ FormEmits<Entity> {}
 const emit = defineEmits<Emits>()
@@ -91,8 +102,6 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
-
-const showSideTree = ref<boolean>(true)
 
 // Tabs
 const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" })].filter((x) => x))

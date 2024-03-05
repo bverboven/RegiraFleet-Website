@@ -11,7 +11,7 @@
 
     "title": "Regira Fleet Manager",
 
-    "entities": ["intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
-    "dashboard": ["intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
-    "navbar": ["vehicles", "intervention-operators"]
+    "entities": ["Interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
+    "dashboard": ["Interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],
+    "navbar": ["Interventions", "vehicles", "intervention-operators"]
 }

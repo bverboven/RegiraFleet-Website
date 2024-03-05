@@ -6,7 +6,7 @@ import Entity from "./Entity"
 export class EntityService extends EntityServiceBase<Entity> {
     constructor(axios: AxiosWithFilesInstance, config: IConfig) {
         super(axios, config)
-        console.debug("InterventionTypeService", this, { config })
+        console.debug("InterventionService", this, { config })
     }
 
     async getAttachments(so?: object): Promise<Array<EntityAttachment>> {
@@ -33,11 +33,8 @@ export class EntityService extends EntityServiceBase<Entity> {
     }
 
     protected override prepareItem(item: Entity): Entity {
-        item.addresses = item.addresses?.filter((x) => !x._deleted)
-        item.contactData = item.contactData?.filter((x) => !x._deleted)
         item.interventionTypes = item.interventionTypes?.filter((x) => !x._deleted)
         item.attachments = item.attachments?.filter((x) => !x._deleted)
-
         return super.prepareItem(item)
     }
 

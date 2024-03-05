@@ -1,6 +1,6 @@
 <template>
     <div class="row g-1">
-        <div v-for="(item, i) in items" :key="item.id" class="col-auto" :class="{ 'is-deleted': item._deleted }">
+        <div v-for="(item, i) in items" :key="item.id" class="col-auto">
             <div class="text-nowrap p-2 border rounded-1">
                 <FormModalButton v-model="items![i]" class="m-0 p-0" />
                 {{ item.title }}
@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-auto">
-            <InputSelector v-model="newItem" :filter-defaults="filterDefaults" :placeholder="placeholder" @select="handleSelect" />
+            <InputSelector v-model="newItem" @select="handleSelect" />
         </div>
     </div>
 </template>
@@ -25,10 +25,8 @@ const emit = defineEmits<{
     (e: "update:idsValue", args: Array<number>): void
 }>()
 const props = defineProps<{
-    placeholder?: string
     modelValue?: Array<Entity>
     idsValue?: Array<number>
-    filterDefaults?: Record<string, any>
 }>()
 
 const { fromPool, list } = useEntityStore()
@@ -56,8 +54,7 @@ function handleSelect(selected?: Entity) {
 }
 function handleRemove(selected: Entity) {
     console.debug("handleRemove", { selected })
-    selected._deleted = !selected._deleted
-    const newVal = [...items.value] // items.value.filter((x) => x.$id != selected?.$id)
+    const newVal = items.value.filter((x) => x.$id != selected?.$id)
     emit(
         "update:idsValue",
         newVal.map((x) => x.id!)

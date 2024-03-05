@@ -1,11 +1,28 @@
-import type { AxiosWithFilesInstance } from "@/regira_modules/vue/http/axios"
-import { EntityServiceBase, type IConfig } from "@/regira_modules/vue/entities"
-import { insertWithAttachments, updateWithAttachments } from "../../entity-attachments"
+import { type AxiosWithFilesInstance, createQueryString } from "@/regira_modules/vue/http"
+import { EntityServiceBase, type ListResult, type IConfig } from "@/regira_modules/vue/entities"
+import { Entity as EntityAttachment, insertWithAttachments, updateWithAttachments, createEntity, save as saveAttachments } from "../../entity-attachments"
 import Entity from "./Entity"
 
 export class EntityService extends EntityServiceBase<Entity> {
     constructor(axios: AxiosWithFilesInstance, config: IConfig) {
         super(axios, config)
+        console.debug("VehicleService", this, { config })
+    }
+
+    async getAttachments(so?: object): Promise<Array<EntityAttachment>> {
+        const url = `${this.config.api}/attachments`
+        const queryString = createQueryString(so || {})
+        const {
+            data: { items },
+        } = await this.axios.get<ListResult<EntityAttachment>>(`${url}?${queryString}`)
+
+        return items.map((x) => EntityAttachment.create(x))
+    }
+    async addAttachment(itemId: number, file: Blob): Promise<EntityAttachment> {
+        const url = `${this.config.api}/${itemId}/files`
+        const attachment = createEntity(file)
+        await saveAttachments(url, [attachment])
+        return attachment
     }
 
     override async insert(item: Entity): Promise<Entity | null> {
