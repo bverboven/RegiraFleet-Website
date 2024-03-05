@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
-import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
+import { Feedback, TabContainer, Tab, useScreen } from "@/regira_modules/vue/ui"
 import { FormButtonsRow } from "@/components/input"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
 import config from "../config/config"

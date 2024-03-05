@@ -1,6 +1,6 @@
 import type { App } from "vue"
 import type { RouteRecordRaw } from "vue-router"
-import type { AxiosInstance } from "axios"
+import type { AxiosWithFilesInstance } from "@/regira_modules/vue/http/axios"
 import type { IServiceProvider } from "@/regira_modules/vue/ioc"
 import type { IIconProvider } from "@/regira_modules/vue/ui/icons"
 import { DetailsSummary } from "@/regira_modules/vue/entities"
@@ -41,11 +41,11 @@ export function createRoutes(): Array<RouteRecordRaw> {
 }
 
 export function addServices(serviceProvider: IServiceProvider) {
-    serviceProvider.add(Entity.name, (sp) => new EntityService(sp.get<AxiosInstance>("axios")!, config))
+    serviceProvider.add(Entity.name, (sp) => new EntityService(sp.get<AxiosWithFilesInstance>("axios")!, config))
 }
 
 export function addIcons(icons: IIconProvider) {
-    icons.add(Entity.name, config.icon)
+    icons.add(Entity.name, config.icon!)
 }
 
 export default {

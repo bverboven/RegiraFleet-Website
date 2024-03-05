@@ -5,6 +5,9 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
+        <div class="col-1 text-truncate">
+            {{ item.code }}
+        </div>
         <div class="col text-truncate">
             {{ item.$title }}
         </div>

@@ -1,5 +1,5 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
-import type { Country } from "../../countries-all/Entity"
+import { Country } from '../../countries/data/Entity';
 
 export class Address extends EntityBase {
     id: number = 0

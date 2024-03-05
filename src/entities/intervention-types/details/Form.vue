@@ -31,6 +31,13 @@
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <div class="input-group">
+                                        <div class="input-group-text"><Icon name="code" /></div>
+                                        <input v-model="item.code" maxlength="8" class="form-control" />
+                                    </div>
+                                    <FormLabel label="Code" />
+                                </div>
+                                <div class="col-md mb-2">
+                                    <div class="input-group">
                                         <div class="input-group-text"><Icon name="title" /></div>
                                         <input v-model="item.title" maxlength="128" class="form-control" />
                                     </div>
