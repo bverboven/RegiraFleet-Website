@@ -15,7 +15,7 @@
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" @click="showUsersList = !showUsersList">
                             Select user
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }">
+                        <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }" style="min-width: 12.5rem">
                             <li v-for="item in demoUsers" :key="item.username">
                                 <a class="dropdown-item" href="#" @click="handleSelectUser(item)">{{ item.title }}</a>
                             </li>
@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue"
 import { useConfig } from "@/app-config"
-import { useLoginForm, type ILoginEmits, type ILoginProps } from "@/regira_modules/vue/auth"
+import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
 
 interface IEmits extends ILoginEmits {}
@@ -59,7 +59,7 @@ const props: ILoginProps = defineProps<{
     signingIn?: boolean
 }>()
 
-type IDemoUser = { username: string; title: string }
+type IDemoUser = { username: string; title: string; clientId: string }
 
 const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
 
@@ -68,10 +68,13 @@ const minHeight = computed(() => (appConfig.isDemo && showUsersList.value ? "22r
 const showUsersList = ref(false)
 const demoUsers = ref<Array<IDemoUser>>()
 
-function handleSelectUser(item: { username: string; password?: string }) {
+const auth = useAuth()
+function handleSelectUser(item: { username: string; password?: string; clientId: string }) {
     username.value = item.username
     password.value = item.password || "demo"
     showUsersList.value = false
+    console.debug("handleSelectUser", { item, options: auth.service.options })
+    auth.service.options.loginUrl = appConfig.loginUrl.replace("\{clientId\}", item.clientId).replace("\{clientApp\}", appConfig.clientApp)
 }
 
 onMounted(async () => {

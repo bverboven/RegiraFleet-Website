@@ -5,7 +5,12 @@
         </li>
         <li v-if="isAuthenticated" class="nav-item dropdown">
             <LoadingContainer :is-loading="isLoading" style="max-height: 2.5rem">
-                <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item"><Icon name="user" /></router-link>
+                <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item">
+                    <Icon name="user" :title="$auth.authData.name" />
+                    <span class="ms-2 d-md-none">
+                        {{ $auth.authData.name }}
+                    </span>
+                </router-link>
                 <!-- <a class="nav-link dropdown-toggle" @click="handleToggleDropDown" href="#" id="navbarAccountDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <Icon name="user" /> USER
                 </a> -->

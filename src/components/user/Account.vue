@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-auto">
                 <ul class="list-group">
-                    <li class="list-group-item">USER</li>
+                    <li class="list-group-item"><Icon name="user" class="mx-1 me-2" />{{ $auth.authData.name }}</li>
                     <li class="list-group-item">
                         <button type="button" class="btn btn-default p-1" @click="showChangePassword = !showChangePassword">
                             <Icon name="security" class="me-1" />

@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col">
-                <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup" @select="handleSelectTab">
+                <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
                         <FormSection title="Vehicle">
                             <div class="row">
@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue"
+import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
@@ -99,8 +99,4 @@ const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore 
 
 // Tabs
 const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
-const activeTab = ref<string>()
-async function handleSelectTab(tab: string) {
-    activeTab.value = tab
-}
 </script>

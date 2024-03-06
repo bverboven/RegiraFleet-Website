@@ -8,16 +8,25 @@ interface IAuth {
     tokenManager: ITokenManager
     service: IAuthService
 }
+export type IAuthOptions = {
+    clientApp?: string
+    loginUrl?: string
+}
 
-type Input = { enabled: boolean; clientApp?: string; tokenManager: ITokenManager; axios: AxiosInstance }
+interface Input extends IAuthOptions {
+    enabled: boolean
+    tokenManager: ITokenManager
+    axios: AxiosInstance
+}
 
 let auth: IAuth
-export function createAuth({ enabled, clientApp, tokenManager, axios }: Input): IAuth {
+export function createAuth(options: Input): IAuth {
+    const { enabled, tokenManager, axios, clientApp, loginUrl } = options
     auth = {
         enabled,
         clientApp,
         tokenManager,
-        service: new AuthService(axios, tokenManager),
+        service: new AuthService(axios, tokenManager, { clientApp, loginUrl }),
     }
 
     return auth

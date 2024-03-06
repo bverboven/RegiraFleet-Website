@@ -3,8 +3,8 @@
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
             <div class="col fw-bold">Intervention(s)</div>
-            <div class="col fw-bold">Supplier</div>
             <div class="col fw-bold">Vehicle</div>
+            <div class="col fw-bold">Supplier</div>
             <div class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
         </div>
         <template v-for="(item, i) in items" :key="item.$id">

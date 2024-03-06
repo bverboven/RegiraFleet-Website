@@ -2,8 +2,9 @@
     <Autocomplete v-model="item" :search="search" :max-results="maxResults" :id-selector="idSelector" :display-item-formatter="displayItemFormatter" :placeholder="placeholder" ref="autoEl">
         <template #default="{ item, q }">
             <div class="row">
-                <div class="col-1">{{ item.code }}</div>
-                <div class="col">{{ item.$title }}</div>
+                <div class="col">
+                    {{ item.code }} <span class="text-muted">{{ item.$title }}</span>
+                </div>
             </div>
         </template>
     </Autocomplete>
@@ -56,6 +57,5 @@ defineExpose({
 const entityService = get<IEntityService<Entity>>(Entity.name)!
 const search = (q: string) => entityService.list({ ...props.filterDefaults, title: (q || "") + "*", pageSize: props.maxResults })
 const idSelector = (item?: Entity) => item?.$id?.toString()
-const resultItemFormatter = (item?: Entity, q?: string) => `${item?.$title}`
-const displayItemFormatter = (item?: Entity) => item?.$title as string
+const displayItemFormatter = (item?: Entity) => (item != null ? `${item?.code} - ${item?.$title}` : "")
 </script>

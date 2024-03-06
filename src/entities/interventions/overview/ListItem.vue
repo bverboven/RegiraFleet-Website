@@ -9,12 +9,12 @@
             {{ interventionTypes(item) }}
         </div>
         <div class="col text-truncate">
-            <OperatorButton :modelValue="item.operator" class="p-1 me-1" />
-            {{ getOperator(item.operator).$title }}
-        </div>
-        <div class="col text-truncate">
             <VehicleButton :modelValue="item.vehicle" class="p-1 me-1" />
             {{ getVehicle(item.vehicle).code }} <span class="text-muted">({{ getVehicle(item.vehicle).$title }})</span>
+        </div>
+        <div class="col text-truncate">
+            <OperatorButton :modelValue="item.operator" class="p-1 me-1" />
+            {{ getOperator(item.operator).$title }}
         </div>
         <div class="col-auto d-none d-md-block">
             <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>

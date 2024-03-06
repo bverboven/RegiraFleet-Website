@@ -4,11 +4,10 @@ import { addBearerHeader, autoLogoutOnFailedRequest } from "./auth-axios"
 import { useAuthStore } from "./store"
 import routeGuard from "./route-guard"
 import type ITokenManager from "./token-manager"
-import { createAuth } from "./auth"
+import { createAuth, type IAuthOptions } from "./auth"
 import type { IAuthData } from "./AuthData"
 
-type Input = {
-    clientApp?: string
+interface Input extends IAuthOptions {
     tokenManager: ITokenManager
     axios: AxiosInstance
     enableRouteGuard?: boolean
@@ -18,14 +17,15 @@ type Input = {
 
 export default {
     async install(app: App, options: Input) {
-        const { clientApp, tokenManager, axios, enableRouteGuard = true, enabled = true, onAuthenticationChange = () => {} } = options
+        const { clientApp, loginUrl, tokenManager, axios, enableRouteGuard = true, enabled = true, onAuthenticationChange = () => {} } = options
         const { $router: router } = app.config.globalProperties
 
         const auth = createAuth({
             enabled,
-            clientApp,
             tokenManager,
             axios,
+            clientApp,
+            loginUrl,
         })
 
         const store = useAuthStore()

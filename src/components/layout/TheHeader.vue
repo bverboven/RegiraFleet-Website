@@ -1,22 +1,13 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-md bg-body-tertiary" v-click-outside="handleCloseMenu">
         <router-link class="navbar-brand" :to="{ name: 'home' }" :title="'Fleet Manager v ' + version">
             <img :src="logo" style="height: 2rem; vertical-align: top" class="me-1" />
             Fleet Manager
         </router-link>
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            @click.stop="showNavBarContent = !showNavBarContent"
-        >
+        <button class="navbar-toggler" type="button" @click.stop="showNavbarContent = !showNavbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse bg-light pt-2 pt-md-0" :class="{ show: showNavbarContent }">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item d-none">
                     <router-link class="nav-link" aria-current="page" :to="{ name: 'home' }" :title="'Fleet Manager v ' + version">Fleet Manager</router-link>
@@ -27,7 +18,7 @@
                 <li class="nav-item" v-for="navItem in navbarItems">
                     <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click.native="handleCloseMenu">
                         <icon :name="navItem.id" />
-                        <span class="d-sm-none d-lg-inline ms-2">{{ navItem.overviewTitle }}</span>
+                        <span class="d-md-none d-lg-inline ms-2">{{ navItem.overviewTitle }}</span>
                     </RouterLink>
                 </li>
                 <li class="nav-item dropdown">
@@ -86,12 +77,12 @@ import AccountMenu from "@/components/user/HeaderMenu.vue"
 
 const { version } = useConfig()
 
-const showNavBarContent = ref(false)
+const showNavbarContent = ref(false)
 const showNavbarManagementDropdown = ref(false)
 const showNavbarStatisticsDropdown = ref(false)
 
 document.addEventListener("click", () => {
-    showNavBarContent.value = false
+    showNavbarContent.value = false
     showNavbarManagementDropdown.value = false
     showNavbarStatisticsDropdown.value = false
 })
@@ -101,7 +92,6 @@ const configs = Object.entries(app.appContext.config.globalProperties.$configs).
 
 const { navbar: navbarKeys } = useConfig()
 const navbarItems = ref<Array<IConfig>>([])
-const showNavbarContent = ref(false)
 
 function handleCloseMenu() {
     showNavbarContent.value = false
