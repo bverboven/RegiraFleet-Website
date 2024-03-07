@@ -102,7 +102,7 @@ export const routes: Array<RouteRecordRaw> = [
   // statistics
   {
     name: 'statistics',
-    path: '/statistieken',
+    path: '/statistics',
     component: Statistics,
     props: true,
     meta: {

@@ -98,6 +98,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
             onAuthenticationChange: async (auth) => {
                 if (auth.isAuthenticated) {
                     app.config.globalProperties.$setAppStatus(AppStatus.Loading)
+                    app.config.globalProperties.$feedback.success(`Welcome ${auth.displayName || auth.name}`)
 
                     // preloading
                     const preloaderTypes = [Country]

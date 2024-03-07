@@ -1,4 +1,5 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
+import type { Entity as Invoice } from "../intervention-invoices/Entity"
 import type { Entity as Vehicle } from "../../vehicles"
 import type { Entity as InterventionOperator } from "../../intervention-operators"
 import type { Entity as InterventionType } from "../../intervention-types"
@@ -20,6 +21,7 @@ export class Intervention extends EntityBase {
 
     vehicle?: Vehicle
     operator?: InterventionOperator
+    invoices?: Array<Invoice>
     interventionTypes?: Array<InterventionType>
     attachments?: Array<EntityAttachment>
 

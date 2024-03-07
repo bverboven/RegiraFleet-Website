@@ -31,7 +31,7 @@
                         data-toggle="dropdown"
                         aria-expanded="false"
                     >
-                        Statistieken
+                        <Icon name="statistics" /> Statistics
                     </a>
                     <ul class="dropdown-menu" :class="{ show: showNavbarStatisticsDropdown }" aria-labelledby="navbarStatistiekenDropdown">
                         <li>

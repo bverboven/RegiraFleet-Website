@@ -10,6 +10,7 @@
             <!-- <div class="form-control">{{ item?.title }}</div> -->
         </slot>
         <slot name="append">
+            <button type="button" v-show="item != null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
             <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
         </slot>
     </div>

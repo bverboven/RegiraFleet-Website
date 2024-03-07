@@ -4,6 +4,15 @@ export class EntitySearchObject extends SearchObjectBase {
     code?: string
     title?: string
 
+    interventionTypeId?: number | Array<number>
+    supplierId?: number
+    vehicleId?: number
+    vehicleTypeId?: number
+    brandId?: number
+
+    minDate?: Date
+    maxDate?: Date
+
     minCreated?: Date
     maxCreated?: Date
     minLastModified?: Date

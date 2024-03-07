@@ -56,7 +56,10 @@
                     </template>
 
                     <template #invoices>
-                        <FormSection title="Invoice(s)"> ToDo: INVOICE </FormSection>
+                        <FormSection title="Invoice(s)">
+                            ToDo: INVOICES
+                            <Debug :modelValue="item.invoices" />
+                        </FormSection>
                     </template>
 
                     <template #files>

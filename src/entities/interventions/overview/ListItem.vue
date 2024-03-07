@@ -5,17 +5,25 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
+        <div class="col-1">
+            <div class="italic-muted" :title="formatDate(item.interventionDate, $culture)">{{ formatShortDate(item.interventionDate, $culture) }}</div>
+        </div>
         <div class="col text-truncate">
+            <span class="d-lg-none">
+                <VehicleButton :modelValue="item.vehicle" class="p-1" />
+                {{ getVehicle(item.vehicle).code }} -
+            </span>
             {{ interventionTypes(item) }}
         </div>
-        <div class="col text-truncate">
-            <VehicleButton :modelValue="item.vehicle" class="p-1 me-1" />
+        <div class="col d-none d-lg-block text-truncate">
+            <VehicleButton :modelValue="item.vehicle" class="p-1" />
             {{ getVehicle(item.vehicle).code }} <span class="text-muted">({{ getVehicle(item.vehicle).$title }})</span>
         </div>
-        <div class="col text-truncate">
-            <OperatorButton :modelValue="item.operator" class="p-1 me-1" />
+        <div class="col d-none d-lg-block text-truncate">
+            <OperatorButton :modelValue="item.operator" class="p-1" />
             {{ getOperator(item.operator).$title }}
         </div>
+        <div class="col text-truncate d-none d-md-block">{{ item.invoices?.map((x) => x.invoiceNumber).join(", ") }}</div>
         <div class="col-auto d-none d-md-block">
             <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>
         </div>
@@ -25,6 +33,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useVModelField, createFromComputedPool } from "@/regira_modules/vue/vue-helper"
+import { formatDate, formatShortDate } from "@/regira_modules/vue/formatters"
 import { ModalType, ConfirmButton } from "@/regira_modules/vue/ui"
 import type { SaveResult } from "@/regira_modules/vue/entities"
 import { FormModalButton as VehicleButton, useEntityStore as useVehicleStore } from "../../vehicles"

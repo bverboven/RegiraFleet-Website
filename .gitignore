@@ -29,5 +29,5 @@ coverage
 
 *.tsbuildinfo
 
-# custom
-regira_modules
+# Regira
+regira_modules/*
