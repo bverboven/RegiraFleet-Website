@@ -23,7 +23,7 @@ const config: IConfig = {
     api,
     detailsUrl: api,
     listUrl: api,
-    searchUrl: api,
+    searchUrl: api + "/search",
     saveUrl: api,
     deleteUrl: api,
 }

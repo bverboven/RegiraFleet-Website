@@ -38,12 +38,6 @@
                             </div>
                         </FormSection>
 
-                        <!-- Contact Data -->
-                        <ContactData v-model="item.contactData" :stakeholder="item" :readonly="readonly" :show-summary="item.id > 0" />
-
-                        <!-- Addresses -->
-                        <Addresses v-model="item.addresses" :stakeholder="item" />
-
                         <FormSection title="Intervention types">
                             <div class="row">
                                 <div class="col mb-2">
@@ -52,6 +46,14 @@
                                 </div>
                             </div>
                         </FormSection>
+                    </template>
+
+                    <template #contact>
+                        <!-- Contact Data -->
+                        <ContactData v-model="item.contactData" :owner="item" :readonly="readonly" />
+
+                        <!-- Addresses -->
+                        <Addresses v-model="item.addresses" :owner="item" :readonly="readonly" />
                     </template>
 
                     <template #files>
@@ -104,5 +106,5 @@ const { service: entityService } = useEntityStore()
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
 
 // Tabs
-const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
+const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("contact", { icon: "contact" }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
 </script>

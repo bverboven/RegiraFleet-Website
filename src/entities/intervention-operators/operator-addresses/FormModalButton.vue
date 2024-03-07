@@ -3,7 +3,7 @@
         <slot><Icon name="connect" /></slot>
         <Teleport to="#modals">
             <Modal v-if="isOpen" :title="modalTitle" :showFooter="true" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
-                <Form v-model="item" :item-defaults="itemDefaults" />
+                <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
             </Modal>
         </Teleport>
     </button>
@@ -24,6 +24,7 @@ const props = defineProps<{
     modelValue?: Entity
     itemDefaults?: Ref<Record<string, any>> | Record<string, any>
     modalTitle?: string
+    readonly?: boolean
 }>()
 
 const { item, isOpen, handleOpen, handleCancel, handleSubmit } = useOwnedModal(Entity, { props, emit })

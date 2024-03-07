@@ -1,8 +1,8 @@
 <template>
-    <FormSection title="Contact data" :readonly="readonly" :show-summary="(stakeholder?.id || 0) > 0">
-        <List v-model="items" />
+    <FormSection title="Contact data">
+        <List v-model="items" :readonly="readonly" />
 
-        <div class="row">
+        <div v-if="!readonly" class="row">
             <div class="col-md mb-2">
                 <div class="input-group">
                     <div class="input-group-text">
@@ -22,26 +22,14 @@
                 </div>
             </div>
         </div>
-        <template #summary>
-            <template v-if="items?.length">
-                <div v-for="item in items" class="mb-2">
-                    <div class="input-group">
-                        <ActionButton :item="item" class="btn btn-outline-info" />
-                        <input v-model="item.value" class="form-control" />
-                        <span class="input-group-text" v-if="item.title != null">{{ item.title }}</span>
-                    </div>
-                </div>
-            </template>
-            <div v-else class="italic-muted">no items</div>
-        </template>
     </FormSection>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
 import { useOwnedCollection } from "@/regira_modules/vue/entities"
-import type { Entity as Stakeholder } from "../"
-import { Entity, List, ActionButton, getDataType } from "./"
+import type { Entity as Owner } from "../"
+import { Entity, List, getDataType } from "./"
 
 const emit = defineEmits<{
     (e: "update:modelValue", args: Array<Entity>): void
@@ -50,7 +38,7 @@ const emit = defineEmits<{
 const props = withDefaults(
     defineProps<{
         modelValue?: Array<Entity>
-        stakeholder?: Stakeholder
+        owner?: Owner
         readonly?: boolean
         showSummary?: boolean
     }>(),

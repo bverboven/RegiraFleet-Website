@@ -17,7 +17,7 @@
             <div class="col">
                 <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
-                        <FormSection :title="config.detailsTitle" :readonly="readonly">
+                        <FormSection :title="config.detailsTitle">
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <VehicleSelector v-model="item.vehicle" v-model:idValue="item.vehicleId" />
@@ -53,6 +53,10 @@
                                 </div>
                             </div>
                         </FormSection>
+                    </template>
+
+                    <template #invoices>
+                        <FormSection title="Invoice(s)"> ToDo: INVOICE </FormSection>
                     </template>
 
                     <template #files>
@@ -105,5 +109,7 @@ const operatorFilterDefaults = computed(() => ({ interventionTypeId: item.value.
 const interventionTypeFilterDefaults = computed(() => ({ operatorId: item.value.operator?.id }))
 
 // Tabs
-const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
+const tabs = computed(() =>
+    [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("invoice(s)", { key: "invoices", icon: "invoice" }), Tab.create("files", { icon: "attachment" })].filter((x) => x)
+)
 </script>

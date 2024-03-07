@@ -6,7 +6,7 @@
                     <Icon name="move" />
                 </span>
                 <ActionButton :item="item" class="btn btn-outline-info" />
-                <input v-model="item.value" class="form-control" @change="handleChangeValue" />
+                <input v-model="item.value" class="form-control" :readonly="readonly" @change="handleChangeValue" />
                 <span class="input-group-text" v-if="item.title != null">{{ item.title }}</span>
                 <FormModalButton class="btn btn-outline-secondary" v-model="item"><Icon name="edit" /></FormModalButton>
                 <button v-if="item.id != 0" type="button" class="btn btn-outline-danger" @click="item._deleted = !item._deleted"><Icon name="delete" /></button>

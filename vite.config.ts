@@ -22,5 +22,5 @@ export default defineConfig({
   esbuild: {
       //drop: ["console", "debugger"],
   },
-  base: "/client/",
+  base: "/manager/",
 })

@@ -9,6 +9,7 @@
                 <IconButton icon="clear" @click="handleReset" :showText="true" />
             </div>
         </div>
+
         <!-- keywords -->
         <div class="row">
             <div class="col mb-2">
@@ -16,6 +17,24 @@
                     <div class="input-group-text"><Icon name="search" /></div>
                     <input v-model.lazy.trim="searchObject.q" class="form-control" placeholder="keyword(s)" />
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- code -->
+            <div class="col mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="code" /></div>
+                    <input v-model.lazy.trim="searchObject.code" class="form-control" placeholder="code" />
+                </div>
+            </div>
+            <!-- VehicleType -->
+            <div class="col-md mb-2">
+                <VehicleTypeSelector v-model="vehicleType" v-model:idValue="searchObject.vehicleTypeId as number" placeholder="vehicle type" @select="handleUpdate">
+                    <template #prepend>
+                        <div class="input-group-text"><Icon :name="VehicleType.name" /></div>
+                    </template>
+                </VehicleTypeSelector>
             </div>
         </div>
 
@@ -28,13 +47,12 @@
                     </template>
                 </BrandSelector>
             </div>
-            <!-- VehicleType -->
-            <div class="col-md mb-2">
-                <VehicleTypeSelector v-model="vehicleType" v-model:idValue="searchObject.vehicleTypeId as number" placeholder="vehicle type" @select="handleUpdate">
-                    <template #prepend>
-                        <div class="input-group-text"><Icon :name="VehicleType.name" /></div>
-                    </template>
-                </VehicleTypeSelector>
+            <!-- model -->
+            <div class="col mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="title" /></div>
+                    <input v-model.lazy.trim="searchObject.model" class="form-control" placeholder="model" />
+                </div>
             </div>
         </div>
     </div>

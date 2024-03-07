@@ -6,7 +6,8 @@ export class EntitySearchObject extends SearchObjectBase {
     identificationNumber?: string
 
     address?: string
-    contactData?: string
+    phone?: string
+    email?: string
 
     minCreated?: Date
     maxCreated?: Date
