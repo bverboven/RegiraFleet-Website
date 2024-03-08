@@ -3,7 +3,7 @@
         <template #default="{ item, q }">
             <div class="row">
                 <div class="col">
-                    {{ item.code }} <span class="text-muted">{{ item.$title }}</span>
+                    {{ item.code }} <span class="text-muted">{{ item.vehicleType?.title }}</span>
                 </div>
             </div>
         </template>
@@ -55,7 +55,7 @@ defineExpose({
 })
 
 const entityService = get<IEntityService<Entity>>(Entity.name)!
-const search = (q: string) => entityService.list({ ...props.filterDefaults, title: (q || "") + "*", pageSize: props.maxResults })
+const search = (q: string) => entityService.list({ ...props.filterDefaults, title: `*${q || ""}*`, pageSize: props.maxResults })
 const idSelector = (item?: Entity) => item?.$id?.toString()
-const displayItemFormatter = (item?: Entity) => (item != null ? `${item?.code} - ${item?.$title}` : "")
+const displayItemFormatter = (item?: Entity) => (item != null ? `${item?.$title}` : "")
 </script>

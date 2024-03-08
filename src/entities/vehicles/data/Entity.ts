@@ -11,14 +11,6 @@ export class Vehicle extends EntityBase {
     brandId?: number
     vehicleTypeId?: number
 
-    quantity?: number
-    unitCategoryId?: number
-    startDate?: Date = new Date()
-    endDate?: Date
-    isBillable: boolean | number = 1
-    isBilled?: boolean | number
-
-    description?: string
     notes?: string
 
     created: Date
@@ -32,7 +24,7 @@ export class Vehicle extends EntityBase {
         return this.id || "new"
     }
     override get $title(): string | undefined {
-        return `${this.brand?.title} ${this.model}`.trim() || this.code
+        return `${this.code} ${this.vehicleType?.title}`.trim()
     }
 }
 

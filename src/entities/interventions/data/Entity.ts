@@ -1,5 +1,5 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
-import type { Entity as Invoice } from "../intervention-invoices/Entity"
+import type Invoice from "../intervention-invoices/Entity"
 import type { Entity as Vehicle } from "../../vehicles"
 import type { Entity as InterventionOperator } from "../../intervention-operators"
 import type { Entity as InterventionType } from "../../intervention-types"
@@ -13,7 +13,7 @@ export class Intervention extends EntityBase {
     description?: string
     notes?: string
 
-    interventionDate?: Date
+    interventionDate?: Date = new Date()
     created?: Date
     lastModified?: Date
 
@@ -29,7 +29,10 @@ export class Intervention extends EntityBase {
         return this.id || "new"
     }
     override get $title(): string | undefined {
-        return `${this.interventionTypes?.map((x) => x.title).join(", ")} on ${this.vehicle?.code}`
+        if (!this.interventionTypes?.length) {
+            return ""
+        }
+        return `${this.interventionTypes?.map((x) => x.title).join(", ") || "New intervention"} on ${this.vehicle?.code || "vehicle"}`
     }
 }
 

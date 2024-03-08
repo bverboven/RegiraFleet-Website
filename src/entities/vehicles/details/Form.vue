@@ -54,6 +54,10 @@
                     <template #files>
                         <EntityAttachments v-model="item.attachments" />
                     </template>
+
+                    <template #interventions>
+                        <Interventions :owner="item" />
+                    </template>
                 </TabContainer>
             </div>
         </div>
@@ -77,8 +81,10 @@ import { FormButtonsRow } from "@/components/input"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as BrandSelector } from "../../brands"
 import { InputSelector as VehicleTypeSelector } from "../../vehicle-types"
+import { Entity as Intervention } from "../../interventions"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
+import Interventions from "../vehicle-interventions/Overview.vue"
 
 interface Emits extends /* @vue-ignore */ FormEmits<Entity> {}
 const emit = defineEmits<Emits>()
@@ -98,5 +104,7 @@ const { service: entityService } = useEntityStore()
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
 
 // Tabs
-const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
+const tabs = computed(() =>
+    [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" }), Tab.create("interventions", { icon: Intervention.name })].filter((x) => x)
+)
 </script>
