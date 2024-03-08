@@ -131,8 +131,9 @@ fetch(`${appConfig.baseUrl}/config.json`)
         // mount
         app.config.globalProperties.$setAppStatus(AppStatus.Mounting)
 
-        await whenAppReady()
         app.mount("#app")
+
+        await whenAppReady()
 
         // Welcome
         app.config.globalProperties.$feedback.success("Welcome, the app is ready")

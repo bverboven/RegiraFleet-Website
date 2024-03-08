@@ -8,6 +8,7 @@ function routerFactory(routes: Array<RouteRecordRaw>) {
     const router = createRouter({
         history: createWebHistory(import.meta.env.BASE_URL),
         routes: [...defaultRoutes, ...routes],
+        linkActiveClass: "active",
     })
 
     // toDo: find better fix!

@@ -30,4 +30,4 @@ coverage
 *.tsbuildinfo
 
 # Regira
-regira_modules/*
+src/regira_modules/*

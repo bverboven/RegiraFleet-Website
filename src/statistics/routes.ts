@@ -1,14 +1,12 @@
 import Permissions from "@/infrastructure/permissions"
 
 import StatisticsView from "@/views/StatisticsView.vue"
-import YearFilter from "@/statistics/YearFilter.vue"
-import YearVehicleTypeFilter from "@/statistics/YearVehicleTypeFilter.vue"
-import StatsPerVehicleType from "@/views/Dummy.vue"
+import StatsPerVehicle from "./components/DefaultStats.vue"
+import StatsPerVehicleType from "./components/DefaultStats.vue"
 import StatsPerVehiclePerType from "@/views/Dummy.vue"
-import StatsPerVehicle from "@/views/Dummy.vue"
-import StatsPerSupplier from "@/views/Dummy.vue"
-import StatsPerInterventionType from "@/views/Dummy.vue"
-import StatsPerInterventionTypePerVehicleType from "@/views/Dummy.vue"
+import StatsPerSupplier from "./components/DefaultStats.vue"
+import StatsPerInterventionType from "./components/DefaultStats.vue"
+import StatsPerInterventionTypePerVehicleType from "./components/DefaultStats.vue"
 
 export default [
     // statistics
@@ -25,67 +23,57 @@ export default [
             {
                 name: "stats-per-vehicle",
                 path: "per-vehicle",
-                components: {
-                    default: StatsPerVehicle,
-                    filter: YearFilter,
-                },
+                component: StatsPerVehicle,
                 meta: {
                     title: "Totals per vehicle",
+                    api: "per-vehicle/{year}",
                 },
             },
             {
                 name: "stats-per-vehicleType",
                 path: "per-vehicletype",
-                components: {
-                    default: StatsPerVehicleType,
-                    filter: YearFilter,
-                },
+                component: StatsPerVehicleType,
                 meta: {
                     title: "Totals per vehicletype",
-                },
-            },
-            {
-                name: "stats-per-vehicle-per-type",
-                path: "per-vehicle-per-type",
-                components: {
-                    default: StatsPerVehiclePerType,
-                    filter: YearVehicleTypeFilter,
-                },
-                meta: {
-                    title: "Totals per vehicle per type",
-                },
-            },
-            {
-                name: "stats-per-intervention",
-                path: "per-intervention",
-                components: {
-                    default: StatsPerInterventionType,
-                    filter: YearFilter,
-                },
-                meta: {
-                    title: "Totals per intervention",
-                },
-            },
-            {
-                name: "stats-per-intervention-and-vehicleType",
-                path: "per-intervention-en-vehicletype",
-                components: {
-                    default: StatsPerInterventionTypePerVehicleType,
-                    filter: YearFilter,
-                },
-                meta: {
-                    title: "Totals per intervention & vehicletype",
+                    api: "per-vehicletype/{year}",
                 },
             },
             {
                 name: "stats-per-supplier",
                 path: "per-supplier",
-                components: {
-                    default: StatsPerSupplier,
-                    filter: YearFilter,
-                },
+                component: StatsPerSupplier,
                 meta: {
                     title: "Totals per supplier",
+                    api: "per-intervention-operator/{year}",
+                },
+            },
+            {
+                name: "stats-per-interventionType",
+                path: "per-interventiontype",
+                component: StatsPerInterventionType,
+                meta: {
+                    title: "Totals per intervention",
+                    api: "per-interventiontype/{year}",
+                },
+            },
+            {
+                name: "stats-per-vehicle-per-type",
+                path: "per-vehicle-per-type/{year}",
+                components: {
+                    default: StatsPerVehiclePerType,
+                },
+                meta: {
+                    title: "Totals per vehicle per type",
+                    api: "per-vehicle/{vehicleTypeCode}/{year}",
+                },
+            },
+            {
+                name: "stats-per-interventionType-and-vehicleType",
+                path: "per-interventiontype-en-vehicletype",
+                component: StatsPerInterventionTypePerVehicleType,
+                meta: {
+                    title: "Totals per intervention & vehicletype",
+                    api: "per-interventiontype-and-vehicletype/{year}",
                 },
             },
         ],
