@@ -21,41 +21,7 @@
                         <span class="d-md-none d-lg-inline ms-2">{{ navItem.overviewTitle }}</span>
                     </RouterLink>
                 </li>
-                <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        @click.stop.prevent="showNavbarStatisticsDropdown = !showNavbarStatisticsDropdown"
-                        href="#"
-                        id="navbarStatistiekenDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        <Icon name="statistics" /> Statistics
-                    </a>
-                    <ul class="dropdown-menu" :class="{ show: showNavbarStatisticsDropdown }" aria-labelledby="navbarStatistiekenDropdown">
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-car' }">Totalen per wagen</router-link>
-                        </li>
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-carType' }">Totalen per wagentype</router-link>
-                        </li>
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-car-per-type' }">Totalen per wagen &amp; wagentype</router-link>
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-intervention' }">Totalen per interventietype</router-link>
-                        </li>
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-intervention-and-carType' }"> Totalen per interventietype &amp; wagentype </router-link>
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <router-link class="dropdown-item" :to="{ name: 'stats-per-supplier' }">Totalen per leverancier</router-link>
-                        </li>
-                    </ul>
-                </li>
+                <StatisticsMenuItem />
             </ul>
             <form class="d-flex" role="search">
                 <div class="row">
@@ -74,6 +40,7 @@ import { useConfig } from "@/app-config"
 import logo from "@/assets/images/logo-sm.png"
 import type { IConfig } from "@/regira_modules/vue/entities"
 import AccountMenu from "@/components/user/HeaderMenu.vue"
+import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
 
 const { version } = useConfig()
 

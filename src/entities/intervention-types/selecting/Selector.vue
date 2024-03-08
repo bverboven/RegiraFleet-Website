@@ -33,7 +33,7 @@ const props = defineProps<{
 
 const { fromPool, list } = useEntityStore()
 const items = computed<Array<Entity>>({
-    get: () => fromPool(props.modelValue || []) as Array<Entity>,
+    get: () => props.modelValue || [],
     set: (value) => emit("update:modelValue", value as Array<Entity>),
 })
 
@@ -44,7 +44,10 @@ function handleSelect(selected?: Entity) {
         return
     }
 
-    if (items.value.every((x) => x.$id != selected?.$id)) {
+    const alreadySelected = items.value.find((x) => x.id == selected.id)
+    if (alreadySelected != null) {
+        alreadySelected._deleted = false
+    } else if (items.value.every((x) => x.$id != selected?.$id)) {
         const newVal = [...items.value, selected]
         emit(
             "update:idsValue",

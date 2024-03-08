@@ -5,7 +5,7 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
-        <div class="col-1">
+        <div class="col-2 col-md-1">
             <div class="italic-muted" :title="formatDate(item.interventionDate, $culture)">{{ formatShortDate(item.interventionDate, $culture) }}</div>
         </div>
         <div class="col text-truncate">
@@ -17,7 +17,7 @@
         </div>
         <div class="col d-none d-lg-block text-truncate">
             <VehicleButton :modelValue="item.vehicle" class="p-1" />
-            {{ getVehicle(item.vehicle).code }} <span class="text-muted">({{ getVehicle(item.vehicle).$title }})</span>
+            {{ getVehicle(item.vehicle).$title }} <span class="text-muted">({{ getVehicle(item.vehicle)?.brand?.title }})</span>
         </div>
         <div class="col d-none d-lg-block text-truncate">
             <OperatorButton :modelValue="item.operator" class="p-1" />

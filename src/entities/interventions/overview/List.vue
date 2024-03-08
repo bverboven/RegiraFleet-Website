@@ -2,7 +2,7 @@
     <div class="entity-list">
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
-            <div class="col-1 fw-bold">Date</div>
+            <div class="col-2 col-md-1 fw-bold">Date</div>
             <div class="col fw-bold">
                 <span class="d-lg-none">Intervention</span>
                 <span class="d-none d-lg-block">Type(s)</span>

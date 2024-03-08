@@ -30,12 +30,14 @@ watchEffect(() => {
             dashboardItems.value.push(item)
         }
     })
-    const statisticsItem: IDashboardItem = {
-        name: "statistics",
-        title: "Statistics",
-        icon: "statistics",
-        description: "Export statistics to Excel",
+    if (app.appContext.config.globalProperties.$statistics?.enabled) {
+        const statisticsItem: IDashboardItem = {
+            name: "statistics",
+            title: "Statistics",
+            icon: "statistics",
+            description: "Export statistics to Excel",
+        }
+        dashboardItems.value.push(statisticsItem)
     }
-    dashboardItems.value.push(statisticsItem)
 })
 </script>

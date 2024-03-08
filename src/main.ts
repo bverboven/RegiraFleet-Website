@@ -12,6 +12,7 @@ import { initAxios } from "@/regira_modules/vue/http/axios"
 import { plugin as authPlugin, CookieTokenManager } from "@/regira_modules/vue/auth"
 import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_modules/vue/ioc"
 import appConfig, { createConfig, useConfig } from "@/app-config"
+import { plugin as statisticsPlugin } from "@/statistics"
 import entityPlugins from "./entities"
 
 import App from "./App.vue"
@@ -25,6 +26,7 @@ dateSerializer.use()
 import "./assets/main.scss"
 import { defaultPoolCache, PoolCache } from "@/regira_modules/vue/entities"
 import { Entity as Country } from "./entities/countries"
+import { Entity as VehicleType } from "./entities/vehicle-types"
 
 fetch(`${appConfig.baseUrl}/config.json`)
     .then((r) => r.json())
@@ -82,8 +84,12 @@ fetch(`${appConfig.baseUrl}/config.json`)
         const entityRoutes: Array<RouteRecordRaw> = []
         app.use(entityPlugins, { routes: entityRoutes })
 
+        // statistics + routes
+        const statisticRoutes: Array<RouteRecordRaw> = []
+        app.use(statisticsPlugin, { routes: statisticRoutes })
+
         // routing
-        const router = routerFactory(entityRoutes)
+        const router = routerFactory([...entityRoutes, ...statisticRoutes])
         app.use(router)
 
         // preloader
@@ -101,7 +107,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
                     app.config.globalProperties.$feedback.success(`Welcome ${auth.displayName || auth.name}`)
 
                     // preloading
-                    const preloaderTypes = [Country]
+                    const preloaderTypes = [Country, VehicleType]
                     const { preload } = usePreloader()
                     await preload(preloaderTypes as any)
 
@@ -124,9 +130,10 @@ fetch(`${appConfig.baseUrl}/config.json`)
 
         // mount
         app.config.globalProperties.$setAppStatus(AppStatus.Mounting)
-        app.mount("#app")
 
         await whenAppReady()
+        app.mount("#app")
+
         // Welcome
         app.config.globalProperties.$feedback.success("Welcome, the app is ready")
     })

@@ -37,10 +37,11 @@
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <div class="input-group">
-                                        <input type="number" min="0" step="1" v-model="item.mileage" class="form-control" />
+                                        <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" class="form-control" />
                                         <div class="input-group-text">Km</div>
                                     </div>
-                                    <FormLabel label="Mileage" />
+                                    <FormLabel v-if="lastInterventionForVehicle?.mileage" :label="`(last: ${lastInterventionForVehicle.mileage.toLocaleString($culture)} km)`" />
+                                    <FormLabel v-else label="Mileage" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
@@ -78,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
+import { ref, computed, watchEffect } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
@@ -111,8 +112,22 @@ const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore 
 const operatorFilterDefaults = computed(() => ({ interventionTypeId: item.value.interventionTypes?.filter((x) => !x._deleted)?.map((x) => x.id) }))
 const interventionTypeFilterDefaults = computed(() => ({ operatorId: item.value.operator?.id }))
 
+const lastInterventionForVehicle = ref<Entity>()
+
 // Tabs
 const tabs = computed(() =>
     [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("invoice(s)", { key: "invoices", icon: "invoice" }), Tab.create("files", { icon: "attachment" })].filter((x) => x)
 )
+
+watchEffect(async () => {
+    if (item.value.id) {
+        return
+    }
+
+    if (item.value?.vehicleId) {
+        lastInterventionForVehicle.value = (await entityService.list({ vehicleId: item.value.vehicleId, sortBy: "DateDesc", pageSize: 1 }))[0]
+    } else {
+        lastInterventionForVehicle.value = undefined
+    }
+})
 </script>
