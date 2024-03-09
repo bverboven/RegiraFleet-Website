@@ -1,33 +1,41 @@
 <template>
-    <div class="row">
-        <div class="col-xl mb-2">
-            <MarkDownInput v-model="item.description" placeholder="description" />
-            <FormLabel label="Description" /><Icon name="markdown" class="px-1" />
-        </div>
-        <div class="w-100" v-if="stacked"></div>
-        <div class="col-xl mb-2">
-            <textarea class="form-control" v-model="item.notes" placeholder="notes" />
-            <FormLabel label="Notes" />
+    <div class="col-md mb-2">
+        <div class="form-floating">
+            <textarea v-model="item" :maxlength="maxLength" :style="style" class="form-control"></textarea>
+            <label>{{ label }}</label>
+            <!-- <FormLabel :label="label" /> -->
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue"
 import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { MarkDownInput } from "@/regira_modules/vue/ui"
-
-type Model = {
-    description?: string
-    notes?: string
-}
 
 const emit = defineEmits<{
-    (e: "update:modelValue", args: Model): void
+    (e: "update:modelValue", value: string): void
 }>()
-const props = defineProps<{
-    modelValue: Model
-    stacked?: boolean
-}>()
+const props = withDefaults(
+    defineProps<{
+        modelValue?: string
+        label?: string
+        maxLength?: number
+        style?: Record<string, any>
+    }>(),
+    {
+        modelValue: "",
+        label: "Description",
+        style: () => ({ height: "7.5rem" }),
+    }
+)
 
-const item = useVModelField<Model>(props, emit)
+const item = useVModelField<string>(props, emit)
+const label = computed(() => {
+    let lblValue = props.label
+    if (props.maxLength) {
+        const charsLeft = props.maxLength - (item.value?.length || 0)
+        lblValue = `${lblValue} (${charsLeft} characters left)`
+    }
+    return lblValue
+})
 </script>

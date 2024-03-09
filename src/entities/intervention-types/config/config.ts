@@ -16,7 +16,7 @@ const config: IConfig = {
     overviewTitle: "Intervention Types",
     detailsTitle: "Intervention Type",
     description: `Manage types of intervention`,
-    icon: "bi bi-marker-tip",
+    icon: "bi bi-tools",
 
     defaultPageSize: 10,
 

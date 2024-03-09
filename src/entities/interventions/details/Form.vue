@@ -24,24 +24,24 @@
                                     <FormLabel label="Vehicle" />
                                 </div>
                                 <div class="col-md mb-2">
-                                    <OperatorSelector v-model="item.operator" v-model:idValue="item.operatorId" :filter-defaults="operatorFilterDefaults" />
-                                    <FormLabel label="Supplier" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :filter-defaults="interventionTypeFilterDefaults" placeholder="select type" />
-                                    <FormLabel label="Intervention type(s)" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md mb-2">
                                     <div class="input-group">
                                         <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" class="form-control" />
                                         <div class="input-group-text">Km</div>
                                     </div>
                                     <FormLabel v-if="lastInterventionForVehicle?.mileage" :label="`(last: ${lastInterventionForVehicle.mileage.toLocaleString($culture)} km)`" />
                                     <FormLabel v-else label="Mileage" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <InterventionTypeSelector v-model="item.interventionTypes" :filter-defaults="interventionTypeFilterDefaults" :maxLength="2" placeholder="select type" />
+                                    <FormLabel label="Intervention type(s)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md mb-2">
+                                    <OperatorSelector v-model="item.operator" v-model:idValue="item.operatorId" :filter-defaults="operatorFilterDefaults" />
+                                    <FormLabel label="Supplier" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
@@ -53,14 +53,14 @@
                                     <FormLabel label="Intervention Date" />
                                 </div>
                             </div>
+                            <div class="row">
+                                <DescriptionInput v-model="item.description" label="Notes" />
+                            </div>
                         </FormSection>
                     </template>
 
                     <template #invoices>
-                        <FormSection title="Invoice(s)">
-                            ToDo: INVOICES
-                            <Debug :modelValue="item.invoices" />
-                        </FormSection>
+                        <InvoicesOverview v-model="item.invoices" :owner="item" />
                     </template>
 
                     <template #files>
@@ -83,11 +83,12 @@ import { ref, computed, watchEffect } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
-import { FormButtonsRow } from "@/components/input"
+import { DescriptionInput, FormButtonsRow } from "@/components/input"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as VehicleSelector } from "../../vehicles"
 import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import { InputSelector as OperatorSelector } from "../../intervention-operators"
+import InvoicesOverview from "../intervention-invoices/Overview.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"

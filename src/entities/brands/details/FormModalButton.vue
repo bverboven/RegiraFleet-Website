@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-default" @click="open">
         <slot><Icon :name="Entity.name" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" :title="modalTitle" :showFooter="false" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSave">
+            <Modal v-if="isOpen" :title="modalTitle" :showFooter="false" :full-width="false" @close="close" @cancel="handleCancel" @submit="handleSave">
                 <Form v-model="item" :initial-tab="initialTab" :is-popup="true" @cancel="handleCancel" @save="handleSave" @remove="handleRemove" />
             </Modal>
         </Teleport>

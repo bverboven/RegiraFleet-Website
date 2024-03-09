@@ -10,7 +10,7 @@
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
             <div class="col-2 col-xl-1 fw-bold">Date</div>
             <div class="col fw-bold">Type(s)</div>
-            <div class="col d-none d-lg-block fw-bold">Supplier</div>
+            <div class="col d-none d-lg-block fw-bold">Vehicle</div>
             <div class="col d-none d-md-block fw-bold">Invoice(s)</div>
         </div>
         <div v-for="item in items" class="row border-bottom border-bottom-1 py-2">
@@ -24,8 +24,8 @@
                 {{ interventionTypes(item) }}
             </div>
             <div class="col d-none d-lg-block text-truncate">
-                <OperatorButton :modelValue="item.operator" class="p-1" />
-                {{ getOperator(item.operator).$title }}
+                <VehicleButton :modelValue="item.vehicle" class="p-1" />
+                {{ getVehicle(item.vehicle).$title }}
             </div>
             <div class="col text-truncate d-none d-md-block">{{ item.invoices?.map((x) => x.invoiceNumber).join(", ") }}</div>
         </div>
@@ -37,12 +37,12 @@ import { ref, computed, onMounted } from "vue"
 import { get } from "@/regira_modules/vue/ioc"
 import { createFromComputedPool } from "@/regira_modules/vue/vue-helper"
 import { formatDate } from "@/regira_modules/vue/formatters"
-import type Vehicle from "../data/Entity"
+import type Supplier from "../data/Entity"
 import { Entity, type EntityService, FormModalButton as InterventionButton } from "../../interventions"
-import { FormModalButton as OperatorButton, useEntityStore as useOperatorStore } from "../../intervention-operators"
+import { FormModalButton as VehicleButton, useEntityStore as useVehicleStore } from "../../vehicles"
 
 const props = defineProps<{
-    owner: Vehicle
+    owner: Supplier
 }>()
 
 const service = get<EntityService>(Entity.name)!
@@ -50,10 +50,10 @@ const items = ref<Array<Entity>>()
 
 const interventionTypes = computed(() => (item: Entity) => item.interventionTypes?.map((x) => x.title).join(", "))
 
-const getOperator = createFromComputedPool(useOperatorStore()) as any
+const getVehicle = createFromComputedPool(useVehicleStore()) as any
 
 async function load() {
-    items.value = await service.list({ vehicleId: props.owner.id })
+    items.value = await service.list({ operatorId: props.owner.id })
 }
 
 onMounted(load)

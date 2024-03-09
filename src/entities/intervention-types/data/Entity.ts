@@ -4,6 +4,7 @@ export class InterventionType extends EntityBase {
     id: number = 0
     code?: string
     title: string
+    description?: string
     created?: Date
     lastModified?: Date
     isArchived?: boolean

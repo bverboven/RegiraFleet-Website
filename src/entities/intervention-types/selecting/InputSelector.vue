@@ -6,7 +6,7 @@
             </FormModalButton>
         </slot>
         <slot>
-            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :placeholder="placeholder" @select="handleSelect" ref="autoEl" />
+            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :disabled :placeholder="placeholder" @select="handleSelect" ref="autoEl" />
         </slot>
         <slot name="append">
             <button type="button" v-show="item != null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
@@ -33,6 +33,7 @@ const props = defineProps<{
     idValue?: number | string
     itemDefaults?: Ref<Record<string, any>> | Record<string, any>
     filterDefaults?: Record<string, any>
+    disabled?: boolean
     closeOnSave?: boolean
     placeholder?: string
 }>()

@@ -16,7 +16,7 @@ const config: IConfig = {
     overviewTitle: "Interventions",
     detailsTitle: "Intervention",
     description: `Vehicle interventions`,
-    icon: "bi bi-tools",
+    icon: "bi bi-wrench-adjustable",
 
     defaultPageSize: 10,
 

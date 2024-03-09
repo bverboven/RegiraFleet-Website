@@ -59,6 +59,10 @@
                     <template #files>
                         <EntityAttachments v-model="item.attachments" />
                     </template>
+
+                    <template #interventions>
+                        <Interventions :owner="item" />
+                    </template>
                 </TabContainer>
             </div>
         </div>
@@ -81,10 +85,12 @@ import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
 import { FormButtonsRow } from "@/components/input"
+import { Entity as Intervention } from "../../interventions"
 import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { Overview as ContactData } from "../operator-contact-data"
 import { Overview as Addresses } from "../operator-addresses"
+import Interventions from "../operator-interventions/Overview.vue"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 
@@ -106,5 +112,12 @@ const { service: entityService } = useEntityStore()
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
 
 // Tabs
-const tabs = computed(() => [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("contact", { icon: "contact" }), Tab.create("files", { icon: "attachment" })].filter((x) => x))
+const tabs = computed(() =>
+    [
+        Tab.create("form", { icon: "form", isDefault: true }),
+        Tab.create("contact", { icon: "contact" }),
+        Tab.create("files", { icon: "attachment" }),
+        Tab.create("interventions", { icon: Intervention.name }),
+    ].filter((x) => x)
+)
 </script>

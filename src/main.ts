@@ -12,6 +12,7 @@ import { initAxios } from "@/regira_modules/vue/http/axios"
 import { plugin as authPlugin, CookieTokenManager } from "@/regira_modules/vue/auth"
 import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_modules/vue/ioc"
 import appConfig, { createConfig, useConfig } from "@/app-config"
+import DescriptionInput from "@/components/input/DescriptionInput.vue"
 import { plugin as statisticsPlugin } from "@/statistics"
 import entityPlugins from "./entities"
 
@@ -53,6 +54,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
         app.component("NullableCheckBox", NullableCheckBox)
         app.component("NullableLabel", NullableLabel)
         app.component("FormLabel", FormLabel)
+        app.component("DescriptionInput", DescriptionInput)
 
         // services
         app.use(servicesPlugin, {

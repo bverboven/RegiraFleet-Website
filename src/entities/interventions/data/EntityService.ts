@@ -34,6 +34,7 @@ export class EntityService extends EntityServiceBase<Entity> {
 
     protected override prepareItem(item: Entity): Entity {
         item.interventionTypes = item.interventionTypes?.filter((x) => !x._deleted)
+        item.invoices = item.invoices?.filter((x) => !x._deleted)
         item.attachments = item.attachments?.filter((x) => !x._deleted)
         return super.prepareItem(item)
     }

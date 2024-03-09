@@ -1,0 +1,63 @@
+<template>
+    <div>
+        <div class="row">
+            <div class="col-sm mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="invoice" /></div>
+                    <input v-model="item.invoiceNumber" required class="form-control" />
+                </div>
+                <FormLabel label="Invoice number" />
+            </div>
+            <div class="col-sm mb-2">
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <Icon name="date" />
+                    </div>
+                    <DateInput v-model="item.invoiceDate" :culture="$culture" class="form-control" />
+                </div>
+                <FormLabel label="Invoice date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="euro" /></div>
+                    <input type="number" v-model="item.priceExcl" class="form-control" />
+                </div>
+                <FormLabel label="Price (excl)" />
+            </div>
+            <div class="col-sm mb-2">
+                <select v-model="item.taxCategory" class="form-select">
+                    <option :value="TaxCategory.Deductible">Deductible</option>
+                    <option :value="TaxCategory.NotDeductible">Not Deductible</option>
+                    <option :value="TaxCategory.Mixed">Mixed</option>
+                </select>
+                <FormLabel label="Tax category" />
+            </div>
+        </div>
+        <div class="row">
+            <DescriptionInput v-model="item.description" label="Notes" />
+        </div>
+        <Debug
+            :modelValue="{
+                item,
+            }"
+        />
+    </div>
+</template>
+
+<script setup lang="ts">
+import { useVModelField } from "@/regira_modules/vue/vue-helper"
+import Entity from "./Entity"
+import { TaxCategory } from "./TaxCategory"
+
+const emit = defineEmits<{
+    (e: "update:modelValue", value: Entity): void
+}>()
+const props = defineProps<{
+    modelValue: Entity
+    readonly?: boolean
+}>()
+
+const item = useVModelField<Entity>(props, emit)
+</script>
