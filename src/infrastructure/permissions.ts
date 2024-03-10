@@ -1,6 +1,6 @@
 export enum Permissions {
-  CAN_EDIT = 'can_edit',
-  CAN_READ = 'can_read'
+    CAN_READ = "can_read",
+    CAN_EDIT = "can_write",
 }
 
 export default Permissions
