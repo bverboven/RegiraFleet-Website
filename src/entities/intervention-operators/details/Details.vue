@@ -3,7 +3,15 @@
         <LoadingContainer :is-loading="isLoading">
             <RouterView v-slot="{ Component }">
                 <Feedback :feedback="feedback" />
-                <component :is="Component" v-if="item != null" v-model="item" :overview-url="overviewUrl" @change-state="isLoading = $event == FormStates.pending" @remove="handleRemove" />
+                <component
+                    :is="Component"
+                    v-if="item != null"
+                    v-model="item"
+                    :overview-url="overviewUrl"
+                    :readonly="$isReadonlyUser"
+                    @change-state="isLoading = $event == FormStates.pending"
+                    @remove="handleRemove"
+                />
             </RouterView>
         </LoadingContainer>
     </section>

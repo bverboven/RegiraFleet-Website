@@ -5,7 +5,7 @@
             <div class="col fw-bold">Invoice number</div>
             <div class="col d-none d-sm-block fw-bold">Invoice date</div>
             <div class="col-2 col-xl-1 d-none d-md-block fw-bold text-end">Price (incl)</div>
-            <div class="col-auto">
+            <div v-if="!readonly" class="col-auto">
                 <button type="button" class="btn btn-outline-danger py-1" disabled><Icon name="delete" /></button>
             </div>
         </div>

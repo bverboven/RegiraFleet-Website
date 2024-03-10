@@ -41,6 +41,7 @@
         <LoadingContainer :is-loading="isLoading">
             <component
                 :is="List"
+                :readonly="$isReadonlyUser"
                 v-if="items && items.length > 0"
                 v-model="items"
                 @request-save="handleRequestSave"

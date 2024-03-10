@@ -1,7 +1,7 @@
 <template>
     <div class="col-md mb-2">
         <div class="form-floating">
-            <textarea v-model="item" :maxlength="maxLength" :style="style" class="form-control"></textarea>
+            <textarea v-model="item" :maxlength="maxLength" :readonly="readonly" :style="style" class="form-control"></textarea>
             <label>{{ label }}</label>
             <!-- <FormLabel :label="label" /> -->
         </div>
@@ -18,6 +18,7 @@ const emit = defineEmits<{
 const props = withDefaults(
     defineProps<{
         modelValue?: string
+        readonly?: boolean
         label?: string
         maxLength?: number
         style?: Record<string, any>

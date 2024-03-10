@@ -14,6 +14,7 @@ import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_module
 import appConfig, { createConfig, useConfig } from "@/app-config"
 import DescriptionInput from "@/components/input/DescriptionInput.vue"
 import { plugin as statisticsPlugin } from "@/statistics"
+import { plugin as userPlugin } from "@/components/user/plugin"
 import entityPlugins from "./entities"
 
 import App from "./App.vue"
@@ -129,6 +130,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
                 }
             },
         })
+        app.use(userPlugin)
 
         // mount
         app.config.globalProperties.$setAppStatus(AppStatus.Mounting)

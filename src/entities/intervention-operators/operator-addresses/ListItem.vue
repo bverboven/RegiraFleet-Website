@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-md mb-2">
             <div class="input-group">
-                <span class="input-group-text drag-handle cursor move">
+                <span v-if="!readonly" class="input-group-text drag-handle cursor move">
                     <Icon name="move" />
                 </span>
-                <AddressButton class="btn btn-outline-info" :modelValue="item" />
+                <AddressButton :modelValue="item" class="btn btn-outline-info" />
                 <div class="form-control">
                     {{ address }}
                 </div>
-                <FormModalButton class="btn btn-outline-secondary" v-model="item"><Icon name="edit" /></FormModalButton>
-                <button v-if="item.id != 0" type="button" class="btn btn-outline-danger" @click="item._deleted = !item._deleted"><Icon name="delete" /></button>
+                <FormModalButton v-model="item" :readonly="readonly" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton>
+                <button v-if="!readonly && item.id != 0" type="button" class="btn btn-outline-danger" @click="item._deleted = !item._deleted"><Icon name="delete" /></button>
             </div>
         </div>
     </div>

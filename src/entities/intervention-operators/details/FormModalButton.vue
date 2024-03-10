@@ -3,7 +3,7 @@
         <slot><Icon :name="Entity.name" /></slot>
         <Teleport to="#modals">
             <Modal v-if="isOpen" :title="modalTitle" :showFooter="false" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSave">
-                <Form v-model="item" :initial-tab="initialTab" :is-popup="true" @cancel="handleCancel" @save="handleSave" @remove="handleRemove" />
+                <Form v-model="item" :initial-tab="initialTab" :readonly="readonly" :is-popup="true" @cancel="handleCancel" @save="handleSave" @remove="handleRemove" />
             </Modal>
         </Teleport>
     </button>
@@ -24,6 +24,7 @@ const emit = defineEmits<Emits>()
 const props = defineProps<{
     modelValue?: Entity
     itemDefaults?: Ref<Record<string, any>> | Record<string, any>
+    readonly?: boolean
     initialTab?: string
     label?: string
     closeOnSave?: boolean

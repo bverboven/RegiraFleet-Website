@@ -43,6 +43,7 @@
                 :is="List"
                 v-if="items && items.length > 0"
                 v-model="items"
+                :readonly="$isReadonlyUser"
                 @request-save="handleRequestSave"
                 @request-remove="handleRequestRemove"
                 @save="handleSave"

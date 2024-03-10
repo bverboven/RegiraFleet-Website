@@ -6,11 +6,13 @@
             </div>
         </slot>
         <slot>
-            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :auto-select="autoSelect" @change="handleSelect" ref="autoEl" />
+            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :readonly="readonly" :auto-select="autoSelect" @change="handleSelect" ref="autoEl" />
         </slot>
         <slot name="append">
-            <button type="button" :disabled="item == null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
-            <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
+            <template v-if="!readonly">
+                <button type="button" :disabled="item == null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
+                <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
+            </template>
         </slot>
     </div>
 </template>
@@ -32,6 +34,7 @@ const props = defineProps<{
     idValue?: string
     filterDefaults?: Record<string, any>
     autoSelect?: boolean
+    readonly?: boolean
 }>()
 const autoEl = ref<any>(null)
 const { fromPool, fromCache } = useEntityStore()

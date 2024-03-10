@@ -2,8 +2,8 @@
     <button type="button" class="btn btn-default" @click="handleOpen">
         <slot><Icon name="connect" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" title="Contact data" :showFooter="true" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
-                <Form v-model="item" :item-defaults="itemDefaults" />
+            <Modal v-if="isOpen" title="Contact data" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
+                <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
             </Modal>
         </Teleport>
     </button>
@@ -22,6 +22,7 @@ const emit = defineEmits<{
 }>()
 const props = defineProps<{
     modelValue?: Entity
+    readonly?: boolean
     itemDefaults?: Ref<Record<string, any>> | Record<string, any>
 }>()
 

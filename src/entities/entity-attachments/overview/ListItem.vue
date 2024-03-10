@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md mb-2">
             <div class="input-group">
-                <span class="input-group-text drag-handle cursor move">
+                <span v-if="!readonly" class="input-group-text drag-handle cursor move">
                     <Icon name="move" />
                 </span>
                 <a :href="item.uri" target="_blank" class="btn btn-outline-info" @click.prevent="handleDownload"><Icon name="download" /></a>
@@ -12,17 +12,18 @@
                     @update:model-value="onChangeFilename"
                     maxlength="256"
                     class="form-control"
+                    :readonly="readonly"
                     :placeholder="item.fileName"
                     autocomplete="__away"
                 />
-                <input v-else v-model.lazy="item.fileName" @update:model-value="onChangeFilename" maxlength="256" class="form-control" autocomplete="__away" />
+                <input v-else v-model.lazy="item.fileName" :readonly="readonly" @update:model-value="onChangeFilename" maxlength="256" class="form-control" autocomplete="__away" />
                 <span class="input-group-text" style="width: 5rem; overflow: hidden">
                     <span class="w-100 text-end">
                         {{ formatFileSize(item.attachment?.length) }}
                     </span>
                 </span>
-                <FormModalButton v-model="item" @save="$emit('update:modelValue', item)" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton>
-                <button v-if="item.id != 0" type="button" class="btn btn-outline-danger" @click="handleRemove"><Icon name="delete" /></button>
+                <FormModalButton v-if="!readonly" v-model="item" @save="$emit('update:modelValue', item)" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton>
+                <button v-if="!readonly && item.id != 0" type="button" class="btn btn-outline-danger" @click="handleRemove"><Icon name="delete" /></button>
             </div>
         </div>
     </div>

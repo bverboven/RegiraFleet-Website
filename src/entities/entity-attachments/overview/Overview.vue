@@ -1,7 +1,7 @@
 <template>
     <FormSection title="Attachments">
-        <List v-model="items" />
-        <FileDropZone @drop-files="handleBrowse" @click="triggerBrowse()">
+        <List v-model="items" :readonly="readonly" />
+        <FileDropZone v-if="!readonly" @drop-files="handleBrowse" @click="triggerBrowse()">
             <template #default="{ isDropping }">
                 <div class="file-drop-zone row align-items-center justify-content-center m-2 mb-3" :class="{ dropping: isDropping }" style="min-height: 20rem">
                     <div class="col-auto">
@@ -26,6 +26,7 @@ const emit = defineEmits<{
 const props = withDefaults(
     defineProps<{
         modelValue?: Array<Entity>
+        readonly?: boolean
     }>(),
     {
         modelValue: () => [],

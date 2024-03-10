@@ -9,7 +9,7 @@ const config: IConfig = {
 
     routePrefix: "intervention-operators",
     baseQueryParams: {
-        includes: [],
+        includes: ["Addresses", "ContactData"],
     },
     initialQuery: {},
 

@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row mb-1">
             <div class="col-auto mb-2">
-                <FormButtonsRow :item="item" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
+                <FormButtonsRow :item="item" :feedback="feedback" :show-delete="item?.id > 0" :readonly="readonly" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col mb-2">
                 <Feedback :feedback="feedback" />
@@ -12,7 +12,6 @@
                 <RouterLink v-else v-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">Overview</span></RouterLink>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <FormSection :title="config.detailsTitle" :readonly="readonly">
@@ -20,16 +19,21 @@
                         <div class="col-md mb-2">
                             <div class="input-group">
                                 <div class="input-group-text"><Icon name="code" /></div>
-                                <input v-model="item.code" maxlength="8" class="form-control" />
+                                <input v-model="item.code" maxlength="8" :readonly="readonly" class="form-control" />
                             </div>
                             <FormLabel label="Code" />
                         </div>
                         <div class="col-md mb-2">
                             <div class="input-group">
                                 <div class="input-group-text"><Icon name="title" /></div>
-                                <input v-model="item.title" maxlength="128" class="form-control" />
+                                <input v-model="item.title" maxlength="128" :readonly="readonly" class="form-control" />
                             </div>
                             <FormLabel label="Title" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <DescriptionInput v-model="item.description" label="Notes" :readonly="readonly" />
                         </div>
                     </div>
                 </FormSection>

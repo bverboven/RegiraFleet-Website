@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row">
             <div class="col-auto mb-2 order-1">
-                <FormButtonsRow :item="item" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
+                <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col-md mb-2 position-relative order-3 order-md-2">
                 <Feedback :feedback="feedback" />
@@ -21,18 +21,18 @@
                             <div class="row">
                                 <div class="col mb-2">
                                     <div class="input-group required-input">
-                                        <input class="form-control" v-model.trim="item.title" placeholder="Company title" required autocomplete="name" maxlength="128" />
+                                        <input class="form-control" v-model.trim="item.title" :readonly="readonly" placeholder="Company title" required autocomplete="name" maxlength="128" />
                                     </div>
                                     <FormLabel label="Title" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-2">
-                                    <input class="form-control" v-model.trim="item.code" placeholder="code or abbr." maxlength="16" />
+                                    <input class="form-control" v-model.trim="item.code" :readonly="readonly" placeholder="code or abbr." maxlength="16" />
                                     <FormLabel label="Code" />
                                 </div>
                                 <div class="col mb-2">
-                                    <input class="form-control" v-model.trim="item.identificationNumber" placeholder="ID" maxlength="16" />
+                                    <input class="form-control" v-model.trim="item.identificationNumber" :readonly="readonly" placeholder="ID" maxlength="16" />
                                     <FormLabel label="(VAT) identification" />
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                         <FormSection title="Intervention types">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" placeholder="select type" />
+                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" placeholder="select type" />
                                     <FormLabel label="Intervention type(s)" />
                                 </div>
                             </div>
@@ -57,11 +57,11 @@
                     </template>
 
                     <template #files>
-                        <EntityAttachments v-model="item.attachments" />
+                        <EntityAttachments v-model="item.attachments" :readonly="readonly" />
                     </template>
 
                     <template #interventions>
-                        <Interventions :owner="item" />
+                        <Interventions :owner="item" :readonly="readonly" />
                     </template>
                 </TabContainer>
             </div>

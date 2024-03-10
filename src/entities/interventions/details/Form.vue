@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row mb-1">
             <div class="col-auto mb-2">
-                <FormButtonsRow :item="item" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
+                <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col mb-2">
                 <Feedback :feedback="feedback" />
@@ -20,27 +20,33 @@
                         <FormSection :title="config.detailsTitle">
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <VehicleSelector v-model="item.vehicle" v-model:idValue="item.vehicleId" />
+                                    <VehicleSelector v-model="item.vehicle" v-model:idValue="item.vehicleId" :readonly="readonly" />
                                     <FormLabel label="Vehicle" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
-                                        <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" class="form-control" />
+                                        <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" :readonly="readonly" class="form-control" />
                                         <div class="input-group-text">Km</div>
                                     </div>
-                                    <FormLabel v-if="lastInterventionForVehicle?.mileage" :label="`(last: ${lastInterventionForVehicle.mileage.toLocaleString($culture)} km)`" />
+                                    <FormLabel v-if="!item.mileage && lastInterventionForVehicle?.mileage" :label="`(last: ${lastInterventionForVehicle.mileage.toLocaleString($culture)} km)`" />
                                     <FormLabel v-else label="Mileage" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :filter-defaults="interventionTypeFilterDefaults" :maxLength="2" placeholder="select type" />
+                                    <InterventionTypeSelector
+                                        v-model="item.interventionTypes"
+                                        :filter-defaults="interventionTypeFilterDefaults"
+                                        :readonly="readonly"
+                                        :maxLength="2"
+                                        placeholder="select type"
+                                    />
                                     <FormLabel label="Intervention type(s)" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <OperatorSelector v-model="item.operator" v-model:idValue="item.operatorId" :filter-defaults="operatorFilterDefaults" />
+                                    <OperatorSelector v-model="item.operator" v-model:idValue="item.operatorId" :filter-defaults="operatorFilterDefaults" :readonly="readonly" />
                                     <FormLabel label="Supplier" />
                                 </div>
                                 <div class="col-md mb-2">
@@ -48,23 +54,23 @@
                                         <div class="input-group-text">
                                             <Icon name="date" />
                                         </div>
-                                        <DateInput v-model="item.interventionDate" :culture="$culture" class="form-control" />
+                                        <DateInput v-model="item.interventionDate" :disabled="readonly" :culture="$culture" class="form-control" />
                                     </div>
                                     <FormLabel label="Intervention Date" />
                                 </div>
                             </div>
                             <div class="row">
-                                <DescriptionInput v-model="item.description" label="Notes" />
+                                <DescriptionInput v-model="item.description" :readonly="readonly" label="Notes" />
                             </div>
                         </FormSection>
                     </template>
 
                     <template #invoices>
-                        <InvoicesOverview v-model="item.invoices" :owner="item" />
+                        <InvoicesOverview v-model="item.invoices" :owner="item" :readonly="readonly" />
                     </template>
 
                     <template #files>
-                        <EntityAttachments v-model="item.attachments" />
+                        <EntityAttachments v-model="item.attachments" :readonly="readonly" />
                     </template>
                 </TabContainer>
             </div>

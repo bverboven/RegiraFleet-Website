@@ -1,17 +1,18 @@
 <template>
     <div class="input-selector input-group text-nowrap">
         <slot name="prepend">
-            <FormModalButton v-model="item" :item-defaults="itemDefaults" :close-on-save="closeOnSave" class="btn btn-outline-secondary" @save="({ saved }) => handleSelect(saved)">
+            <FormModalButton v-model="item" :item-defaults="itemDefaults" :readonly="readonly" :close-on-save="closeOnSave" class="btn btn-outline-secondary" @save="({ saved }) => handleSelect(saved)">
                 <Icon :name="Entity.name" v-if="item?.id" /><Icon v-else name="new" />
             </FormModalButton>
         </slot>
         <slot>
-            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :placeholder="placeholder" @select="handleSelect" ref="autoEl" />
-            <!-- <div class="form-control">{{ item?.title }}</div> -->
+            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :readonly="readonly" :placeholder="placeholder" @select="handleSelect" ref="autoEl" />
         </slot>
         <slot name="append">
-            <button type="button" v-show="item != null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
-            <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
+            <template v-if="!readonly">
+                <button type="button" v-show="item != null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
+                <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
+            </template>
         </slot>
     </div>
 </template>
@@ -32,7 +33,8 @@ const emit = defineEmits<{
 const props = defineProps<{
     modelValue?: Entity
     idValue?: number | string
-    itemDefaults?: Ref<Record<string,any>> | Record<string,any>
+    readonly?: boolean
+    itemDefaults?: Ref<Record<string, any>> | Record<string, any>
     filterDefaults?: Record<string, any>
     closeOnSave?: boolean
     placeholder?: string

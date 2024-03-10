@@ -10,6 +10,7 @@
         <template v-for="(item, i) in items" :key="item.$id">
             <ListItem
                 v-model="items[i]"
+                :readonly="readonly"
                 :class="{ 'bg-light': i % 2 == 0 }"
                 @request-save="$emit('request-save', $event)"
                 @request-remove="$emit('request-remove', $event)"
@@ -35,6 +36,7 @@ interface Emits extends /* @vue-ignore */ OverviewEmits<Entity> {
 const emit = defineEmits<Emits>()
 const props = defineProps<{
     modelValue?: Array<Entity>
+    readonly: boolean
 }>()
 
 const { fromPool } = useEntityStore()

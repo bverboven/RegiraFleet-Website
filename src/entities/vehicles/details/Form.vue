@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row mb-1">
             <div class="col-auto mb-2">
-                <FormButtonsRow :item="item" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
+                <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col mb-2">
                 <Feedback :feedback="feedback" />
@@ -26,24 +26,24 @@
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text"><Icon name="code" /></div>
-                                        <input v-model="item.code" required class="form-control" />
+                                        <input v-model="item.code" :readonly="readonly" required class="form-control" />
                                     </div>
                                     <FormLabel label="Code" />
                                 </div>
                                 <div class="col-md mb-2">
-                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" placeholder="vehicle type" />
+                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" placeholder="vehicle type" />
                                     <FormLabel label="Type" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" placeholder="brand" />
+                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" placeholder="brand" />
                                     <FormLabel label="Brand" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text"><Icon name="title" /></div>
-                                        <input v-model="item.model" class="form-control" />
+                                        <input v-model="item.model" :readonly="readonly" class="form-control" />
                                     </div>
                                     <FormLabel label="Model" />
                                 </div>
@@ -52,11 +52,11 @@
                     </template>
 
                     <template #files>
-                        <EntityAttachments v-model="item.attachments" />
+                        <EntityAttachments v-model="item.attachments" :readonly="readonly" />
                     </template>
 
                     <template #interventions>
-                        <Interventions :owner="item" />
+                        <Interventions :owner="item" :readonly="readonly" />
                     </template>
                 </TabContainer>
             </div>

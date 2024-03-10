@@ -12,7 +12,7 @@
             {{ item.$title }}
         </div>
         <div class="col d-none d-sm-block">
-            <template v-if="item.$address != null"><AddressButton :modelValue="item.$address" class="btn btn-default p-1" /> {{ getLocation(item) }}</template>
+            <template v-if="item.$address != null"><AddressButton :modelValue="item.$address" :readonly="readonly" class="btn btn-default p-1" /> {{ getLocation(item) }}</template>
         </div>
         <div class="col d-none d-lg-block text-truncate">
             <template v-if="item.contactData?.length">
@@ -22,7 +22,7 @@
                 </div>
             </template>
         </div>
-        <div class="col-auto d-none d-md-block">
+        <div v-if="!readonly" class="col-auto d-none d-md-block">
             <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>
         </div>
     </div>
@@ -47,6 +47,7 @@ const emit = defineEmits<{
 }>()
 const props = defineProps<{
     modelValue: Entity
+    readonly?: boolean
 }>()
 
 const item = useVModelField<Entity>(props, emit)

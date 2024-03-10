@@ -13,13 +13,13 @@
         </div>
         <div class="col text-truncate">
             <div v-if="item.vehicleType != null">
-                <VehicleTypeButton :modelValue="item.vehicleType!" class="p-1" />
+                <VehicleTypeButton :modelValue="item.vehicleType!" :readonly="readonly" class="p-1" />
                 {{ getVehicleType(item.vehicleType)?.title }}
             </div>
         </div>
         <div class="col text-truncate">
             <div v-if="item.brand != null">
-                <BrandButton :modelValue="item.brand!" class="p-1" />
+                <BrandButton :modelValue="item.brand!" :readonly="readonly" class="p-1" />
                 {{ getBrand(item.brand)?.title }}
             </div>
         </div>
@@ -46,6 +46,7 @@ const emit = defineEmits<{
 }>()
 const props = defineProps<{
     modelValue: Entity
+    readonly?: boolean
 }>()
 
 const item = useVModelField<Entity>(props, emit)

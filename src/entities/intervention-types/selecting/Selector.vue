@@ -2,12 +2,12 @@
     <div class="row g-1">
         <div v-for="(item, i) in items" :key="item.id" class="col-auto" :class="{ 'is-deleted': item._deleted }">
             <div class="text-nowrap p-2 border rounded-1">
-                <FormModalButton v-model="items![i]" class="m-0 p-0" />
+                <FormModalButton v-model="items![i]" :readonly="readonly" class="m-0 p-0" />
                 {{ item.title }}
-                <IconButton icon="delete" class="m-0 py-0 px-1" @click="handleRemove(item)" />
+                <IconButton v-if="!readonly" icon="delete" class="m-0 py-0 px-1" @click="handleRemove(item)" />
             </div>
         </div>
-        <div class="col-auto">
+        <div v-if="!readonly" class="col-auto">
             <InputSelector v-model="newItem" :filter-defaults="filterDefaults" :placeholder="placeholder" @select="handleSelect" />
         </div>
     </div>
@@ -25,9 +25,10 @@ const emit = defineEmits<{
     (e: "update:idsValue", args: Array<number>): void
 }>()
 const props = defineProps<{
-    placeholder?: string
     modelValue?: Array<Entity>
     idsValue?: Array<number>
+    readonly?: boolean
+    placeholder?: string
     filterDefaults?: Record<string, any>
 }>()
 

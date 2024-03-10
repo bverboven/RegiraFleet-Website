@@ -12,13 +12,13 @@
             <span class="d-none d-md-inline ms-1">Restore</span>
         </IconButton>
         <template v-else>
-            <IconButton v-if="!isArchived" type="submit" icon="save" button-label="Save" class="btn-primary py-1 me-2" :disabled="status != '' && status != FeedbackStatus.failed">
+            <IconButton v-if="!isArchived" type="submit" icon="save" button-label="Save" class="btn-primary py-1 me-2" :disabled="readonly || (status != '' && status != FeedbackStatus.failed)">
                 <span class="d-none d-md-inline ms-1">Save</span>
             </IconButton>
-            <IconButton type="button" icon="cancel" button-label="Cancel" class="btn-secondary py-1 mx-2" @click="emit('cancel')" :disabled="!canCancel">
+            <IconButton type="button" icon="cancel" button-label="Cancel" class="btn-secondary py-1 mx-2" @click="emit('cancel')" :disabled="readonly || !canCancel">
                 <span class="d-none d-md-inline ms-1">Cancel</span>
             </IconButton>
-            <ConfirmButton type="button" :modalType="ModalType.danger" @confirm="emit('remove')" class="btn-danger py-1 ms-2" v-show="showDelete">
+            <ConfirmButton type="button" :modalType="ModalType.danger" class="btn-danger py-1 ms-2" :disabled="readonly" v-show="showDelete" @confirm="emit('remove')">
                 <template #button-content>
                     <Icon name="delete" class="me-1" />
                     <span class="d-none d-md-inline">Delete</span>
@@ -45,6 +45,7 @@ const emit = defineEmits<{
 const props = withDefaults(
     defineProps<{
         item?: IEntity
+        readonly?: boolean
         feedback: FeedbackOut
         showDelete?: boolean
         canCancel?: boolean

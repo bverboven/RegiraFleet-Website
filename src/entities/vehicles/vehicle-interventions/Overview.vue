@@ -3,28 +3,28 @@
         <template #title>
             <div class="d-flex justify-content-between">
                 <h3 class="p-2 mb-2">Interventions</h3>
-                <InterventionButton :item-defaults="{ vehicle: owner, vehicleId: owner?.id }" class="btn btn-info py-1 my-1" @save="load"><Icon name="new" /></InterventionButton>
+                <InterventionButton v-if="!readonly" :item-defaults="{ vehicle: owner, vehicleId: owner?.id }" class="btn btn-info py-1 my-1" @save="load"><Icon name="new" /></InterventionButton>
             </div>
         </template>
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
-            <div class="col-2 col-xl-1 fw-bold">Date</div>
+            <div class="col-3 col-md-2 col-xl-1 fw-bold">Date</div>
             <div class="col fw-bold">Type(s)</div>
             <div class="col d-none d-lg-block fw-bold">Supplier</div>
             <div class="col d-none d-md-block fw-bold">Invoice(s)</div>
         </div>
         <div v-for="item in items" class="row border-bottom border-bottom-1 py-2">
             <div class="col-auto">
-                <InterventionButton :modelValue="item" class="p-1" />
+                <InterventionButton :modelValue="item" :readonly="readonly" class="p-1" />
             </div>
-            <div class="col-2 col-xl-1">
+            <div class="col-3 col-md-2 col-xl-1">
                 <div class="italic-muted">{{ formatDate(item.interventionDate, $culture) }}</div>
             </div>
             <div class="col text-truncate">
                 {{ interventionTypes(item) }}
             </div>
             <div class="col d-none d-lg-block text-truncate">
-                <OperatorButton :modelValue="item.operator" class="p-1" />
+                <OperatorButton :modelValue="item.operator" :readonly="readonly" class="p-1" />
                 {{ getOperator(item.operator).$title }}
             </div>
             <div class="col text-truncate d-none d-md-block">{{ item.invoices?.map((x) => x.invoiceNumber).join(", ") }}</div>
@@ -43,6 +43,7 @@ import { FormModalButton as OperatorButton, useEntityStore as useOperatorStore }
 
 const props = defineProps<{
     owner: Vehicle
+    readonly?: boolean
 }>()
 
 const service = get<EntityService>(Entity.name)!

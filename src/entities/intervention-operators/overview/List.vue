@@ -6,11 +6,12 @@
             <div class="col fw-bold">Title</div>
             <div class="col d-none d-sm-block fw-bold"><Icon name="map" class="text-muted m-1" /> Location</div>
             <div class="col d-none d-lg-block fw-bold"><Icon name="connect" class="text-muted m-1" /> Contact</div>
-            <div class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
+            <div v-if="!readonly" class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
         </div>
         <template v-for="(item, i) in items" :key="item.$id">
             <ListItem
                 v-model="items[i]"
+                :readonly="readonly"
                 :class="{ 'bg-light': i % 2 == 0 }"
                 @request-save="$emit('request-save', $event)"
                 @request-remove="$emit('request-remove', $event)"
@@ -32,6 +33,7 @@ interface Emits extends /* @vue-ignore */ OverviewEmits<Entity> {}
 const emit = defineEmits<Emits>()
 const props = defineProps<{
     modelValue?: Array<Entity>
+    readonly?: boolean
 }>()
 
 const { fromPool } = useEntityStore()

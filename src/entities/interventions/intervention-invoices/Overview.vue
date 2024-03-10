@@ -4,7 +4,7 @@
 
         <div v-if="!readonly" class="row mt-2">
             <div class="col mb-2">
-                <FormModalButton :modal-title="`New Invoice`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">Add new invoice</FormModalButton>
+                <FormModalButton :modal-title="`New Invoice`" :item-defaults="defaultValues" :readonly="readonly" class="btn btn-info" @save="handleSave">Add new invoice</FormModalButton>
             </div>
         </div>
     </FormSection>

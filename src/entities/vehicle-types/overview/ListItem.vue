@@ -5,13 +5,13 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
-        <div class="col-1 text-truncate">
+        <div class="col-2 col-md-1 text-truncate">
             {{ item.code }}
         </div>
         <div class="col text-truncate">
             {{ item.$title }}
         </div>
-        <div class="col-auto d-none d-md-block">
+        <div v-if="!readonly" class="col-auto d-none d-md-block">
             <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>
         </div>
     </div>
@@ -32,6 +32,7 @@ const emit = defineEmits<{
 }>()
 const props = defineProps<{
     modelValue: Entity
+    readonly?: boolean
 }>()
 
 const item = useVModelField<Entity>(props, emit)

@@ -1,7 +1,7 @@
 <template>
     <Draggable v-model="items" item-key="id" handle=".drag-handle" ghost-class="ghost">
         <template #item="{ element, index }">
-            <ListItem v-model="items[index]" :class="{ 'is-deleted': element._deleted }" @update:model-value="emit('update:modelValue', items)" @remove="emit('update:modelValue', items)" />
+            <ListItem v-model="items[index]" :class="{ 'is-deleted': element._deleted }" :readonly="readonly" @update:model-value="emit('update:modelValue', items)" @remove="emit('update:modelValue', items)" />
         </template>
     </Draggable>
 </template>
@@ -18,6 +18,7 @@ const emit = defineEmits<{
 const props = withDefaults(
     defineProps<{
         modelValue?: Array<Entity>
+        readonly?: boolean
     }>(),
     {
         modelValue: () => [],
