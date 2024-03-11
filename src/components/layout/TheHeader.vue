@@ -15,18 +15,25 @@
                 <!-- <li class="nav-item">
                         <router-link class="nav-link" :to="{ name: 'brands' }">Brands</router-link>
                     </li> -->
-                <li class="nav-item" v-for="navItem in navbarItems">
-                    <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click.native="handleCloseMenu">
+                <li v-for="navItem in navbarItems" :key="navItem.id" class="nav-item">
+                    <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click="handleCloseMenu">
                         <icon :name="navItem.id" />
                         <span class="d-md-none d-lg-inline ms-2">{{ navItem.overviewTitle }}</span>
                     </RouterLink>
                 </li>
                 <StatisticsMenuItem />
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex">
                 <div class="row">
-                    <div v-if="$auth.enabled" class="col-sm-auto">
+                    <div v-if="$auth.enabled" class="col">
                         <AccountMenu :isAuthenticated="$auth.isAuthenticated" @close="handleCloseMenu" />
+                    </div>
+                    <div class="col-auto">
+                        <ul class="list-inline">
+                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'en' }" @click="setLangCode('en')">EN</li>
+                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'fr' }" @click="setLangCode('fr')">FR</li>
+                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'nl' }" @click="setLangCode('nl')">NL</li>
+                        </ul>
                     </div>
                 </div>
             </form>
@@ -41,6 +48,7 @@ import logo from "@/assets/images/logo-sm.png"
 import type { IConfig } from "@/regira_modules/vue/entities"
 import AccountMenu from "@/components/user/HeaderMenu.vue"
 import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
+import { useLang } from "@/regira_modules/vue/lang"
 
 const { version } = useConfig()
 
@@ -59,6 +67,8 @@ const configs = Object.entries(app.appContext.config.globalProperties.$configs).
 
 const { navbar: navbarKeys } = useConfig()
 const navbarItems = ref<Array<IConfig>>([])
+
+const { langCode, setLangCode } = useLang()
 
 function handleCloseMenu() {
     showNavbarContent.value = false

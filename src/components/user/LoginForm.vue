@@ -2,8 +2,8 @@
     <form @submit.prevent="handleSubmit" ref="loginForm" :style="{ 'min-height': minHeight }">
         <div class="mb-3 position-relative" v-if="failed">
             <div class="bg-danger border rounded text-light p-2">
-                {{ $t("signInErrorMsg") }}
-                <span v-if="isLockedOut">{{ $t("tryAgainInMin", { minutes: 5 }) }}</span>
+                {{ t("signInErrorMsg") }}
+                <span v-if="isLockedOut">{{ t("tryAgainInMin", { minutes: 5 }) }}</span>
             </div>
         </div>
         <div class="row mb-3">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ $t("username") }}</label>
+            <label class="col-sm-3 col-form-label">{{ t("username") }}</label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <input class="form-control" autocomplete="username email" v-model="username" :disabled="signingIn" />
@@ -36,21 +36,21 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ $t("password") }}</label>
+            <label class="col-sm-3 col-form-label">{{ t("password") }}</label>
             <div class="col-sm-9">
                 <input type="password" class="form-control" autocomplete="password current-password" v-model="password" :disabled="signingIn" />
             </div>
         </div>
         <div class="row">
             <div class="col-4 col-sm-3">
-                <button type="submit" class="btn btn-primary" :disabled="signingIn">{{ $t("signIn") }}</button>
+                <button type="submit" class="btn btn-primary" :disabled="signingIn">{{ t("signIn") }}</button>
             </div>
             <div class="col col-sm">
                 <span v-if="signingIn" class="text-info">
                     <Loading class="me-1" style="width: 2rem" />
-                    {{ $t("signingIn") }}
+                    {{ t("signingIn") }}
                 </span>
-                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{ $t("forgotPassword") }}</button>
+                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{ t("forgotPassword") }}</button>
             </div>
         </div>
     </form>
@@ -61,7 +61,7 @@ import { ref, computed, onMounted } from "vue"
 import { useConfig } from "@/app-config"
 import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
-import { useLang } from "@/regira_modules/vue/lang"
+import { useUserLang } from "./useUserLang"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -80,6 +80,10 @@ const minHeight = computed(() => (appConfig.isDemo && showUsersList.value ? "22r
 const showUsersList = ref(false)
 const demoUsers = ref<Array<IDemoUser>>()
 
+// translate
+const { langCode, setLangCode, t } = useUserLang()
+
+// auth
 const auth = useAuth()
 function handleSelectUser(item: { username: string; password?: string; clientId: string }) {
     username.value = item.username
@@ -89,9 +93,7 @@ function handleSelectUser(item: { username: string; password?: string; clientId:
     auth.service.options.loginUrl = appConfig.loginUrl.replace("{clientId}", item.clientId).replace("{clientApp}", appConfig.clientApp)
 }
 
-const { langCode, setLangCode } = useLang()
-
 onMounted(async () => {
     demoUsers.value = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
 })
-</script>
+</script>./useUserLang

@@ -7,13 +7,13 @@
                     <li class="list-group-item">
                         <button type="button" class="btn btn-default p-1" @click="showChangePassword = !showChangePassword">
                             <Icon name="security" class="me-1" />
-                            Change password
+                            {{ t("changePassword") }}
                         </button>
                     </li>
                     <li class="list-group-item">
                         <button type="button" class="btn btn-default p-1" @click="handleLogout">
                             <Icon name="exit" class="me-1" />
-                            Sign out
+                            {{ t("signOut") }}
                         </button>
                     </li>
                 </ul>
@@ -23,7 +23,7 @@
     </section>
 
     <Teleport to="#modals">
-        <Modal v-if="showChangePassword" title="Change password" :show-footer="false" @close="showChangePassword = false" @cancel="showChangePassword = false">
+        <Modal v-if="showChangePassword" :title="t('changePassword')" :show-footer="false" @close="showChangePassword = false" @cancel="showChangePassword = false">
             <ChangePasswordForm :username="$auth.authData.name" />
         </Modal>
     </Teleport>
@@ -33,6 +33,9 @@
 import { ref } from "vue"
 import { useAuthStore } from "@/regira_modules/vue/auth"
 import ChangePasswordForm from "./ChangePasswordForm.vue"
+import { useUserLang } from "./useUserLang"
+
+const { t, tm } = useUserLang()
 
 const showChangePassword = ref(false)
 
