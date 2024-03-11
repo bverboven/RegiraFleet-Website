@@ -1,0 +1,38 @@
+{
+    "hello": {
+        "en": "Hello",
+        "nl": "Hallo"
+    },
+    "forgotPassword": {
+        "en": "Forgot password?",
+        "nl": "Wachtwoord vergeten?"
+    },
+    "password": {
+        "en": "Password",
+        "nl": "Wachtwoord"
+    },
+    "signIn": {
+        "en": "Sign in",
+        "nl": "Aanmelden"
+    },
+    "signingIn": {
+        "en": "Signing in ...",
+        "nl": "Aan het aanmelden ..."
+    },
+    "signInErrorMsg": {
+        "en": "Unfortunately, signing in failed.",
+        "nl": "Helaas, het aanmelden is mislukt."
+    },
+    "tryAgainInMin": {
+        "en": "Try again in {minutes} min.",
+        "nl": "Probeer opnieuw in {minutes} min."
+    },
+    "username": {
+        "en": "Username",
+        "nl": "Gebruikersnaam"
+    },
+    "welcome": {
+        "en": "Welcome {name}",
+        "nl": "Welkom {name}"
+    }
+}

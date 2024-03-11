@@ -1,11 +1,10 @@
 <template>
-    <Anchor v-if="href" :href="href" :target="dataType == ContactDataTypes.website ? '_blank' : undefined"><ContactDataIcon :type="dataType" /></Anchor>
+    <MyAnchor v-if="href" :href="href" :target="dataType == ContactDataTypes.website ? '_blank' : undefined"><ContactDataIcon :type="dataType" /></MyAnchor>
     <button v-else disabled><ContactDataIcon :type="dataType" /></button>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { Anchor } from "@/regira_modules/vue/ui"
 import { getDataType } from "./functions"
 import ContactDataTypes from "./ContactDataTypes"
 import type Entity from "./Entity"

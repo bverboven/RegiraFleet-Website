@@ -2,7 +2,8 @@
     "clientApp": "fleet-client",
     "loginUrl": "auth/?clientApp={clientApp}&clientId={clientId}",
     "api": {
-        "development": "https://localhost:7193/",
+        "_development": "https://localhost:7193/",
+        "development": "https://fleet.regira.com/api",
         "production": "https://fleet.regira.com/api"
     },
     "includeCredentials": false,

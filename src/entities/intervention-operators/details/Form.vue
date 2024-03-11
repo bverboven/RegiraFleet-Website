@@ -38,6 +38,12 @@
                             </div>
                         </FormSection>
 
+                        <!-- Contact Data -->
+                        <ContactData v-model="item.contactData" :owner="item" :readonly="readonly" />
+
+                        <!-- Addresses -->
+                        <Addresses v-model="item.addresses" :owner="item" :readonly="readonly" />
+
                         <FormSection title="Intervention types">
                             <div class="row">
                                 <div class="col mb-2">
@@ -115,7 +121,7 @@ const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore 
 const tabs = computed(() =>
     [
         Tab.create("form", { icon: "form", isDefault: true }),
-        Tab.create("contact", { icon: "contact" }),
+        //Tab.create("contact", { icon: "contact" }),
         Tab.create("files", { icon: "attachment" }),
         Tab.create("interventions", { icon: Intervention.name }),
     ].filter((x) => x)

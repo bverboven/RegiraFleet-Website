@@ -14,7 +14,7 @@ import appConfig from "@/app-config"
 import { type IDashboardItem, toDashboardItem, Dashboard, type IConfig } from "@/regira_modules/vue/entities"
 
 const app = getCurrentInstance()!
-const configs = Object.entries(app.appContext.config.globalProperties.$configs).map(([_, config]) => config as IConfig)
+const configs = Object.entries(app.appContext.config.globalProperties.$configs).map(([, config]) => config as IConfig)
 
 const { title: homeTitle, dashboard: dashboardKeys } = appConfig
 const dashboardItems = ref<Array<IDashboardItem>>([])
