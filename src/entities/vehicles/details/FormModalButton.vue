@@ -3,7 +3,7 @@
         <slot><Icon :name="Entity.name" /></slot>
         <Teleport to="#modals">
             <Modal v-if="isOpen" :title="modalTitle" :showFooter="false" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSave">
-                <Form v-model="item" :readonly="readonly" :is-popup="true" @cancel="handleCancel" @save="handleSave" @remove="handleRemove" />
+                <Form v-model="item" :readonly="readonly" :is-popup="true" style="min-height: 40rem" @cancel="handleCancel" @save="handleSave" @remove="handleRemove" />
             </Modal>
         </Teleport>
     </button>

@@ -6,7 +6,7 @@ import Entity from "./Entity"
 export class EntityService extends EntityServiceBase<Entity> {
     constructor(axios: AxiosWithFilesInstance, config: IConfig) {
         super(axios, config)
-        console.debug("InterventionTypeService", this, { config })
+        console.debug("InterventionOperatorService", this, { config })
     }
 
     async getAttachments(so?: object): Promise<Array<EntityAttachment>> {

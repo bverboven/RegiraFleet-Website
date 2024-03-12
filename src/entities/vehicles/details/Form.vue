@@ -49,6 +49,15 @@
                                 </div>
                             </div>
                         </FormSection>
+
+                        <FormSection title="Intervention types">
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" placeholder="select type" />
+                                    <FormLabel label="Allowed intervention type(s)" />
+                                </div>
+                            </div>
+                        </FormSection>
                     </template>
 
                     <template #files>
@@ -82,6 +91,7 @@ import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as BrandSelector } from "../../brands"
 import { InputSelector as VehicleTypeSelector } from "../../vehicle-types"
 import { Entity as Intervention } from "../../interventions"
+import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import Interventions from "../vehicle-interventions/Overview.vue"

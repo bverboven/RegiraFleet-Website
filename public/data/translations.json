@@ -1,8 +1,4 @@
 {
-    "hello": {
-        "en": "Hello",
-        "nl": "Hallo"
-    },
     "submit": {
         "en": "Submit",
         "nl": "Verstuur"

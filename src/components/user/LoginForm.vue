@@ -9,11 +9,7 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="float-end">
-                    <ul class="list-inline">
-                        <li class="list-inline-item" :class="{ 'fw-bold': langCode == 'en' }" @click="setLangCode('en')">EN</li>
-                        <li class="list-inline-item" :class="{ 'fw-bold': langCode == 'fr' }" @click="setLangCode('fr')">FR</li>
-                        <li class="list-inline-item" :class="{ 'fw-bold': langCode == 'nl' }" @click="setLangCode('nl')">NL</li>
-                    </ul>
+                    <LangSelector />
                 </div>
             </div>
         </div>
@@ -62,6 +58,7 @@ import { useConfig } from "@/app-config"
 import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
 import { useUserLang } from "./useUserLang"
+import LangSelector from "../layout/LangSelector.vue"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -81,7 +78,7 @@ const showUsersList = ref(false)
 const demoUsers = ref<Array<IDemoUser>>()
 
 // translate
-const { langCode, setLangCode, t } = useUserLang()
+const { t } = useUserLang()
 
 // auth
 const auth = useAuth()
@@ -96,4 +93,5 @@ function handleSelectUser(item: { username: string; password?: string; clientId:
 onMounted(async () => {
     demoUsers.value = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
 })
-</script>./useUserLang
+</script>
+./useUserLang

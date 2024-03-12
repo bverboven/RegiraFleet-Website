@@ -22,7 +22,7 @@
             <div class="col-sm mb-2">
                 <div class="input-group">
                     <div class="input-group-text"><Icon name="euro" /></div>
-                    <input type="number" v-model="item.priceExcl" :readonly="readonly" class="form-control" />
+                    <input type="number" v-model="item.priceExcl" step="any" :readonly="readonly" class="form-control" />
                 </div>
                 <FormLabel label="Price (excl)" />
             </div>

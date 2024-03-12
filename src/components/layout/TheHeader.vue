@@ -29,11 +29,7 @@
                         <AccountMenu :isAuthenticated="$auth.isAuthenticated" @close="handleCloseMenu" />
                     </div>
                     <div class="col-auto">
-                        <ul class="list-inline">
-                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'en' }" @click="setLangCode('en')">EN</li>
-                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'fr' }" @click="setLangCode('fr')">FR</li>
-                            <li class="list-inline-item cursor pointer" :class="{ 'fw-bold': langCode == 'nl' }" @click="setLangCode('nl')">NL</li>
-                        </ul>
+                        <LangSelector />
                     </div>
                 </div>
             </form>
@@ -48,7 +44,7 @@ import logo from "@/assets/images/logo-sm.png"
 import type { IConfig } from "@/regira_modules/vue/entities"
 import AccountMenu from "@/components/user/HeaderMenu.vue"
 import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
-import { useLang } from "@/regira_modules/vue/lang"
+import LangSelector from "./LangSelector.vue"
 
 const { version } = useConfig()
 
@@ -67,8 +63,6 @@ const configs = Object.entries(app.appContext.config.globalProperties.$configs).
 
 const { navbar: navbarKeys } = useConfig()
 const navbarItems = ref<Array<IConfig>>([])
-
-const { langCode, setLangCode } = useLang()
 
 function handleCloseMenu() {
     showNavbarContent.value = false
