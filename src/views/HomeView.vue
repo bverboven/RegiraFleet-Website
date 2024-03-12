@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1 class="text-center">
-            {{ homeTitle }}
+            {{ $tm(homeTitle) }}
         </h1>
 
         <Dashboard :items="dashboardItems" />
@@ -10,14 +10,18 @@
 
 <script setup lang="ts">
 import { ref, watchEffect, getCurrentInstance } from "vue"
+import type { IConfig } from "@/regira_modules/vue/entities"
+import { type IDashboardItem, toDashboardItem, Dashboard } from "@/components/dashboard"
+import { useLang } from "@/regira_modules/vue/lang"
 import appConfig from "@/app-config"
-import { type IDashboardItem, toDashboardItem, Dashboard, type IConfig } from "@/regira_modules/vue/entities"
 
 const app = getCurrentInstance()!
 const configs = Object.entries(app.appContext.config.globalProperties.$configs).map(([, config]) => config as IConfig)
 
 const { title: homeTitle, dashboard: dashboardKeys } = appConfig
 const dashboardItems = ref<Array<IDashboardItem>>([])
+
+const { translate, translateMessage } = useLang()
 
 watchEffect(() => {
     dashboardItems.value = []
@@ -33,9 +37,12 @@ watchEffect(() => {
     if (app.appContext.config.globalProperties.$statistics?.enabled) {
         const statisticsItem: IDashboardItem = {
             name: "statistics",
-            title: "Statistics",
+            title: translate("statistics"),
             icon: "statistics",
-            description: "Export statistics to Excel",
+            description: translateMessage({
+                en: "Export statistics to Excel",
+                nl: "Exporteer statistieken naar Excel",
+            }),
         }
         dashboardItems.value.push(statisticsItem)
     }

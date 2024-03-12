@@ -13,9 +13,18 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Intervention Types",
-    detailsTitle: "Intervention Type",
-    description: `Manage types of intervention`,
+    overviewTitle: {
+        en: "Intervention Types",
+        nl: "Interventietypes",
+    },
+    detailsTitle: {
+        en: "Intervention Type",
+        nl: "Interventietype",
+    },
+    description: {
+        en: `Manage types of intervention`,
+        nl: `Beheer interventietypes`,
+    },
     icon: "bi bi-tools",
 
     defaultPageSize: 10,

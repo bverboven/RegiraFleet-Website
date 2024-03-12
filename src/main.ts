@@ -31,16 +31,19 @@ import { defaultPoolCache, PoolCache } from "@/regira_modules/vue/entities"
 import { Entity as Country } from "./entities/countries"
 import { Entity as VehicleType } from "./entities/vehicle-types"
 
+// load translations
+const translations = await fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json())
+
+// load config
 fetch(`${appConfig.baseUrl}/config.json`)
     .then((r) => r.json())
     .then(async (config: Record<string, any>) => {
+        // start init app
         console.debug("init", { config })
-        // config
+        // config (processed)
         const processedConfig = createConfig(config)
         const { api, includeCredentials } = processedConfig
         const axios = initAxios({ api, includeCredentials })
-
-        document.title = processedConfig.title
 
         // app
         const app = createApp(App)
@@ -82,9 +85,11 @@ fetch(`${appConfig.baseUrl}/config.json`)
         // lang
         app.use(langPlugin, {
             defaultLang: "en",
-            messages: () => fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json()),
+            messages: translations, //() => fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json()),
         })
-        const { translate: t, setLangCode } = useLang()
+        const { translate: t, translateMessage, setLangCode } = useLang()
+
+        document.title = translateMessage(processedConfig.title)
 
         // global directives
         app.use(focus)
@@ -128,6 +133,7 @@ fetch(`${appConfig.baseUrl}/config.json`)
                     app.config.globalProperties.$setAppStatus(AppStatus.Ready)
 
                     setLangCode(auth.culture!.split("-")[0])
+                    document.title = translateMessage(processedConfig.title)
 
                     console.debug("ready", {
                         app,

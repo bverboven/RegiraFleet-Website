@@ -2,7 +2,7 @@ import { computed } from "vue"
 import { useLang, translate, type IFormatInput } from "@/regira_modules/vue/lang"
 import translations from "./translations"
 
-export function useUserLang() {
+export function useStatisticsLang() {
     const lang = useLang()
     const { langCode, fallbackLangCode } = lang
     const t = computed(() => (key: string, formatArgs?: IFormatInput) => translate(key, translations, langCode.value, formatArgs) ?? translate(key, translations, fallbackLangCode.value, formatArgs))
@@ -15,4 +15,4 @@ export function useUserLang() {
     }
 }
 
-export default useUserLang
+export default useStatisticsLang

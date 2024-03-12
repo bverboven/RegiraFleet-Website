@@ -12,9 +12,18 @@ const config: IConfig = {
         includes: ["Brand", "VehicleType"],
     },
 
-    overviewTitle: "Vehicles",
-    detailsTitle: "Vehicles",
-    description: `Manage Vehicles`,
+    overviewTitle: {
+        en: "Vehicles",
+        nl: "Voertuigen",
+    },
+    detailsTitle: {
+        en: "Vehicles",
+        nl: "Voertuigen",
+    },
+    description: {
+        en: `Manage Vehicles`,
+        nl: `Beheer voertuigen`,
+    },
     icon: "bi bi-car-front",
 
     defaultPageSize: 10,

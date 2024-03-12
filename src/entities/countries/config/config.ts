@@ -14,9 +14,18 @@ const config: IConfig = {
     },
     nav: [],
 
-    overviewTitle: "Countries",
-    detailsTitle: "Country",
-    description: `Manage countries`,
+    overviewTitle: {
+        en: "Countries",
+        nl: "Landen",
+    },
+    detailsTitle: {
+        en: "Country",
+        nl: "Land",
+    },
+    description: {
+        en: `Manage countries`,
+        nl: `Beheer landen`,
+    },
     icon: "bi bi-globe-americas",
 
     defaultPageSize: 10,

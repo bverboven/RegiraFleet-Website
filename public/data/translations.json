@@ -1,7 +1,47 @@
 {
+    "date": {
+        "en": "Date",
+        "nl": "Datum"
+    },
+    "fleetManager": {
+        "en": "Fleet Manager",
+        "nl": "Vlootmanager"
+    },
+    "invoice": {
+        "en": "Invoice",
+        "nl": "Factuur"
+    },
+    "interventionType": {
+        "en": "Intervention type",
+        "nl": "Interventietype"
+    },
+    "keywords": {
+        "en": "keyword(s)",
+        "nl": "zoekwoord(en)"
+    },
+    "new": {
+        "en": "New",
+        "nl": "Nieuw"
+    },
+    "statistics": {
+        "en": "Statistics",
+        "nl": "Statistieken"
+    },
     "submit": {
         "en": "Submit",
         "nl": "Verstuur"
+    },
+    "supplier": {
+        "en": "Supplier",
+        "nl": "Leverancier"
+    },
+    "vehicle": {
+        "en": "Vehicle",
+        "nl": "Voertuig"
+    },
+    "vehicleType": {
+        "en": "Vehicle type",
+        "nl": "Voertuigtype"
     },
     "welcome": {
         "en": "Welcome {name}",

@@ -13,9 +13,18 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Interventions",
-    detailsTitle: "Intervention",
-    description: `Vehicle interventions`,
+    overviewTitle: {
+        en: "Interventions",
+        nl: "Interventies",
+    },
+    detailsTitle: {
+        en: "Intervention",
+        nl: "Interventie",
+    },
+    description: {
+        en: `Manage vehicle interventions`,
+        nl: `Beheer interventies van voertuigen`,
+    },
     icon: "bi bi-wrench-adjustable",
 
     defaultPageSize: 10,

@@ -10,7 +10,10 @@
     "isDebug": true,
     "isDemo": true,
 
-    "title": "Regira Fleet Manager",
+    "title": {
+        "en": "Regira Fleet Manager",
+        "nl": "Regira Vlootmanager"
+    },
 
     "entities": ["Interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
     "dashboard": ["Interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],
