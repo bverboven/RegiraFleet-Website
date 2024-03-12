@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-default" @click="open">
         <slot><Icon name="search" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" :title="modalTitle" :showFooter="true" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSubmit">
+            <Modal v-if="isOpen" :title="modalTitle || $tm(config.overviewTitle)" :showFooter="true" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSubmit">
                 <SelectorSearch v-model="selected" :filter-defaults="filterDefaults" :item-defaults="itemDefaults" :page-size="maxResults" />
             </Modal>
         </Teleport>
@@ -34,7 +34,7 @@ const props = withDefaults(
 const selected = ref<Entity>()
 const isOpen = ref(false)
 const { service: entityService } = useEntityStore()
-const modalTitle = computed(() => props.label || entityService.toEntity(props.modelValue || {}).$title || config.detailsTitle)
+const modalTitle = computed(() => props.label || entityService.toEntity(props.modelValue || {}).$title)
 
 function open() {
     selected.value = props.modelValue

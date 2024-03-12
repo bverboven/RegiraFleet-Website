@@ -17,8 +17,8 @@ const config: IConfig = {
         nl: "Voertuigen",
     },
     detailsTitle: {
-        en: "Vehicles",
-        nl: "Voertuigen",
+        en: "Vehicle",
+        nl: "Voertuig",
     },
     description: {
         en: `Manage Vehicles`,

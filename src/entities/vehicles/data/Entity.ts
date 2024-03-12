@@ -26,7 +26,7 @@ export class Vehicle extends EntityBase {
         return this.id || "new"
     }
     override get $title(): string | undefined {
-        return `${this.code} ${this.vehicleType?.title}`.trim()
+        return `${this.code || ""} ${this.vehicleType?.title || ""}`.trim()
     }
 }
 

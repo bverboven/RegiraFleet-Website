@@ -17,7 +17,7 @@
             <div class="col">
                 <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
-                        <FormSection :title="config.detailsTitle">
+                        <FormSection :title="$tm(config.detailsTitle)">
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <VehicleSelector v-model="item.vehicle" v-model:idValue="item.vehicleId" :readonly="readonly" @update:modelValue="handleUpdateVehicle" />
