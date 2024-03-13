@@ -13,18 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: {
-        en: "Brands",
-        nl: "Merken",
-    },
-    detailsTitle: {
-        en: "Brand",
-        nl: "Merk",
-    },
-    description: {
-        en: `Manage vehicle brands`,
-        nl: `Beheer merken van voertuigen`,
-    },
+    overviewTitle: "brands",
+    detailsTitle: "brand",
+    description: "brandsDescription",
     icon: "bi bi-building-fill-gear",
 
     defaultPageSize: 10,

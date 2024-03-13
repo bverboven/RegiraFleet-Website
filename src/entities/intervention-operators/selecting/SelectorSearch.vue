@@ -51,7 +51,7 @@
                 </template>
             </div>
             <div class="col-12 col-sm-auto order-1 order-sm-3">
-                <ResultSummary v-if="items != null" :visibleCount="items.length" :totalCount="itemsCount" />
+                <ResultSummary v-if="items?.length" :visibleCount="items.length" :totalCount="itemsCount" />
             </div>
         </div>
 

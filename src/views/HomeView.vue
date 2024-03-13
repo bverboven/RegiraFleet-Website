@@ -12,7 +12,6 @@
 import { ref, watchEffect, getCurrentInstance } from "vue"
 import type { IConfig } from "@/regira_modules/vue/entities"
 import { type IDashboardItem, toDashboardItem, Dashboard } from "@/components/dashboard"
-import { useLang } from "@/regira_modules/vue/lang"
 import appConfig from "@/app-config"
 
 const app = getCurrentInstance()!
@@ -20,8 +19,6 @@ const configs = Object.entries(app.appContext.config.globalProperties.$configs).
 
 const { title: homeTitle, dashboard: dashboardKeys } = appConfig
 const dashboardItems = ref<Array<IDashboardItem>>([])
-
-const { translate, translateMessage } = useLang()
 
 watchEffect(() => {
     dashboardItems.value = []
@@ -37,12 +34,9 @@ watchEffect(() => {
     if (app.appContext.config.globalProperties.$statistics?.enabled) {
         const statisticsItem: IDashboardItem = {
             name: "statistics",
-            title: translate("statistics"),
+            title: "statistics",
             icon: "statistics",
-            description: translateMessage({
-                en: "Export statistics to Excel",
-                nl: "Exporteer statistieken naar Excel",
-            }),
+            description: "statisticsDescription",
         }
         dashboardItems.value.push(statisticsItem)
     }

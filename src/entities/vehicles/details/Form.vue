@@ -33,19 +33,19 @@
                                     <FormLabel :label="$t('code')" />
                                 </div>
                                 <div class="col-md mb-2">
-                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" :placeholder="$t('vehicleTypePlaceholder')" />
+                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('type')" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" :placeholder="$t('brand')" />
+                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" :placeholder="$t('selectBrand')" />
                                     <FormLabel :label="$t('brand')" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text"><Icon name="title" /></div>
-                                        <input v-model="item.model" :readonly="readonly" class="form-control" />
+                                        <input v-model="item.model" :readonly="readonly" class="form-control" :placeholder="$t('modelPlaceholder')" />
                                     </div>
                                     <FormLabel :label="$t('model')" />
                                 </div>
@@ -122,7 +122,7 @@ const tabs = computed(() =>
     [
         Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
         Tab.create("files", { icon: "attachment", title: translate("files") }),
-        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions") }),
+        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions"), isDisabled: !item.value?.id }),
     ].filter((x) => x)
 )
 </script>

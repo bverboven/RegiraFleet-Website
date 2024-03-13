@@ -9,7 +9,9 @@
             </div>
             <div class="col-auto">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank"><Icon name="popOut" /></RouterLink>
-                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t('overview') }}</span></RouterLink>
+                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"
+                    ><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t("overview") }}</span></RouterLink
+                >
             </div>
         </div>
 
@@ -20,22 +22,34 @@
                         <FormSection :title="$tm(config.detailsTitle)">
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <VehicleSelector v-model="item.vehicle" v-model:idValue="item.vehicleId" :readonly="readonly" @update:modelValue="handleUpdateVehicle" />
-                                    <FormLabel label="Vehicle" />
+                                    <VehicleSelector
+                                        v-model="item.vehicle"
+                                        v-model:idValue="item.vehicleId"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectVehicle')"
+                                        @update:modelValue="handleUpdateVehicle"
+                                    />
+                                    <FormLabel :label="$t('vehicle')" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
-                                        <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" :readonly="readonly" class="form-control" />
                                         <div class="input-group-text">Km</div>
+                                        <input type="number" :min="lastInterventionForVehicle?.mileage || 0" step="1" v-model="item.mileage" :readonly="readonly" class="form-control" />
                                     </div>
                                     <FormLabel v-if="!item.mileage && lastInterventionForVehicle?.mileage" :label="`(last: ${lastInterventionForVehicle.mileage.toLocaleString($culture)} km)`" />
-                                    <FormLabel v-else label="Mileage" />
+                                    <FormLabel v-else :label="$t('mileage')" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <OperatorSelector v-model="item.operator" v-model:idValue="item.operatorId" :filter-defaults="operatorFilterDefaults" :readonly="readonly" />
-                                    <FormLabel label="Supplier" />
+                                    <OperatorSelector
+                                        v-model="item.operator"
+                                        v-model:idValue="item.operatorId"
+                                        :filter-defaults="operatorFilterDefaults"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectSupplier')"
+                                    />
+                                    <FormLabel :label="$t('supplier')" />
                                 </div>
                                 <div class="col mb-2">
                                     <InterventionTypeSelector
@@ -43,9 +57,9 @@
                                         v-model:idValue="item.interventionTypeId"
                                         :filter-defaults="interventionTypeFilterDefaults"
                                         :readonly="readonly"
-                                        placeholder="select type"
+                                        :placeholder="$t('selectType')"
                                     />
-                                    <FormLabel label="Intervention type" />
+                                    <FormLabel :label="$t('interventionType')" />
                                 </div>
                             </div>
                             <div class="row">
@@ -56,11 +70,11 @@
                                         </div>
                                         <DateInput v-model="item.interventionDate" :disabled="readonly" :culture="$culture" class="form-control" />
                                     </div>
-                                    <FormLabel label="Intervention Date" />
+                                    <FormLabel :label="$t('interventionDate')" />
                                 </div>
                             </div>
                             <div class="row">
-                                <DescriptionInput v-model="item.description" :readonly="readonly" label="Notes" />
+                                <DescriptionInput v-model="item.description" :readonly="readonly" :label="$t('notes')" />
                             </div>
                         </FormSection>
 
@@ -107,6 +121,7 @@ import { ref, computed, watchEffect } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
+import { useLang } from "@/regira_modules/vue/lang"
 import { DescriptionInput, FormButtonsRow } from "@/components/input"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { type Entity as Vehicle, InputSelector as VehicleSelector, useEntityStore as useVehicleStore } from "../../vehicles"
@@ -192,12 +207,12 @@ watchEffect(async () => {
 })
 
 // Tabs
+const { translate } = useLang()
 const tabs = computed(() =>
     [
-        Tab.create("form", { icon: "form", isDefault: true }),
-        // invoice
-        Tab.create("invoice", { key: "invoice", icon: "invoice" }),
-        Tab.create("files", { icon: "attachment" }),
+        Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
+        Tab.create("invoice", { icon: "invoice", title: translate("invoice") }),
+        Tab.create("files", { icon: "attachment", title: translate("files") }),
     ].filter((x) => x)
 )
 </script>

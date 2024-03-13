@@ -13,18 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: {
-        en: "Vehicle Types",
-        nl: "Voertuigtypes",
-    },
-    detailsTitle: {
-        en: "Vehicle Type",
-        nl: "Voertuigtype",
-    },
-    description: {
-        en: `Manage types of vehicle`,
-        nl: `Beheer voertuigtypes`,
-    },
+    overviewTitle: "vehicleTypes",
+    detailsTitle: "vehicleType",
+    description: "vehicleTypesDescription",
     icon: "bi bi-sign-intersection-t",
 
     defaultPageSize: 10,

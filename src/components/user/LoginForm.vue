@@ -7,10 +7,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col">
-                <div class="float-end">
-                    <LangSelector />
-                </div>
+            <div class="col text-info">{{ t("signInInfo") }}</div>
+            <div class="col-auto">
+                <LangSelector />
             </div>
         </div>
         <div class="row mb-3">
@@ -38,10 +37,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4 col-sm-3">
+            <div class="col">
                 <button type="submit" class="btn btn-primary" :disabled="signingIn">{{ t("signIn") }}</button>
             </div>
-            <div class="col col-sm">
+            <div class="col-auto">
                 <span v-if="signingIn" class="text-info">
                     <Loading class="me-1" style="width: 2rem" />
                     {{ t("signingIn") }}

@@ -2,11 +2,11 @@
     <div class="entity-list">
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
-            <div class="col-2 col-md-1 fw-bold">Date</div>
-            <div class="col-3 col-sm-2 col-lg fw-bold">Vehicle</div>
-            <div class="col fw-bold">Intervention</div>
-            <div class="col d-none d-lg-block fw-bold">Supplier</div>
-            <div class="col d-none d-md-block fw-bold">Invoice</div>
+            <div class="col-2 col-md-1 fw-bold">{{ $t("date") }}</div>
+            <div class="col-3 col-sm-2 col-lg fw-bold">{{ $t("vehicle") }}</div>
+            <div class="col fw-bold">{{ $t("intervention") }}</div>
+            <div class="col d-none d-lg-block fw-bold">{{ $t("supplier") }}</div>
+            <div class="col d-none d-md-block fw-bold">{{ $t("invoice") }}</div>
             <div class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
         </div>
         <template v-for="(item, i) in items" :key="item.$id">

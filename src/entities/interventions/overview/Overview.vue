@@ -33,7 +33,7 @@
                 </template>
             </div>
             <div class="col-12 col-sm-auto order-1 order-sm-3">
-                <ResultSummary v-if="items != null" :visibleCount="items.length" :totalCount="itemsCount" />
+                <ResultSummary v-if="items?.length" :visibleCount="items.length" :totalCount="itemsCount" />
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 @remove="handleRemove"
                 @request-reload="updateOverviewRoute(false)"
             />
-            <p v-if="items && items.length <= 0" class="italic-muted">No items</p>
+            <p v-if="items && items.length <= 0" class="italic-muted">{{ $t("noResults") }}</p>
         </LoadingContainer>
 
         <!-- Paging -->

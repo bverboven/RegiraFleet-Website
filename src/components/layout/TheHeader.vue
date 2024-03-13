@@ -18,7 +18,7 @@
                 <li v-for="navItem in navbarItems" :key="navItem.id" class="nav-item">
                     <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click="handleCloseMenu">
                         <icon :name="navItem.id" />
-                        <span class="d-md-none d-lg-inline ms-2">{{ $tm(navItem.overviewTitle) }}</span>
+                        <span class="d-md-none d-lg-inline ms-2">{{ $t(navItem.overviewTitle) }}</span>
                     </RouterLink>
                 </li>
                 <StatisticsMenuItem />

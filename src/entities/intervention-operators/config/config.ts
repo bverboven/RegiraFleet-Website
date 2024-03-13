@@ -13,18 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: {
-        en: "Suppliers",
-        nl: "Leveranciers",
-    },
-    detailsTitle: {
-        en: "Supplier",
-        nl: "Leverancier",
-    },
-    description: {
-        en: `Manage suppliers & service operators`,
-        nl: `Beheer garages & leveranciers`,
-    },
+    overviewTitle: "suppliers",
+    detailsTitle: "supplier",
+    description: "suppliersDescription",
     icon: "bi bi-person-gear",
 
     defaultPageSize: 10,

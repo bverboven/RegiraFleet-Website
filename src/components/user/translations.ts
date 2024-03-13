@@ -57,6 +57,10 @@ export default {
         en: "Signing in ...",
         nl: "Aan het aanmelden ...",
     },
+    signInInfo: {
+        en: "Fill in username & password to sign in",
+        nl: "Vul je gebruikersnaam & wachtwoord in",
+    },
     signInErrorMsg: {
         en: "Unfortunately, signing in failed.",
         nl: "Helaas, het aanmelden is mislukt.",

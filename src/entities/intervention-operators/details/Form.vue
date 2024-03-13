@@ -127,7 +127,7 @@ const tabs = computed(() =>
         Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
         //Tab.create("contact", { icon: "contact" }),
         Tab.create("files", { icon: "attachment", title: translate("files") }),
-        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions") }),
+        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions"), isDisabled: !item.value?.id }),
     ].filter((x) => x)
 )
 </script>

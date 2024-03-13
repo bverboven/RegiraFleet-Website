@@ -3,7 +3,7 @@
         <div class="card-header">
             <slot name="header">
                 <h5 class="card-title">
-                    {{ $tm(item.title) }}
+                    {{ $t(item.title) }}
                 </h5>
             </slot>
         </div>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="col">
                         <slot name="desc">
-                            <div class="text-muted mb-0" v-html="$tm(item.description)"></div>
+                            <div class="text-muted mb-0" v-html="$t(item.description)"></div>
                         </slot>
                     </div>
                 </div>

@@ -23,6 +23,14 @@
         "en": "Brand",
         "nl": "Merk"
     },
+    "brands": {
+        "en": "Brands",
+        "nl": "Merken"
+    },
+    "brandsDescription": {
+        "en": "Manage vehicle brands",
+        "nl": "Beheer merken van voertuigen"
+    },
     "cancel": {
         "en": "Cancel",
         "nl": "Opnieuw"
@@ -47,6 +55,14 @@
         "en": "Contact data",
         "nl": "Contactgegevens"
     },
+    "country": {
+        "en": "Country",
+        "nl": "Land"
+    },
+    "countries": {
+        "en": "Countries",
+        "nl": "Landen"
+    },
     "date": {
         "en": "Date",
         "nl": "Datum"
@@ -58,6 +74,10 @@
     "deleteItem": {
         "en": "Delete item '{title}'?",
         "nl": "Verwijder '{title}'?"
+    },
+    "deleteIntervention": {
+        "en": "Delete intervention '{interventionType}' on {vehicle} at {date}",
+        "nl": "Verwijder interventie '{interventionType}' voor {vehicle} op {date}"
     },
     "files": {
         "en": "Files",
@@ -79,6 +99,10 @@
         "en": "Invoice",
         "nl": "Factuur"
     },
+    "interventionDate": {
+        "en": "Intervention Date",
+        "nl": "Interventiedatum"
+    },
     "intervention": {
         "en": "Intervention",
         "nl": "Interventie"
@@ -86,6 +110,10 @@
     "interventions": {
         "en": "Interventions",
         "nl": "Interventies"
+    },
+    "interventionsDescription": {
+        "en": "Manage vehicle interventions",
+        "nl": "Beheer interventies van voertuigen"
     },
     "interventionType": {
         "en": "Intervention type",
@@ -99,6 +127,10 @@
         "en": "Intervention types",
         "nl": "Interventietypes"
     },
+    "interventionTypesDescription": {
+        "en": "Manage types of intervention",
+        "nl": "Beheer interventietypes"
+    },
     "keywords": {
         "en": "keyword(s)",
         "nl": "zoekwoord(en)"
@@ -107,9 +139,17 @@
         "en": "Location",
         "nl": "Plaats"
     },
+    "mileage": {
+        "en": "Mileage",
+        "nl": "Kilometerstand"
+    },
     "model": {
         "en": "Model",
         "nl": "Model"
+    },
+    "modelPlaceholder": {
+        "en": "model",
+        "nl": "model"
     },
     "name": {
         "en": "Name",
@@ -118,6 +158,10 @@
     "new": {
         "en": "New",
         "nl": "Nieuw"
+    },
+    "noResults": {
+        "en": "No items",
+        "nl": "Geen resultaten"
     },
     "notes": {
         "en": "Notes",
@@ -135,9 +179,21 @@
         "en": "Save",
         "nl": "Opslaan"
     },
+    "selectBrand": {
+        "en": "select a brand",
+        "nl": "selecteer een merk"
+    },
     "selectType": {
         "en": "select type",
         "nl": "selecteer een type"
+    },
+    "selectSupplier": {
+        "en": "select supplier",
+        "nl": "selecteer een leverancier"
+    },
+    "selectVehicle": {
+        "en": "select vehicle",
+        "nl": "selecteer een voertuig"
     },
     "signIn": {
         "en": "Sign in",
@@ -147,6 +203,10 @@
         "en": "Statistics",
         "nl": "Statistieken"
     },
+    "statisticsDescription": {
+        "en": "Export statistics to Excel",
+        "nl": "Exporteer statistieken naar Excel"
+    },
     "submit": {
         "en": "Submit",
         "nl": "Verstuur"
@@ -154,6 +214,14 @@
     "supplier": {
         "en": "Supplier",
         "nl": "Leverancier"
+    },
+    "suppliers": {
+        "en": "Suppliers",
+        "nl": "Leveranciers"
+    },
+    "suppliersDescription": {
+        "en": "Manage suppliers & service operators",
+        "nl": "Beheer garages & leveranciers"
     },
     "type": {
         "en": "Type",
@@ -167,6 +235,14 @@
         "en": "Vehicle",
         "nl": "Voertuig"
     },
+    "vehicles": {
+        "en": "Vehicles",
+        "nl": "Voertuigen"
+    },
+    "vehiclesDescription": {
+        "en": "Manage vehicles",
+        "nl": "Beheer voertuigen"
+    },
     "vehicleCodePlaceholder": {
         "en": "vehicle code",
         "nl": "code voertuig"
@@ -174,6 +250,14 @@
     "vehicleType": {
         "en": "Vehicle type",
         "nl": "Voertuigtype"
+    },
+    "vehicleTypes": {
+        "en": "Vehicle types",
+        "nl": "Voertuigtypes"
+    },
+    "vehicleTypesDescription": {
+        "en": "Manage types of vehicle",
+        "nl": "Beheer voertuigtypes"
     },
     "vehicleTypePlaceholder": {
         "en": "vehicle type",

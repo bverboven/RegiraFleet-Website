@@ -12,6 +12,7 @@ import { preloaderPlugin, usePreloader } from "@/regira_modules/vue/entities"
 import { initAxios } from "@/regira_modules/vue/http/axios"
 import { plugin as authPlugin, CookieTokenManager } from "@/regira_modules/vue/auth"
 import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_modules/vue/ioc"
+import { formatDateTime } from "./regira_modules/vue/formatters"
 import appConfig, { createConfig, useConfig } from "@/app-config"
 import DescriptionInput from "@/components/input/DescriptionInput.vue"
 import { plugin as statisticsPlugin } from "@/statistics"
@@ -32,7 +33,7 @@ import { Entity as Country } from "./entities/countries"
 import { Entity as VehicleType } from "./entities/vehicle-types"
 
 // load config
-fetch(`${appConfig.baseUrl}/config.json`)
+fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd")}`)
     .then((r) => r.json())
     .then(async (config: Record<string, any>) => {
         // start init app

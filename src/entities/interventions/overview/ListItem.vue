@@ -33,7 +33,9 @@
         </div>
         <div class="col text-truncate d-none d-md-block">{{ item.invoice?.invoiceNumber }}</div>
         <div class="col-auto d-none d-md-block">
-            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">{{ $t("deleteItem", { title: item?.$title }) }}</ConfirmButton>
+            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">{{
+                $t("deleteIntervention", { interventionType: item?.interventionType?.title, vehicle: item?.vehicle?.code, date: formatShortDate(item?.interventionDate) })
+            }}</ConfirmButton>
         </div>
     </div>
 </template>
