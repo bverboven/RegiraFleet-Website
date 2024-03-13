@@ -8,17 +8,24 @@
         <div class="col-2 col-md-1">
             <div class="italic-muted" :title="formatDate(item.interventionDate, $culture)">{{ formatShortDate(item.interventionDate, $culture) }}</div>
         </div>
-        <div class="col d-none d-lg-block text-truncate">
+        <div class="col-3 col-sm-2 col-lg text-truncate">
             <VehicleButton :modelValue="item.vehicle" class="p-1" />
-            {{ getVehicle(item.vehicle)?.$title }} <span class="text-muted">({{ getVehicle(item.vehicle)?.brand?.title }})</span>
+            <span class="d-lg-none">
+                {{ getVehicle(item.vehicle)?.code }}
+            </span>
+            <span class="d-none d-lg-inline">
+                {{ getVehicle(item.vehicle)?.$title }}
+            </span>
+            <span class="d-none d-xl-inline text-muted"> ({{ getVehicle(item.vehicle)?.brand?.title }}) </span>
         </div>
         <div class="col text-truncate">
-            <span class="d-lg-none">
-                <VehicleButton :modelValue="item.vehicle" class="p-1" />
-                {{ getVehicle(item.vehicle).code }} -
-            </span>
             <InterventionTypeButton :modelValue="item.interventionType" class="p-1" />
-            {{ getInterventionType(item.interventionType)?.$title }}
+            <span class="d-sm-none">
+                {{ getInterventionType(item.interventionType)?.code }}
+            </span>
+            <span class="d-none d-sm-inline">
+                {{ getInterventionType(item.interventionType)?.$title }}
+            </span>
         </div>
         <div class="col d-none d-lg-block text-truncate">
             <OperatorButton :modelValue="item.operator" class="p-1" />
@@ -26,7 +33,7 @@
         </div>
         <div class="col text-truncate d-none d-md-block">{{ item.invoice?.invoiceNumber }}</div>
         <div class="col-auto d-none d-md-block">
-            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>
+            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">{{ $t("deleteItem", { title: item?.$title }) }}</ConfirmButton>
         </div>
     </div>
 </template>

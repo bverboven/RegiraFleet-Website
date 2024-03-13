@@ -1,5 +1,5 @@
 <template>
-    <FormSection title="Contact data">
+    <FormSection :title="$t('contactData')">
         <List v-model="items" :readonly="readonly" />
 
         <div v-if="!readonly" class="row">
@@ -14,7 +14,7 @@
                         class="form-control"
                         @blur="handleAddNew"
                         @keydown.enter.prevent="handleAddNew"
-                        placeholder="add new phone, email, website"
+                        :placeholder="$t('addContactData')"
                         autocomplete="__away"
                         ref="newContactDataInput"
                     />

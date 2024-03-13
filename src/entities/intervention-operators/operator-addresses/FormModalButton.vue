@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-default" @click="handleOpen">
         <slot><Icon name="connect" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" :title="modalTitle || $tm(config.detailsTitle)" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
+            <Modal v-if="isOpen" :title="modalTitle || $t('address')" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
                 <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
             </Modal>
         </Teleport>

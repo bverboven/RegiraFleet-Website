@@ -9,7 +9,7 @@
             </div>
             <div class="col-auto">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank"><Icon name="popOut" /></RouterLink>
-                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">Overview</span></RouterLink>
+                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t('overview') }}</span></RouterLink>
             </div>
         </div>
 
@@ -63,6 +63,8 @@
                                 <DescriptionInput v-model="item.description" :readonly="readonly" label="Notes" />
                             </div>
                         </FormSection>
+
+                        <!-- <InvoiceOverview v-model="item.invoice" :owner="item" :readonly="readonly" /> -->
                     </template>
 
                     <template #invoice>
@@ -191,6 +193,11 @@ watchEffect(async () => {
 
 // Tabs
 const tabs = computed(() =>
-    [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("invoice", { key: "invoice", icon: "invoice" }), Tab.create("files", { icon: "attachment" })].filter((x) => x)
+    [
+        Tab.create("form", { icon: "form", isDefault: true }),
+        // invoice
+        Tab.create("invoice", { key: "invoice", icon: "invoice" }),
+        Tab.create("files", { icon: "attachment" }),
+    ].filter((x) => x)
 )
 </script>

@@ -22,7 +22,7 @@
         </footer>
 
         <Teleport to="#loginModal">
-            <LoginModal v-if="showLogin">
+            <LoginModal v-if="showLogin" :title="$t('signIn')">
                 <LoginForm :username="username" @forgot-password="openForgotPassword" />
             </LoginModal>
             <ForgotPasswordModal v-if="showForgotPassword" @close="showForgotPassword = false">

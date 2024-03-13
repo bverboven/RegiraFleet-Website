@@ -5,7 +5,7 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
-        <div class="col-1 text-truncate">
+        <div class="col-2 col-lg-1 text-truncate">
             {{ item.code }}
         </div>
         <div class="col text-truncate">
@@ -16,14 +16,14 @@
         </div>
         <div class="col d-none d-lg-block text-truncate">
             <template v-if="item.contactData?.length">
-                <div v-for="cd in getContactData(item)" class="mb-1 text-nowrap">
+                <div v-for="cd in getContactData(item)" :key="cd.id" class="mb-1 text-nowrap">
                     <ActionButton :item="cd" class="p-1" :title="cd.value" />
                     {{ cd.value }}
                 </div>
             </template>
         </div>
         <div v-if="!readonly" class="col-auto d-none d-md-block">
-            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">Remove {{ item.$title }}?</ConfirmButton>
+            <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">{{ $t("deleteItem", { title: item?.$title }) }}</ConfirmButton>
         </div>
     </div>
 </template>

@@ -1,27 +1,147 @@
 {
+    "addContactData": {
+        "en": "add new phone, email, website",
+        "nl": "nieuwe tel, e-mail of website"
+    },
+    "addNewAddress": {
+        "en": "Add new address",
+        "nl": "Nieuw adres"
+    },
+    "addNewFile(s)": {
+        "en": "Add new file(s)",
+        "nl": "Voeg nieuwe bestanden toe"
+    },
+    "address": {
+        "en": "Address",
+        "nl": "Adres"
+    },
+    "allowedInterventionTypes": {
+        "en": "Allowed intervention type(s)",
+        "nl": "Toegestane interventietype(s)"
+    },
+    "brand": {
+        "en": "Brand",
+        "nl": "Merk"
+    },
+    "cancel": {
+        "en": "Cancel",
+        "nl": "Opnieuw"
+    },
+    "code": {
+        "en": "Code",
+        "nl": "Code"
+    },
+    "codePlaceholder": {
+        "en": "code or abbr.",
+        "nl": "code of afkorting"
+    },
+    "companyTitle": {
+        "en": "Company title",
+        "nl": "Naam organisatie"
+    },
+    "contact": {
+        "en": "Contact",
+        "nl": "Contact"
+    },
+    "contactData": {
+        "en": "Contact data",
+        "nl": "Contactgegevens"
+    },
     "date": {
         "en": "Date",
         "nl": "Datum"
+    },
+    "delete": {
+        "en": "Delete",
+        "nl": "Verwijder"
+    },
+    "deleteItem": {
+        "en": "Delete item '{title}'?",
+        "nl": "Verwijder '{title}'?"
+    },
+    "files": {
+        "en": "Files",
+        "nl": "Bestanden"
+    },
+    "filtersAreApplied": {
+        "en": "Filters are applied",
+        "nl": "Filters actief"
     },
     "fleetManager": {
         "en": "Fleet Manager",
         "nl": "Vlootmanager"
     },
+    "form": {
+        "en": "Form",
+        "nl": "Formulier"
+    },
     "invoice": {
         "en": "Invoice",
         "nl": "Factuur"
+    },
+    "intervention": {
+        "en": "Intervention",
+        "nl": "Interventie"
+    },
+    "interventions": {
+        "en": "Interventions",
+        "nl": "Interventies"
     },
     "interventionType": {
         "en": "Intervention type",
         "nl": "Interventietype"
     },
+    "interventionType(s)": {
+        "en": "Intervention type(s)",
+        "nl": "Interventietype(s)"
+    },
+    "interventionTypes": {
+        "en": "Intervention types",
+        "nl": "Interventietypes"
+    },
     "keywords": {
         "en": "keyword(s)",
         "nl": "zoekwoord(en)"
     },
+    "location": {
+        "en": "Location",
+        "nl": "Plaats"
+    },
+    "model": {
+        "en": "Model",
+        "nl": "Model"
+    },
+    "name": {
+        "en": "Name",
+        "nl": "Naam"
+    },
     "new": {
         "en": "New",
         "nl": "Nieuw"
+    },
+    "notes": {
+        "en": "Notes",
+        "nl": "Nota's"
+    },
+    "overview": {
+        "en": "Overview",
+        "nl": "Overzicht"
+    },
+    "results": {
+        "en": "results",
+        "nl": "resultaten"
+    },
+    "save": {
+        "en": "Save",
+        "nl": "Opslaan"
+    },
+    "selectType": {
+        "en": "select type",
+        "nl": "selecteer een type"
+    },
+    "signIn": {
+        "en": "Sign in",
+        "nl": "Aanmelden"
     },
     "statistics": {
         "en": "Statistics",
@@ -35,13 +155,29 @@
         "en": "Supplier",
         "nl": "Leverancier"
     },
+    "type": {
+        "en": "Type",
+        "nl": "Type"
+    },
+    "vatIdentification": {
+        "en": "(VAT) identification",
+        "nl": "BTW nummer"
+    },
     "vehicle": {
         "en": "Vehicle",
         "nl": "Voertuig"
     },
+    "vehicleCodePlaceholder": {
+        "en": "vehicle code",
+        "nl": "code voertuig"
+    },
     "vehicleType": {
         "en": "Vehicle type",
         "nl": "Voertuigtype"
+    },
+    "vehicleTypePlaceholder": {
+        "en": "vehicle type",
+        "nl": "type voertuig"
     },
     "welcome": {
         "en": "Welcome {name}",

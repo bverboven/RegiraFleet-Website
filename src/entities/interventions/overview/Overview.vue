@@ -15,7 +15,7 @@
                 <Feedback v-bind="{ feedback }" :hideCloseButton="true" />
             </div>
             <div class="col-auto order-2 order-lg-3 ps-2">
-                <RouterLink :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info"><Icon name="new" /><span class="d-none d-sm-inline ms-1">new</span></RouterLink>
+                <RouterLink :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info"><Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span></RouterLink>
             </div>
         </div>
 
@@ -62,9 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { useSearchView, useRouteOverview, type OverviewEmits, ResultSummary } from "@/regira_modules/vue/entities"
+import { useSearchView, useRouteOverview, type OverviewEmits } from "@/regira_modules/vue/entities"
 import { Paging, LoadingContainer, Feedback } from "@/regira_modules/vue/ui"
 import { useAuthStore } from "@/regira_modules/vue/auth"
+import ResultSummary from "@/components/ResultSummary.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"

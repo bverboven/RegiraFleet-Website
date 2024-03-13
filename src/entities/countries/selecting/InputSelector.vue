@@ -6,7 +6,16 @@
             </div>
         </slot>
         <slot>
-            <Autocomplete class="form-control" v-model="item" :filter-defaults="filterDefaults" :readonly="readonly" :auto-select="autoSelect" @change="handleSelect" ref="autoEl" />
+            <Autocomplete
+                class="form-control"
+                v-model="item"
+                :filter-defaults="filterDefaults"
+                :readonly="readonly"
+                :placeholder="placeholder"
+                :auto-select="autoSelect"
+                @change="handleSelect"
+                ref="autoEl"
+            />
         </slot>
         <slot name="append">
             <template v-if="!readonly">
@@ -35,6 +44,7 @@ const props = defineProps<{
     filterDefaults?: Record<string, any>
     autoSelect?: boolean
     readonly?: boolean
+    placeholder?: string
 }>()
 const autoEl = ref<any>(null)
 const { fromPool, fromCache } = useEntityStore()

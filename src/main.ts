@@ -31,9 +31,6 @@ import { defaultPoolCache, PoolCache } from "@/regira_modules/vue/entities"
 import { Entity as Country } from "./entities/countries"
 import { Entity as VehicleType } from "./entities/vehicle-types"
 
-// load translations
-const translations = await fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json())
-
 // load config
 fetch(`${appConfig.baseUrl}/config.json`)
     .then((r) => r.json())
@@ -44,6 +41,9 @@ fetch(`${appConfig.baseUrl}/config.json`)
         const processedConfig = createConfig(config)
         const { api, includeCredentials } = processedConfig
         const axios = initAxios({ api, includeCredentials })
+
+        // load translations
+        const translations = await fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json())
 
         // app
         const app = createApp(App)

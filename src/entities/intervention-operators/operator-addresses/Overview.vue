@@ -4,7 +4,7 @@
 
         <div v-if="!readonly" class="row mt-2">
             <div class="col mb-2">
-                <FormModalButton :modal-title="`Address for ${owner.$title}`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">Add new address</FormModalButton>
+                <FormModalButton :modal-title="`Address for ${owner.$title}`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">{{ $t("addNewAddress") }}</FormModalButton>
             </div>
         </div>
     </FormSection>
