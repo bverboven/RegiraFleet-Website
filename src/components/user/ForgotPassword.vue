@@ -12,14 +12,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3 order-2 order-sm-1">
-                    <button type="button" class="btn btn-link px-0" @click="$emit('login', username)">{{ t("signIn") }}</button>
-                </div>
-                <div class="col order-1 order-sm-2">
+                <div class="col">
                     <div v-if="isSuccess">
                         <p class="text-success">{{ t("passwordResetReceivedMsg") }}</p>
                     </div>
                     <button v-else type="submit" class="btn btn-primary" :disabled="!isFormValid">{{ $t("submit") }}</button>
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-link px-0" @click="$emit('login', username)">{{ t("signIn") }}</button>
                 </div>
             </div>
         </LoadingContainer>

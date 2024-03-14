@@ -20,7 +20,7 @@
         <slot name="append">
             <template v-if="!readonly">
                 <button type="button" :disabled="item == null" class="btn btn-outline-secondary" @click="handleSelect(undefined)"><Icon name="clear" /></button>
-                <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" @select="handleSelect" class="btn btn-outline-info" />
+                <SelectorModalButton v-model="item" :filter-defaults="filterDefaults" :disabled="readonly" @select="handleSelect" class="btn btn-outline-info" />
             </template>
         </slot>
     </div>

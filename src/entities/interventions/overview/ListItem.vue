@@ -32,7 +32,7 @@
             {{ getOperator(item.operator)?.$title }}
         </div>
         <div class="col text-truncate d-none d-md-block">{{ item.invoice?.invoiceNumber }}</div>
-        <div class="col-auto d-none d-md-block">
+        <div v-if="!readonly" class="col-auto d-none d-md-block">
             <ConfirmButton icon="delete" class="m-0 p-1" :modal-type="ModalType.danger" @confirm="$emit('request-remove', item)">{{
                 $t("deleteIntervention", { interventionType: item?.interventionType?.title, vehicle: item?.vehicle?.code, date: formatShortDate(item?.interventionDate) })
             }}</ConfirmButton>
@@ -59,6 +59,7 @@ const emit = defineEmits<{
 }>()
 const props = defineProps<{
     modelValue: Entity
+    readonly?: boolean
 }>()
 
 const item = useVModelField<Entity>(props, emit)
