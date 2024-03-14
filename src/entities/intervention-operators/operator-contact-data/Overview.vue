@@ -1,6 +1,7 @@
 <template>
     <FormSection :title="$t('contactData')">
-        <List v-model="items" :readonly="readonly" />
+        <List v-if="items?.length" v-model="items" :readonly="readonly" />
+        <p v-else class="text-info">{{ $t("noItems") }}</p>
 
         <div v-if="!readonly" class="row">
             <div class="col-md mb-2">

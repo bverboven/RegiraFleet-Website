@@ -159,6 +159,10 @@
         "en": "New",
         "nl": "Nieuw"
     },
+    "noItems": {
+        "en": "No items",
+        "nl": "Geen data"
+    },
     "noResults": {
         "en": "No items",
         "nl": "Geen resultaten"

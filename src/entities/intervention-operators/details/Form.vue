@@ -47,7 +47,8 @@
                         <Addresses v-model="item.addresses" :owner="item" :readonly="readonly" />
 
                         <FormSection :title="$t('interventionTypes')">
-                            <div class="row">
+                            <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
+                            <div v-else class="row">
                                 <div class="col mb-2">
                                     <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('interventionType(s)')" />
