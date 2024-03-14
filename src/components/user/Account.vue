@@ -23,9 +23,9 @@
     </section>
 
     <Teleport to="#modals">
-        <Modal v-if="showChangePassword" :title="t('changePassword')" :show-footer="false" @close="showChangePassword = false" @cancel="showChangePassword = false">
+        <MyModal :is-visible="showChangePassword" :title="t('changePassword')" :show-footer="false" @close="showChangePassword = false" @cancel="showChangePassword = false">
             <ChangePasswordForm :username="$auth.authData.name" />
-        </Modal>
+        </MyModal>
     </Teleport>
 </template>
 

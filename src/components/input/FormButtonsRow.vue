@@ -16,9 +16,17 @@
                 <span class="d-none d-md-inline ms-1">{{ $t("save") }}</span>
             </IconButton>
             <IconButton type="button" icon="cancel" class="btn-secondary py-1 mx-2" @click="emit('cancel')" :disabled="readonly || !canCancel">
-                <span class="d-none d-md-inline ms-1">{{ $t("cancel") }}</span>
+                <span class="d-none d-md-inline ms-1">{{ $t("reset") }}</span>
             </IconButton>
-            <ConfirmButton type="button" :modalType="ModalType.danger" class="btn-danger py-1 ms-2" :disabled="readonly" v-show="showDelete" @confirm="emit('remove')">
+            <ConfirmButton
+                type="button"
+                :modal-type="ModalType.danger"
+                :modal-title="$t('removeItem?')"
+                class="btn-danger py-1 ms-2"
+                :disabled="readonly"
+                v-show="showDelete"
+                @confirm="emit('remove')"
+            >
                 <template #button-content>
                     <Icon name="delete" class="me-1" />
                     <span class="d-none d-md-inline">{{ $t("delete") }}</span>

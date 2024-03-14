@@ -5,12 +5,12 @@
         </slot>
 
         <Teleport to="#modals">
-            <Modal v-if="showAdv" :title="props.modalTitle || 'Advanced search'" :show-footer="true" @close="handleClose" @submit="handleSubmit">
+            <MyModal :is-visible="showAdv" :title="props.modalTitle || 'Advanced search'" :show-footer="true" @close="handleClose" @submit="handleSubmit">
                 <slot name="title"></slot>
                 <slot name="adv" :handleUpdate="handleUpdate" :handleSubmit="handleSubmit" :handleClose="handleClose"></slot>
 
                 <Debug :modelValue="searchObject" />
-            </Modal>
+            </MyModal>
         </Teleport>
     </div>
 </template>

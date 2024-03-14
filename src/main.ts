@@ -12,11 +12,12 @@ import { preloaderPlugin, usePreloader } from "@/regira_modules/vue/entities"
 import { initAxios } from "@/regira_modules/vue/http/axios"
 import { plugin as authPlugin, CookieTokenManager } from "@/regira_modules/vue/auth"
 import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_modules/vue/ioc"
-import { formatDateTime } from "./regira_modules/vue/formatters"
+import { formatDateTime } from "@/regira_modules/vue/formatters"
 import appConfig, { createConfig, useConfig } from "@/app-config"
-import DescriptionInput from "@/components/input/DescriptionInput.vue"
-import { plugin as statisticsPlugin } from "@/statistics"
 import { plugin as userPlugin } from "@/infrastructure/user-plugin"
+import DescriptionInput from "@/components/input/DescriptionInput.vue"
+import FleetModal from "@/components/layout/FleetModal.vue"
+import { plugin as statisticsPlugin } from "@/statistics"
 import entityPlugins from "./entities"
 
 import App from "./App.vue"
@@ -80,7 +81,7 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         app.use(isOnlinePlugin)
         app.use(debugPlugin, { isDebug: config.isDebug })
         app.use(loadingPlugin, { img: loadingImg })
-        app.use(modalPlugin)
+        app.use(modalPlugin, { DefaultModal: FleetModal })
         app.use(feedbackPlugin, { autoHideDelay: 2500 })
 
         // lang

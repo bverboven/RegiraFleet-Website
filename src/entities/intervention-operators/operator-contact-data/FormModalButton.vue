@@ -2,9 +2,9 @@
     <button type="button" class="btn btn-default" @click="handleOpen">
         <slot><Icon name="connect" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" title="Contact data" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
+            <MyModal :is-visible="isOpen" title="Contact data" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
                 <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
-            </Modal>
+            </MyModal>
         </Teleport>
     </button>
 </template>

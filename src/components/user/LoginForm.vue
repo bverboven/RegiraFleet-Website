@@ -7,12 +7,6 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col text-info">{{ t("signInInfo") }}</div>
-            <div class="col-auto">
-                <LangSelector />
-            </div>
-        </div>
-        <div class="row mb-3">
             <label class="col-sm-3 col-form-label">{{ t("username") }}</label>
             <div class="col-sm-9">
                 <div class="input-group">
@@ -57,7 +51,6 @@ import { useConfig } from "@/app-config"
 import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
 import { useUserLang } from "./useUserLang"
-import LangSelector from "../layout/LangSelector.vue"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
