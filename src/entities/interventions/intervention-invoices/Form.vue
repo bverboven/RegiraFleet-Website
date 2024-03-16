@@ -6,7 +6,7 @@
                     <div class="input-group-text"><Icon name="invoice" /></div>
                     <input v-model="item.invoiceNumber" required :readonly="readonly" class="form-control" />
                 </div>
-                <FormLabel label="Invoice number" />
+                <FormLabel :label="$t('invoiceNumber')" />
             </div>
             <div class="col-sm mb-2">
                 <div class="input-group">
@@ -15,7 +15,7 @@
                     </div>
                     <DateInput v-model="item.invoiceDate" :disabled="readonly" :culture="$culture" class="form-control" />
                 </div>
-                <FormLabel label="Invoice date" />
+                <FormLabel :label="$t('invoiceDate')" />
             </div>
         </div>
         <div class="row">
@@ -24,7 +24,7 @@
                     <div class="input-group-text"><Icon name="euro" /></div>
                     <input type="number" v-model="item.priceExcl" step="any" :readonly="readonly" class="form-control" />
                 </div>
-                <FormLabel label="Price (excl)" />
+                <FormLabel :label="$t('priceExcl')" />
             </div>
             <div class="col-sm mb-2">
                 <select v-model="item.taxCategory" :disabled="readonly" class="form-select">
@@ -32,11 +32,11 @@
                     <option :value="TaxCategory.NotDeductible">Not Deductible</option>
                     <option :value="TaxCategory.Mixed">Mixed</option>
                 </select>
-                <FormLabel label="Tax category" />
+                <FormLabel :label="$t('taxCategory')" />
             </div>
         </div>
         <div class="row">
-            <DescriptionInput v-model="item.description" :readonly="readonly" label="Notes" />
+            <DescriptionInput v-model="item.description" :readonly="readonly" :label="$t('notes')" />
         </div>
         <Debug
             :modelValue="{

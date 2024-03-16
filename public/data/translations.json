@@ -131,6 +131,14 @@
         "en": "Manage types of intervention",
         "nl": "Beheer interventietypes"
     },
+    "invoiceDate": {
+        "en": "Invoice date",
+        "nl": "Factuurdatum"
+    },
+    "invoiceNumber": {
+        "en": "Invoice number",
+        "nl": "Factuurnummer"
+    },
     "keywords": {
         "en": "keyword(s)",
         "nl": "zoekwoord(en)"
@@ -175,6 +183,14 @@
         "en": "Overview",
         "nl": "Overzicht"
     },
+    "priceExcl": {
+        "en": "Price (excl.)",
+        "nl": "Prijs (excl.)"
+    },
+    "priceIncl": {
+        "en": "Price (incl.)",
+        "nl": "Prijs (incl.)"
+    },
     "removeItem?": {
         "en": "Remove item?",
         "nl": "Item verwijderen?"
@@ -211,6 +227,10 @@
         "en": "Sign in",
         "nl": "Aanmelden"
     },
+    "signOut": {
+        "en": "Sign out",
+        "nl": "Afmelden"
+    },
     "statistics": {
         "en": "Statistics",
         "nl": "Statistieken"
@@ -234,6 +254,14 @@
     "suppliersDescription": {
         "en": "Manage suppliers & service operators",
         "nl": "Beheer garages & leveranciers"
+    },
+    "taxAmount": {
+        "en": "VAT amount",
+        "nl": "BTW bedrag"
+    },
+    "taxCategory": {
+        "en": "Tax category",
+        "nl": "BTW categorie"
     },
     "type": {
         "en": "Type",

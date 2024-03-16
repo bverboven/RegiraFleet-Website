@@ -15,9 +15,12 @@
                 <Feedback v-bind="{ feedback }" :hideCloseButton="true" />
             </div>
             <div class="col-auto order-2 order-lg-3 ps-2">
-                <RouterLink :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" :disabled="$isReadonlyUser" class="btn btn-info">
+                <RouterLink v-if="!$isReadonlyUser" :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info">
                     <Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span>
                 </RouterLink>
+                <button v-else type="button" class="btn btn-info" disabled>
+                    <Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span>
+                </button>
             </div>
         </div>
 
