@@ -1,310 +1,387 @@
 {
     "addContactData": {
         "en": "add new phone, email, website",
-        "nl": "nieuwe tel, e-mail of website"
+        "nl": "nieuwe tel, e-mail of website",
+        "fr": "ajouter un nouveau téléphone, e-mail, site web"
     },
     "addNewAddress": {
         "en": "Add new address",
-        "nl": "Nieuw adres"
+        "nl": "Nieuw adres",
+        "fr": "Ajouter une nouvelle adresse"
     },
     "addNewFile(s)": {
         "en": "Add new file(s)",
-        "nl": "Voeg nieuwe bestanden toe"
+        "nl": "Voeg nieuwe bestanden toe",
+        "fr": "Ajouter un nouveau fichier"
     },
     "address": {
         "en": "Address",
-        "nl": "Adres"
+        "nl": "Adres",
+        "fr": "Adresse"
     },
     "allowedInterventionTypes": {
         "en": "Allowed intervention type(s)",
-        "nl": "Toegestane interventietype(s)"
+        "nl": "Toegestane interventietype(s)",
+        "fr": "Type(s) d'intervention autorisé(s)"
     },
     "brand": {
         "en": "Brand",
-        "nl": "Merk"
+        "nl": "Merk",
+        "fr": "Marque"
     },
     "brands": {
         "en": "Brands",
-        "nl": "Merken"
+        "nl": "Merken",
+        "fr": "Marques"
     },
     "brandsDescription": {
         "en": "Manage vehicle brands",
-        "nl": "Beheer merken van voertuigen"
+        "nl": "Beheer merken van voertuigen",
+        "fr": "Gérer les marques de véhicules"
     },
     "cancel": {
         "en": "Cancel",
-        "nl": "Toch niet"
+        "nl": "Toch niet",
+        "fr": "Annuler"
     },
     "code": {
         "en": "Code",
-        "nl": "Code"
+        "nl": "Code",
+        "fr": "Code"
     },
     "codePlaceholder": {
         "en": "code or abbr.",
-        "nl": "code of afkorting"
+        "nl": "code of afkorting",
+        "fr": "code ou abrév."
     },
     "companyTitle": {
         "en": "Company title",
-        "nl": "Naam organisatie"
+        "nl": "Naam organisatie",
+        "fr": "Nom de l'entreprise"
     },
     "contact": {
         "en": "Contact",
-        "nl": "Contact"
+        "nl": "Contact",
+        "fr": "Contact"
     },
     "contactData": {
         "en": "Contact data",
-        "nl": "Contactgegevens"
+        "nl": "Contactgegevens",
+        "fr": "Coordonnées"
     },
     "country": {
         "en": "Country",
-        "nl": "Land"
+        "nl": "Land",
+        "fr": "Pays"
     },
     "countries": {
         "en": "Countries",
-        "nl": "Landen"
+        "nl": "Landen",
+        "fr": "Pays"
     },
     "date": {
         "en": "Date",
-        "nl": "Datum"
+        "nl": "Datum",
+        "fr": "Date"
     },
     "delete": {
         "en": "Delete",
-        "nl": "Verwijder"
+        "nl": "Verwijder",
+        "fr": "Supprimer"
     },
     "deleteItem": {
         "en": "Delete item '{title}'?",
-        "nl": "Verwijder '{title}'?"
+        "nl": "Verwijder '{title}'?",
+        "fr": "Supprimer l'élément '{title}' ?"
     },
     "deleteIntervention": {
         "en": "Delete intervention '{interventionType}' on {vehicle} at {date}",
-        "nl": "Verwijder interventie '{interventionType}' voor {vehicle} op {date}"
+        "nl": "Verwijder interventie '{interventionType}' voor {vehicle} op {date}",
+        "fr": "Supprimer l'intervention '{interventionType}' sur {vehicle} le {date}"
     },
     "files": {
         "en": "Files",
-        "nl": "Bestanden"
+        "nl": "Bestanden",
+        "fr": "Fichiers"
     },
     "filtersAreApplied": {
         "en": "Filters are applied",
-        "nl": "Filters actief"
+        "nl": "Filters actief",
+        "fr": "Filtres appliqués"
     },
     "fleetManager": {
         "en": "Fleet Manager",
-        "nl": "Vlootmanager"
+        "nl": "Vlootmanager",
+        "fr": "Gestionnaire de parc"
     },
     "form": {
         "en": "Form",
-        "nl": "Formulier"
+        "nl": "Formulier",
+        "fr": "Formulaire"
     },
     "invoice": {
         "en": "Invoice",
-        "nl": "Factuur"
+        "nl": "Factuur",
+        "fr": "Facture"
     },
     "interventionDate": {
         "en": "Intervention Date",
-        "nl": "Interventiedatum"
+        "nl": "Interventiedatum",
+        "fr": "Date d'intervention"
     },
     "intervention": {
         "en": "Intervention",
-        "nl": "Interventie"
+        "nl": "Interventie",
+        "fr": "Intervention"
     },
     "interventions": {
         "en": "Interventions",
-        "nl": "Interventies"
+        "nl": "Interventies",
+        "fr": "Interventions"
     },
     "interventionsDescription": {
         "en": "Manage vehicle interventions",
-        "nl": "Beheer interventies van voertuigen"
+        "nl": "Beheer interventies van voertuigen",
+        "fr": "Gérer les interventions sur les véhicules"
     },
     "interventionType": {
         "en": "Intervention type",
-        "nl": "Interventietype"
+        "nl": "Interventietype",
+        "fr": "Type d'intervention"
     },
     "interventionType(s)": {
         "en": "Intervention type(s)",
-        "nl": "Interventietype(s)"
+        "nl": "Interventietype(s)",
+        "fr": "Type(s) d'intervention"
     },
     "interventionTypes": {
         "en": "Intervention types",
-        "nl": "Interventietypes"
+        "nl": "Interventietypes",
+        "fr": "Types d'intervention"
     },
     "interventionTypesDescription": {
         "en": "Manage types of intervention",
-        "nl": "Beheer interventietypes"
+        "nl": "Beheer interventietypes",
+        "fr": "Gérer les types d'intervention"
     },
     "invoiceDate": {
         "en": "Invoice date",
-        "nl": "Factuurdatum"
+        "nl": "Factuurdatum",
+        "fr": "Date de facture"
     },
     "invoiceNumber": {
         "en": "Invoice number",
-        "nl": "Factuurnummer"
+        "nl": "Factuurnummer",
+        "fr": "Numéro de facture"
     },
     "keywords": {
         "en": "keyword(s)",
-        "nl": "zoekwoord(en)"
+        "nl": "zoekwoord(en)",
+        "fr": "Mot(s)-clé"
     },
     "location": {
         "en": "Location",
-        "nl": "Plaats"
+        "nl": "Plaats",
+        "fr": "Emplacement"
     },
     "mileage": {
         "en": "Mileage",
-        "nl": "Kilometerstand"
+        "nl": "Kilometerstand",
+        "fr": "Kilométrage"
     },
     "model": {
         "en": "Model",
-        "nl": "Model"
+        "nl": "Model",
+        "fr": "Modèle"
     },
     "modelPlaceholder": {
         "en": "model",
-        "nl": "model"
+        "nl": "model",
+        "fr": "modèle"
     },
     "name": {
         "en": "Name",
-        "nl": "Naam"
+        "nl": "Naam",
+        "fr": "Nom"
     },
     "new": {
         "en": "New",
-        "nl": "Nieuw"
+        "nl": "Nieuw",
+        "fr": "Nouveau"
     },
     "noItems": {
         "en": "No items",
-        "nl": "Geen data"
+        "nl": "Geen data",
+        "fr": "Aucun élément"
     },
     "noResults": {
         "en": "No items",
-        "nl": "Geen resultaten"
+        "nl": "Geen resultaten",
+        "fr": "Aucun résultat"
     },
     "notes": {
         "en": "Notes",
-        "nl": "Nota's"
+        "nl": "Nota's",
+        "fr": "Notes"
     },
     "overview": {
         "en": "Overview",
-        "nl": "Overzicht"
+        "nl": "Overzicht",
+        "fr": "Aperçu"
     },
     "priceExcl": {
         "en": "Price (excl.)",
-        "nl": "Prijs (excl.)"
+        "nl": "Prijs (excl.)",
+        "fr": "Prix (HT)"
     },
     "priceIncl": {
         "en": "Price (incl.)",
-        "nl": "Prijs (incl.)"
+        "nl": "Prijs (incl.)",
+        "fr": "Prix (TTC)"
     },
     "removeItem?": {
         "en": "Remove item?",
-        "nl": "Item verwijderen?"
+        "nl": "Item verwijderen?",
+        "fr": "Supprimer l'élément ?"
     },
     "reset": {
         "en": "Reset",
-        "nl": "Opnieuw"
+        "nl": "Opnieuw",
+        "fr": "Réinitialiser"
     },
     "results": {
         "en": "results",
-        "nl": "resultaten"
+        "nl": "resultaten",
+        "fr": "Résultats"
     },
     "save": {
         "en": "Save",
-        "nl": "Opslaan"
+        "nl": "Opslaan",
+        "fr": "Enregistrer"
     },
     "selectBrand": {
         "en": "select a brand",
-        "nl": "selecteer een merk"
+        "nl": "selecteer een merk",
+        "fr": "Sélectionner une marque"
     },
     "selectType": {
         "en": "select type",
-        "nl": "selecteer een type"
+        "nl": "selecteer een type",
+        "fr": "Sélectionner un type"
     },
     "selectSupplier": {
         "en": "select supplier",
-        "nl": "selecteer een leverancier"
+        "nl": "selecteer een leverancier",
+        "fr": "Sélectionner un fournisseur"
     },
     "selectVehicle": {
         "en": "select vehicle",
-        "nl": "selecteer een voertuig"
+        "nl": "selecteer een voertuig",
+        "fr": "Sélectionner un véhicule"
     },
     "signIn": {
         "en": "Sign in",
-        "nl": "Aanmelden"
+        "nl": "Aanmelden",
+        "fr": "Se connecter"
     },
     "signOut": {
         "en": "Sign out",
-        "nl": "Afmelden"
+        "nl": "Afmelden",
+        "fr": "Se déconnecter"
     },
     "statistics": {
         "en": "Statistics",
-        "nl": "Statistieken"
+        "nl": "Statistieken",
+        "fr": "Statistiques"
     },
     "statisticsDescription": {
         "en": "Export statistics to Excel",
-        "nl": "Exporteer statistieken naar Excel"
+        "nl": "Exporteer statistieken naar Excel",
+        "fr": "Exporter les statistiques vers Excel"
     },
     "submit": {
         "en": "Submit",
-        "nl": "Verstuur"
+        "nl": "Verstuur",
+        "fr": "Soumettre"
     },
     "supplier": {
         "en": "Supplier",
-        "nl": "Leverancier"
+        "nl": "Leverancier",
+        "fr": "Fournisseur"
     },
     "suppliers": {
         "en": "Suppliers",
-        "nl": "Leveranciers"
+        "nl": "Leveranciers",
+        "fr": "Fournisseurs"
     },
     "suppliersDescription": {
         "en": "Manage suppliers & service operators",
-        "nl": "Beheer garages & leveranciers"
+        "nl": "Beheer garages & leveranciers",
+        "fr": "Gérer les fournisseurs et les prestataires de service"
     },
     "taxAmount": {
         "en": "VAT amount",
-        "nl": "BTW bedrag"
+        "nl": "BTW bedrag",
+        "fr": "Montant de TVA"
     },
     "taxCategory": {
         "en": "Tax category",
-        "nl": "BTW categorie"
+        "nl": "BTW categorie",
+        "fr": "Catégorie de TVA"
     },
     "type": {
         "en": "Type",
-        "nl": "Type"
+        "nl": "Type",
+        "fr": "Type"
     },
     "vatIdentification": {
         "en": "(VAT) identification",
-        "nl": "BTW nummer"
+        "nl": "BTW nummer",
+        "fr": "Identification (TVA)"
     },
     "vehicle": {
         "en": "Vehicle",
-        "nl": "Voertuig"
+        "nl": "Voertuig",
+        "fr": "Véhicule"
     },
     "vehicles": {
         "en": "Vehicles",
-        "nl": "Voertuigen"
+        "nl": "Voertuigen",
+        "fr": "Véhicules"
     },
     "vehiclesDescription": {
         "en": "Manage vehicles",
-        "nl": "Beheer voertuigen"
+        "nl": "Beheer voertuigen",
+        "fr": "Gérer les véhicules"
     },
     "vehicleCodePlaceholder": {
         "en": "vehicle code",
-        "nl": "code voertuig"
+        "nl": "code voertuig",
+        "fr": "code du véhicule"
     },
     "vehicleType": {
         "en": "Vehicle type",
-        "nl": "Voertuigtype"
+        "nl": "Voertuigtype",
+        "fr": "Type de véhicule"
     },
     "vehicleTypes": {
         "en": "Vehicle types",
-        "nl": "Voertuigtypes"
+        "nl": "Voertuigtypes",
+        "fr": "Types de véhicules"
     },
     "vehicleTypesDescription": {
         "en": "Manage types of vehicle",
-        "nl": "Beheer voertuigtypes"
+        "nl": "Beheer voertuigtypes",
+        "fr": "Gérer les types de véhicules"
     },
     "vehicleTypePlaceholder": {
         "en": "vehicle type",
-        "nl": "type voertuig"
+        "nl": "type voertuig",
+        "fr": "type de véhicule"
     },
     "welcome": {
         "en": "Welcome {name}",
-        "nl": "Welkom {name}"
+        "nl": "Welkom {name}",
+        "fr": "Bienvenue {name}"
     }
 }
