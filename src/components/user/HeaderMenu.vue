@@ -14,7 +14,7 @@
                 <a class="nav-link dropdown-toggle" @click="handleToggleDropDown" href="#" id="navbarAccountDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <Icon name="user" />
                     <span class="ms-2 d-sm-none d-lg-inline">
-                        {{ $auth.authData.name }}
+                        {{ $auth.authData.displayName ?? $auth.authData.name }}
                     </span>
                 </a>
             </LoadingContainer>

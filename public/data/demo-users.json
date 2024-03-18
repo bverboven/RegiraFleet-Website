@@ -10,6 +10,12 @@
         "clientId": "1b615c0096c04eb2975ef84463aa8257"
     },
     {
+        "username": "bwr_admin",
+        "password": "admin",
+        "title": "Brandweer (admin)",
+        "clientId": "1b615c0096c04eb2975ef84463aa8257"
+    },
+    {
         "username": "tra_read",
         "title": "Transport (read)",
         "clientId": "11fc2d46df234aed8df1de9a7b0f114f"
