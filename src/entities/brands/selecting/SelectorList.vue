@@ -2,13 +2,17 @@
     <div class="entity-list">
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="select" class="m-1" /></div>
-            <div class="col fw-bold">Title</div>
+            <div class="col-2 fw-bold">{{ $t("code") }}</div>
+            <div class="col fw-bold">{{ $t("name") }}</div>
         </div>
 
         <template v-for="(item, i) in items" :key="item.$id">
             <div class="row border-bottom border-bottom-1 py-2" :class="{ 'is-selected': isSelected(item) }">
                 <div class="col-auto">
                     <IconButton :icon="isSelected(item) ? 'selected' : 'select'" class="btn-default py-0 px-1" @click="handleSelect(item)" />
+                </div>
+                <div class="col-2 text-truncate">
+                    {{ item.code }}
                 </div>
                 <div class="col text-truncate">
                     <FormModalButton :modelValue="items[i]" class="p-1" />

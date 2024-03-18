@@ -1,10 +1,11 @@
 <template>
     <FormSection title="Address(es)">
-        <List v-model="items" :readonly="readonly" />
+        <List v-if="items?.length" v-model="items" :readonly="readonly" />
+        <p v-else class="text-info">{{ $t("noItems") }}</p>
 
         <div v-if="!readonly" class="row mt-2">
             <div class="col mb-2">
-                <FormModalButton :modal-title="`Address for ${owner.$title}`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">Add new address</FormModalButton>
+                <FormModalButton :modal-title="`Address for ${owner.$title}`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">{{ $t("addNewAddress") }}</FormModalButton>
             </div>
         </div>
     </FormSection>

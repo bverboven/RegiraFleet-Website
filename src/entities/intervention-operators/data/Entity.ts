@@ -1,7 +1,7 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
 import type { Entity as Address } from "../operator-addresses"
 import { ContactDataTypes, type Entity as ContactData } from "../operator-contact-data"
-import type { Entity as InterventionType } from "@/entities/intervention-type"
+import type { Entity as InterventionType } from "@/entities/intervention-types"
 import type { Entity as EntityAttachment } from "@/entities/entity-attachments"
 
 export class InterventionOperator extends EntityBase {

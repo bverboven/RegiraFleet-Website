@@ -1,32 +1,37 @@
 <template>
-    <nav class="navbar navbar-expand-md bg-body-tertiary" v-click-outside="handleCloseMenu">
-        <router-link class="navbar-brand" :to="{ name: 'home' }" :title="'Fleet Manager v ' + version">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary" v-click-outside="handleCloseMenu">
+        <router-link class="navbar-brand" :to="{ name: 'home' }" :title="`${$t('fleetManager')} v${version}`">
             <img :src="logo" style="height: 2rem; vertical-align: top" class="me-1" />
-            Fleet Manager
+            <span class="d-sm-none d-md-inline">
+                {{ $t("fleetManager") }}
+            </span>
         </router-link>
         <button class="navbar-toggler" type="button" @click.stop="showNavbarContent = !showNavbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse bg-light pt-2 pt-md-0" :class="{ show: showNavbarContent }">
+        <div class="collapse navbar-collapse bg-light px-2 px-md-0 pt-2 pt-sm-0" :class="{ show: showNavbarContent }">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item d-none">
-                    <router-link class="nav-link" aria-current="page" :to="{ name: 'home' }" :title="'Fleet Manager v ' + version">Fleet Manager</router-link>
+                <li class="nav-item py-2 py-sm-0 d-none">
+                    <router-link class="nav-link" aria-current="page" :to="{ name: 'home' }" :title="`${$t('fleetManager')} v${version}`">{{ $t("fleetManager") }}</router-link>
                 </li>
                 <!-- <li class="nav-item">
                         <router-link class="nav-link" :to="{ name: 'brands' }">Brands</router-link>
                     </li> -->
-                <li class="nav-item" v-for="navItem in navbarItems">
-                    <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click.native="handleCloseMenu">
+                <li v-for="navItem in navbarItems" :key="navItem.id" class="nav-item py-2 py-sm-0">
+                    <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click="handleCloseMenu">
                         <icon :name="navItem.id" />
-                        <span class="d-md-none d-lg-inline ms-2">{{ navItem.overviewTitle }}</span>
+                        <span class="d-sm-none d-lg-inline ms-2">{{ $t(navItem.overviewTitle) }}</span>
                     </RouterLink>
                 </li>
-                <StatisticsMenuItem />
+                <StatisticsMenuItem class="py-2 py-sm-0" />
             </ul>
-            <form class="d-flex" role="search">
-                <div class="row">
-                    <div v-if="$auth.enabled" class="col-sm-auto">
+            <form class="d-flex mb-4 mb-sm-0">
+                <div class="row my-2 my-sm-0">
+                    <div v-if="$auth.enabled" class="col">
                         <AccountMenu :isAuthenticated="$auth.isAuthenticated" @close="handleCloseMenu" />
+                    </div>
+                    <div class="col-auto pt-2">
+                        <LangSelector class="float-end" />
                     </div>
                 </div>
             </form>
@@ -41,6 +46,7 @@ import logo from "@/assets/images/logo-sm.png"
 import type { IConfig } from "@/regira_modules/vue/entities"
 import AccountMenu from "@/components/user/HeaderMenu.vue"
 import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
+import LangSelector from "./LangSelector.vue"
 
 const { version } = useConfig()
 

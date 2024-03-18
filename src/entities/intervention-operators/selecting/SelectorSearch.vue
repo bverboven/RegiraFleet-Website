@@ -31,7 +31,7 @@
             </div>
             <div class="col-auto order-2 mb-2">
                 <FormModalButton :item-defaults="itemDefaults" :close-on-save="true" @save="({ saved }) => handleSelect(saved)" class="btn btn-info">
-                    <Icon name="new" /> <span class="d-none d-sm-inline">New</span>
+                    <Icon name="new" /> <span class="d-none d-sm-inline">{{ $t("new") }}</span>
                 </FormModalButton>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 </template>
             </div>
             <div class="col-12 col-sm-auto order-1 order-sm-3">
-                <ResultSummary v-if="items != null" :visibleCount="items.length" :totalCount="itemsCount" />
+                <ResultSummary v-if="items?.length" :visibleCount="items.length" :totalCount="itemsCount" />
             </div>
         </div>
 
@@ -81,7 +81,7 @@
 <script setup lang="ts">
 import { onMounted, type Ref } from "vue"
 import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { useSearchView, ResultSummary } from "@/regira_modules/vue/entities"
+import { useSearchView } from "@/regira_modules/vue/entities"
 import { Paging, LoadingContainer, Feedback, ButtonType } from "@/regira_modules/vue/ui"
 import config from "../config/config"
 import Entity from "../data/Entity"

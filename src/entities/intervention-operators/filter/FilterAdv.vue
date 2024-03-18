@@ -14,7 +14,7 @@
             <div class="col-md mb-2">
                 <div class="input-group">
                     <div class="input-group-text"><Icon name="search" /></div>
-                    <input v-model.lazy.trim="searchObject.q" class="form-control" placeholder="keyword(s)" />
+                    <input v-model.lazy.trim="searchObject.q" class="form-control" :placeholder="$t('keywords')" />
                 </div>
             </div>
         </div>

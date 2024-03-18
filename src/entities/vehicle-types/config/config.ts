@@ -13,9 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Vehicle Types",
-    detailsTitle: "Vehicle Type",
-    description: `Manage types of vehicle`,
+    overviewTitle: "vehicleTypes",
+    detailsTitle: "vehicleType",
+    description: "vehicleTypesDescription",
     icon: "bi bi-sign-intersection-t",
 
     defaultPageSize: 10,

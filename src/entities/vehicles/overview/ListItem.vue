@@ -6,7 +6,7 @@
                 <Icon :name="Entity.name" />
             </router-link>
         </div>
-        <div class="col-1 text-nowrap">
+        <div class="col-2 col-lg-1 text-nowrap">
             <div>
                 {{ item.code }}
             </div>
@@ -17,13 +17,13 @@
                 {{ getVehicleType(item.vehicleType)?.title }}
             </div>
         </div>
-        <div class="col text-truncate">
+        <div class="col d-none d-md-block text-truncate">
             <div v-if="item.brand != null">
                 <BrandButton :modelValue="item.brand!" :readonly="readonly" class="p-1" />
                 {{ getBrand(item.brand)?.title }}
             </div>
         </div>
-        <div class="col text-truncate">
+        <div class="col d-none d-lg-block text-truncate">
             <div>{{ item.model }}</div>
         </div>
     </div>

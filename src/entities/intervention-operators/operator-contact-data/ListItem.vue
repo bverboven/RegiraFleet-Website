@@ -8,7 +8,7 @@
                 <ActionButton :item="item" class="btn btn-outline-info" />
                 <input v-model="item.value" class="form-control" :readonly="readonly" @change="handleChangeValue" />
                 <span class="input-group-text" v-if="item.title != null">{{ item.title }}</span>
-                <FormModalButton v-model="item" :disabled="readonly" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton>
+                <!-- <FormModalButton v-model="item" :disabled="readonly" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton> -->
                 <button v-if="!readonly && item.id != 0" type="button" class="btn btn-outline-danger" @click="item._deleted = !item._deleted"><Icon name="delete" /></button>
             </div>
         </div>

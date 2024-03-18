@@ -2,15 +2,16 @@
     <button type="button" class="btn btn-default" @click="open">
         <slot><Icon name="search" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" title="Select" :showFooter="true" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSubmit">
+            <MyModal :is-visible="isOpen" :title="$tm(config.overviewTitle)" :showFooter="true" :full-width="true" @close="close" @cancel="handleCancel" @submit="handleSubmit">
                 <SelectorSearch v-model="selected" :filter-defaults="filterDefaults" :page-size="5" />
-            </Modal>
+            </MyModal>
         </Teleport>
     </button>
 </template>
 
 <script setup lang="ts">
 import { ref, watchEffect } from "vue"
+import config from "../config/config"
 import type Entity from "../data/Entity"
 import SelectorSearch from "./SelectorSearch.vue"
 

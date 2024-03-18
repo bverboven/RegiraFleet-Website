@@ -3,15 +3,20 @@
     "loginUrl": "auth/?clientApp={clientApp}&clientId={clientId}",
     "api": {
         "development": "https://localhost:7193/",
+        "_development": "https://fleet.regira.com/api",
         "production": "https://fleet.regira.com/api"
     },
     "includeCredentials": false,
     "isDebug": true,
     "isDemo": true,
 
-    "title": "Regira Fleet Manager",
+    "title": {
+        "en": "Regira Fleet Manager",
+        "fr": "Regira gestionnaire de flotte",
+        "nl": "Regira Vlootmanager"
+    },
 
-    "entities": ["Interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
-    "dashboard": ["Interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],
-    "navbar": ["Interventions", "vehicles", "intervention-operators"]
+    "entities": ["interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
+    "dashboard": ["interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],
+    "navbar": ["interventions", "vehicles", "intervention-operators"]
 }

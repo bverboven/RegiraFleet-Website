@@ -2,10 +2,10 @@
     <div class="entity-list">
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
-            <div class="col-1 fw-bold">Code</div>
-            <div class="col d-none d-md-block fw-bold">Type</div>
-            <div class="col d-none d-md-block fw-bold">Brand</div>
-            <div class="col fw-bold">Model</div>
+            <div class="col-2 col-lg-1 fw-bold">{{ $t("code") }}</div>
+            <div class="col fw-bold">{{ $t("type") }}</div>
+            <div class="col d-none d-md-block fw-bold">{{ $t("brand") }}</div>
+            <div class="col d-none d-lg-block fw-bold">{{ $t("model") }}</div>
         </div>
         <template v-for="(item, i) in items" :key="item.$id">
             <ListItem

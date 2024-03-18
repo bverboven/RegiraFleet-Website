@@ -15,7 +15,12 @@
                 <Feedback v-bind="{ feedback }" :hideCloseButton="true" />
             </div>
             <div class="col-auto order-2 order-lg-3 ps-2">
-                <RouterLink :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info"><Icon name="new" /><span class="d-none d-sm-inline ms-1">new</span></RouterLink>
+                <RouterLink v-if="!$isReadonlyUser" :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info">
+                    <Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span>
+                </RouterLink>
+                <button v-else type="button" class="btn btn-info" disabled>
+                    <Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span>
+                </button>
             </div>
         </div>
 
@@ -33,7 +38,7 @@
                 </template>
             </div>
             <div class="col-12 col-sm-auto order-1 order-sm-3">
-                <ResultSummary v-if="items != null" :visibleCount="items.length" :totalCount="itemsCount" />
+                <ResultSummary v-if="items?.length" :visibleCount="items.length" :totalCount="itemsCount" />
             </div>
         </div>
 
@@ -43,13 +48,14 @@
                 :is="List"
                 v-if="items && items.length > 0"
                 v-model="items"
+                :readonly="$isReadonlyUser"
                 @request-save="handleRequestSave"
                 @request-remove="handleRequestRemove"
                 @save="handleSave"
                 @remove="handleRemove"
                 @request-reload="updateOverviewRoute(false)"
             />
-            <p v-if="items && items.length <= 0" class="italic-muted">No items</p>
+            <p v-if="items && items.length <= 0" class="italic-muted">{{ $t("noResults") }}</p>
         </LoadingContainer>
 
         <!-- Paging -->
@@ -62,9 +68,10 @@
 </template>
 
 <script setup lang="ts">
-import { useSearchView, useRouteOverview, type OverviewEmits, ResultSummary } from "@/regira_modules/vue/entities"
+import { useSearchView, useRouteOverview, type OverviewEmits } from "@/regira_modules/vue/entities"
 import { Paging, LoadingContainer, Feedback } from "@/regira_modules/vue/ui"
 import { useAuthStore } from "@/regira_modules/vue/auth"
+import ResultSummary from "@/components/ResultSummary.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"

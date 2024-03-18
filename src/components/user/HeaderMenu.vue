@@ -5,25 +5,28 @@
         </li>
         <li v-if="isAuthenticated" class="nav-item dropdown">
             <LoadingContainer :is-loading="isLoading" style="max-height: 2.5rem">
-                <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item">
+                <!-- <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item">
                     <Icon name="user" :title="$auth.authData.name" />
-                    <span class="ms-2 d-md-none">
+                    <span class="ms-2 d-sm-none">
                         {{ $auth.authData.name }}
                     </span>
-                </router-link>
-                <!-- <a class="nav-link dropdown-toggle" @click="handleToggleDropDown" href="#" id="navbarAccountDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                    <Icon name="user" /> USER
-                </a> -->
+                </router-link> -->
+                <a class="nav-link dropdown-toggle" @click="handleToggleDropDown" href="#" id="navbarAccountDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <Icon name="user" />
+                    <span class="ms-2 d-sm-none d-lg-inline">
+                        {{ $auth.authData.displayName ?? $auth.authData.name }}
+                    </span>
+                </a>
             </LoadingContainer>
-            <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
+            <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" style="min-width: 8rem" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
                 <li class="nav-item dropdown">
-                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click.native="handleCloseMenu">My account</router-link>
+                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">My account</router-link>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li class="nav-item dropdown">
                     <button type="button" class="btn btn-link dropdown-item" @click="handleLogout">
                         <Icon name="exit" class="me-1" />
-                        Sign out
+                        {{ $t("signOut") }}
                     </button>
                 </li>
             </ul>

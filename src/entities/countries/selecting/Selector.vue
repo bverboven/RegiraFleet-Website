@@ -1,9 +1,9 @@
 <template>
-    <InputSelector v-model="item" @select="handleSelect" />
+    <InputSelector v-model="item" :placeholder="placeholder" @select="handleSelect" />
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue"
+import { computed, onMounted } from "vue"
 import type Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import InputSelector from "./InputSelector.vue"
@@ -15,6 +15,7 @@ const emit = defineEmits<{
 const props = defineProps<{
     modelValue?: Entity
     idValue?: string
+    placeholder?: string
 }>()
 
 const { fromPool, details } = useEntityStore()
@@ -28,11 +29,11 @@ function handleSelect(selected?: Entity) {
     emit("update:idValue", selected?.id)
     emit("update:modelValue", selected)
 }
-function handleRemove(selected: Entity) {
-    console.debug("handleRemove", { selected })
-    emit("update:idValue", undefined)
-    emit("update:modelValue", undefined)
-}
+// function handleRemove(selected: Entity) {
+//     console.debug("handleRemove", { selected })
+//     emit("update:idValue", undefined)
+//     emit("update:modelValue", undefined)
+// }
 
 onMounted(async () => {
     console.debug("Selector.Mount", { modelValue: props.modelValue, id: props.idValue })

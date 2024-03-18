@@ -13,9 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Brands",
-    detailsTitle: "Brand",
-    description: `Vehicle brands`,
+    overviewTitle: "brands",
+    detailsTitle: "brand",
+    description: "brandsDescription",
     icon: "bi bi-building-fill-gear",
 
     defaultPageSize: 10,

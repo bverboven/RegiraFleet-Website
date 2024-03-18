@@ -7,15 +7,15 @@ const config: IConfig = {
     id: Entity.name,
     key: "Intervention",
 
-    routePrefix: "Interventions",
+    routePrefix: "interventions",
     baseQueryParams: {
-        includes: ["Vehicle", "Operator", "InterventionTypes", "Invoices"],
+        includes: ["Vehicle", "Operator", "InterventionType", "Invoice"],
     },
     initialQuery: {},
 
-    overviewTitle: "Interventions",
-    detailsTitle: "Intervention",
-    description: `Vehicle interventions`,
+    overviewTitle: "interventions",
+    detailsTitle: "intervention",
+    description: "interventionsDescription",
     icon: "bi bi-wrench-adjustable",
 
     defaultPageSize: 10,

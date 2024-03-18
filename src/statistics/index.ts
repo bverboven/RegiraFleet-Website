@@ -1,2 +1,7 @@
 export { plugin } from "./plugin"
-export { default as HeaderMenuItem } from "./HeaderMenuItem.vue"
+export { default as DefaultStats } from "./components/DefaultStats.vue"
+export { default as HeaderMenuItem } from "./components/HeaderMenuItem.vue"
+export { default as NavLinks } from "./components/NavLinks.vue"
+export { default as TableView } from "./components/TableView.vue"
+export { default as YearForm } from "./components/YearForm.vue"
+export { default as YearVehicleTypeFilter } from "./components/YearVehicleTypeFilter.vue"

@@ -2,9 +2,9 @@
     <button type="button" class="btn btn-default" @click="isOpen = true">
         <slot><Icon name="file" /></slot>
         <Teleport to="#modals">
-            <Modal v-if="isOpen" title="Attachment" :showFooter="true" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
+            <MyModal :is-visible="isOpen" title="Attachment" :showFooter="true" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
                 <Form v-model="item" />
-            </Modal>
+            </MyModal>
         </Teleport>
     </button>
 </template>

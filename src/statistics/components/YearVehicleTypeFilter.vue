@@ -9,12 +9,11 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { storeToRefs } from "pinia"
-import useStatisticsStore from "./store"
 import { type Entity as VehicleType, SelectorDropDown as VehicleTypeSelector } from "@/entities/vehicle-types"
+import useStatisticsStore from "../store"
 
 const { filter } = storeToRefs(useStatisticsStore())
 
 const vehicleType = ref<VehicleType>()
 const vehicleTypeId = ref<number>()
 </script>
-../store

@@ -13,9 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Intervention Types",
-    detailsTitle: "Intervention Type",
-    description: `Manage types of intervention`,
+    overviewTitle: "interventionTypes",
+    detailsTitle: "interventionType",
+    description: "interventionTypesDescription",
     icon: "bi bi-tools",
 
     defaultPageSize: 10,

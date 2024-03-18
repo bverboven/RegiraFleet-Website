@@ -1,11 +1,11 @@
 <template>
-    <FormSection title="Attachments">
+    <FormSection :title="$t('files')">
         <List v-model="items" :readonly="readonly" />
         <FileDropZone v-if="!readonly" @drop-files="handleBrowse" @click="triggerBrowse()">
             <template #default="{ isDropping }">
                 <div class="file-drop-zone row align-items-center justify-content-center m-2 mb-3" :class="{ dropping: isDropping }" style="min-height: 20rem">
                     <div class="col-auto">
-                        <span class="italic-muted text-info">Add new file(s)</span>
+                        <span class="italic-muted text-info">{{ $t("addNewFile(s)") }}</span>
                     </div>
                 </div>
             </template>

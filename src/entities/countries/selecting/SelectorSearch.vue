@@ -31,7 +31,7 @@
                 </template>
             </div>
             <div class="col-12 col-sm-auto order-1 order-sm-3">
-                <ResultSummary v-if="items != null" :visibleCount="items.length" :totalCount="itemsCount" />
+                <ResultSummary v-if="items?.length" :visibleCount="items.length" :totalCount="itemsCount" />
             </div>
         </div>
 
@@ -72,8 +72,9 @@
 <script setup lang="ts">
 import { onMounted, type Ref } from "vue"
 import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { useSearchView, ResultSummary } from "@/regira_modules/vue/entities"
+import { useSearchView } from "@/regira_modules/vue/entities"
 import { Paging, LoadingContainer, Feedback, ButtonType } from "@/regira_modules/vue/ui"
+import ResultSummary from "@/components/ResultSummary.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"
 import SearchObject from "../filter/SearchObject"

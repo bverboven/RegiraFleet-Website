@@ -25,7 +25,10 @@ export default [
                 path: "per-vehicle",
                 component: StatsPerVehicle,
                 meta: {
-                    title: "Totals per vehicle",
+                    title: {
+                        en: "Totals per vehicle",
+                        nl: "Totalen per voertuig",
+                    },
                     api: "per-vehicle/{year}",
                 },
             },
@@ -34,7 +37,10 @@ export default [
                 path: "per-vehicletype",
                 component: StatsPerVehicleType,
                 meta: {
-                    title: "Totals per vehicletype",
+                    title: {
+                        en: "Totals per vehicletype",
+                        nl: "Totalen per voertuigtype",
+                    },
                     api: "per-vehicletype/{year}",
                 },
             },
@@ -43,7 +49,10 @@ export default [
                 path: "per-supplier",
                 component: StatsPerSupplier,
                 meta: {
-                    title: "Totals per supplier",
+                    title: {
+                        en: "Totals per supplier",
+                        nl: "Totalen per leverancier",
+                    },
                     api: "per-intervention-operator/{year}",
                 },
             },
@@ -52,7 +61,10 @@ export default [
                 path: "per-interventiontype",
                 component: StatsPerInterventionType,
                 meta: {
-                    title: "Totals per intervention",
+                    title: {
+                        en: "Totals per interventiontype",
+                        nl: "Totalen per interventietype",
+                    },
                     api: "per-interventiontype/{year}",
                 },
             },
@@ -63,7 +75,10 @@ export default [
                     default: StatsPerVehiclePerType,
                 },
                 meta: {
-                    title: "Totals per vehicle per type",
+                    title: {
+                        en: "Totals per vehicle per type",
+                        nl: "Totalen per voertuig per type",
+                    },
                     api: "per-vehicle/{vehicleTypeCode}/{year}",
                 },
             },
@@ -72,7 +87,10 @@ export default [
                 path: "per-interventiontype-en-vehicletype",
                 component: StatsPerInterventionTypePerVehicleType,
                 meta: {
-                    title: "Totals per intervention & vehicletype",
+                    title: {
+                        en: "Totals per interventiontype & vehicletype",
+                        nl: "Totalen per interventietype & voertuigtype",
+                    },
                     api: "per-interventiontype-and-vehicletype/{year}",
                 },
             },

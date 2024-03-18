@@ -9,31 +9,33 @@
             </div>
             <div class="col-auto">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank"><Icon name="popOut" /></RouterLink>
-                <RouterLink v-else v-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">Overview</span></RouterLink>
+                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1">
+                    <Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t("overview") }}</span>
+                </RouterLink>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <FormSection :title="config.detailsTitle" :readonly="readonly">
+                <FormSection :title="$tm(config.detailsTitle)" :readonly="readonly">
                     <div class="row">
                         <div class="col-md mb-2">
                             <div class="input-group">
                                 <div class="input-group-text"><Icon name="code" /></div>
                                 <input v-model="item.code" maxlength="8" :readonly="readonly" class="form-control" />
                             </div>
-                            <FormLabel label="Code" />
+                            <FormLabel :label="$t('code')" />
                         </div>
                         <div class="col-md mb-2">
                             <div class="input-group">
                                 <div class="input-group-text"><Icon name="title" /></div>
                                 <input v-model="item.title" maxlength="128" :readonly="readonly" class="form-control" />
                             </div>
-                            <FormLabel label="Title" />
+                            <FormLabel :label="$t('name')" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-2">
-                            <DescriptionInput v-model="item.description" label="Notes" :readonly="readonly" />
+                            <DescriptionInput v-model="item.description" :label="$t('notes')" :readonly="readonly" />
                         </div>
                     </div>
                 </FormSection>

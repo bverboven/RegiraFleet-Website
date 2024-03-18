@@ -9,7 +9,9 @@
             </div>
             <div class="col col-md-auto order-2 order-md-3 text-end">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1 ms-2" target="_blank"><Icon name="popOut" /></RouterLink>
-                <RouterLink v-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1 ms-1"><Icon name="list" /><span class="d-none d-md-inline ms-1">Overview</span></RouterLink>
+                <RouterLink v-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1 ms-1">
+                    <Icon name="list" /><span class="d-none d-md-inline ms-1">{{ $t("overview") }}</span>
+                </RouterLink>
             </div>
         </div>
 
@@ -17,32 +19,39 @@
             <div class="col">
                 <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
-                        <FormSection title="Supplier">
+                        <FormSection :title="$t('supplier')">
                             <div class="row">
                                 <div class="col mb-2">
                                     <div class="input-group required-input">
-                                        <input class="form-control" v-model.trim="item.title" :readonly="readonly" placeholder="Company title" required autocomplete="name" maxlength="128" />
+                                        <input class="form-control" v-model.trim="item.title" :readonly="readonly" :placeholder="$t('companyTitle')" required autocomplete="name" maxlength="128" />
                                     </div>
-                                    <FormLabel label="Title" />
+                                    <FormLabel :label="$t('name')" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-2">
-                                    <input class="form-control" v-model.trim="item.code" :readonly="readonly" placeholder="code or abbr." maxlength="16" />
-                                    <FormLabel label="Code" />
+                                    <input class="form-control" v-model.trim="item.code" :readonly="readonly" :placeholder="$t('codePlaceholder')" maxlength="16" />
+                                    <FormLabel :label="$t('code')" />
                                 </div>
                                 <div class="col mb-2">
                                     <input class="form-control" v-model.trim="item.identificationNumber" :readonly="readonly" placeholder="ID" maxlength="16" />
-                                    <FormLabel label="(VAT) identification" />
+                                    <FormLabel :label="$t('vatIdentification')" />
                                 </div>
                             </div>
                         </FormSection>
 
-                        <FormSection title="Intervention types">
-                            <div class="row">
+                        <!-- Contact Data -->
+                        <ContactData v-model="item.contactData" :owner="item" :readonly="readonly" />
+
+                        <!-- Addresses -->
+                        <Addresses v-model="item.addresses" :owner="item" :readonly="readonly" />
+
+                        <FormSection :title="$t('interventionTypes')">
+                            <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
+                            <div v-else class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" placeholder="select type" />
-                                    <FormLabel label="Intervention type(s)" />
+                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <FormLabel :label="$t('interventionType(s)')" />
                                 </div>
                             </div>
                         </FormSection>
@@ -84,6 +93,7 @@ import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
+import { useLang } from "@/regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import { Entity as Intervention } from "../../interventions"
 import { Selector as InterventionTypeSelector } from "../../intervention-types"
@@ -112,12 +122,13 @@ const { service: entityService } = useEntityStore()
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
 
 // Tabs
+const { translate } = useLang()
 const tabs = computed(() =>
     [
-        Tab.create("form", { icon: "form", isDefault: true }),
-        Tab.create("contact", { icon: "contact" }),
-        Tab.create("files", { icon: "attachment" }),
-        Tab.create("interventions", { icon: Intervention.name }),
+        Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
+        //Tab.create("contact", { icon: "contact" }),
+        Tab.create("files", { icon: "attachment", title: translate("files") }),
+        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions"), isDisabled: !item.value?.id }),
     ].filter((x) => x)
 )
 </script>

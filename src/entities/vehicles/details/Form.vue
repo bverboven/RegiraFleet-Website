@@ -12,7 +12,9 @@
                     <RouterLink :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" target="_blank"><Icon name="popOut" /></RouterLink>
                 </template>
                 <template v-if="!isPopup && overviewUrl">
-                    <RouterLink :to="overviewUrl" class="btn btn-info py-1"><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">Overview</span></RouterLink>
+                    <RouterLink :to="overviewUrl" class="btn btn-info py-1"
+                        ><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t("overview") }}</span></RouterLink
+                    >
                 </template>
             </div>
         </div>
@@ -26,26 +28,35 @@
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text"><Icon name="code" /></div>
-                                        <input v-model="item.code" :readonly="readonly" required class="form-control" />
+                                        <input v-model="item.code" required :readonly="readonly" :placeholder="$t('vehicleCodePlaceholder')" class="form-control" />
                                     </div>
-                                    <FormLabel label="Code" />
+                                    <FormLabel :label="$t('code')" />
                                 </div>
                                 <div class="col-md mb-2">
-                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" placeholder="vehicle type" />
-                                    <FormLabel label="Type" />
+                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <FormLabel :label="$t('type')" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" placeholder="brand" />
-                                    <FormLabel label="Brand" />
+                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" :placeholder="$t('selectBrand')" />
+                                    <FormLabel :label="$t('brand')" />
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text"><Icon name="title" /></div>
-                                        <input v-model="item.model" :readonly="readonly" class="form-control" />
+                                        <input v-model="item.model" :readonly="readonly" class="form-control" :placeholder="$t('modelPlaceholder')" />
                                     </div>
-                                    <FormLabel label="Model" />
+                                    <FormLabel :label="$t('model')" />
+                                </div>
+                            </div>
+                        </FormSection>
+
+                        <FormSection :title="$t('interventionType')">
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <FormLabel :label="$t('allowedInterventionTypes')" />
                                 </div>
                             </div>
                         </FormSection>
@@ -77,11 +88,13 @@ import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
+import { useLang } from "@/regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as BrandSelector } from "../../brands"
 import { InputSelector as VehicleTypeSelector } from "../../vehicle-types"
 import { Entity as Intervention } from "../../interventions"
+import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import Interventions from "../vehicle-interventions/Overview.vue"
@@ -104,7 +117,12 @@ const { service: entityService } = useEntityStore()
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
 
 // Tabs
+const { translate } = useLang()
 const tabs = computed(() =>
-    [Tab.create("form", { icon: "form", isDefault: true }), Tab.create("files", { icon: "attachment" }), Tab.create("interventions", { icon: Intervention.name })].filter((x) => x)
+    [
+        Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
+        Tab.create("files", { icon: "attachment", title: translate("files") }),
+        Tab.create("interventions", { icon: Intervention.name, title: translate("interventions"), isDisabled: !item.value?.id }),
+    ].filter((x) => x)
 )
 </script>

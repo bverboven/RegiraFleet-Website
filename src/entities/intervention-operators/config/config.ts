@@ -13,9 +13,9 @@ const config: IConfig = {
     },
     initialQuery: {},
 
-    overviewTitle: "Suppliers",
-    detailsTitle: "Supplier",
-    description: `Manage suppliers & intervention operators`,
+    overviewTitle: "suppliers",
+    detailsTitle: "supplier",
+    description: "suppliersDescription",
     icon: "bi bi-person-gear",
 
     defaultPageSize: 10,

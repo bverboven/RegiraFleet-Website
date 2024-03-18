@@ -2,19 +2,17 @@
     <div class="entity-list">
         <div class="row pb-2 border-bottom border-bottom-1">
             <div class="col-auto fw-bold"><Icon name="edit" class="m-1" /></div>
-            <div class="col-2 col-md-1 fw-bold">Date</div>
-            <div class="col fw-bold">
-                <span class="d-lg-none">Intervention</span>
-                <span class="d-none d-lg-block">Type(s)</span>
-            </div>
-            <div class="col d-none d-lg-block fw-bold">Vehicle</div>
-            <div class="col d-none d-lg-block fw-bold">Supplier</div>
-            <div class="col d-none d-md-block fw-bold">Invoice(s)</div>
-            <div class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
+            <div class="col-2 col-md-1 fw-bold">{{ $t("date") }}</div>
+            <div class="col-3 col-sm-2 col-lg fw-bold">{{ $t("vehicle") }}</div>
+            <div class="col fw-bold">{{ $t("intervention") }}</div>
+            <div class="col d-none d-lg-block fw-bold">{{ $t("supplier") }}</div>
+            <div class="col d-none d-md-block fw-bold">{{ $t("invoice") }}</div>
+            <div v-if="!readonly" class="col-auto d-none d-md-block fw-bold"><Icon name="delete" class="text-muted m-1" /></div>
         </div>
         <template v-for="(item, i) in items" :key="item.$id">
             <ListItem
                 v-model="items[i]"
+                :readonly="readonly"
                 :class="{ 'bg-light': i % 2 == 0 }"
                 @request-save="$emit('request-save', $event)"
                 @request-remove="$emit('request-remove', $event)"
@@ -36,6 +34,7 @@ interface Emits extends /* @vue-ignore */ OverviewEmits<Entity> {}
 const emit = defineEmits<Emits>()
 const props = defineProps<{
     modelValue?: Array<Entity>
+    readonly?: boolean
 }>()
 
 const { fromPool } = useEntityStore()

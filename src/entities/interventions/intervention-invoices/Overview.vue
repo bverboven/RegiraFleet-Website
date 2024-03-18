@@ -1,42 +1,29 @@
 <template>
-    <FormSection title="Invoice(s)">
-        <List v-model="items" :readonly="readonly" />
-
-        <div v-if="!readonly" class="row mt-2">
-            <div class="col mb-2">
-                <FormModalButton :modal-title="`New Invoice`" :item-defaults="defaultValues" :readonly="readonly" class="btn btn-info" @save="handleSave">Add new invoice</FormModalButton>
-            </div>
-        </div>
+    <FormSection title="Invoice">
+        <Form v-model="item" :readonly="readonly" />
     </FormSection>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { useOwnedCollection } from "@/regira_modules/vue/entities"
 import { type Entity as Operator } from "../"
-import type Entity from "./Entity"
-import List from "./List.vue"
-import FormModalButton from "./FormModalButton.vue"
+import Entity from "./Entity"
+import Form from "./Form.vue"
 import { TaxCategory } from "./TaxCategory"
+import { useVModelField } from "@/regira_modules/vue/vue-helper"
 
 const emit = defineEmits<{
-    (e: "update:modelValue", args: Array<Entity>): void
-    (e: "sort", args: any): void
+    (e: "update:modelValue", args: Entity): void
 }>()
 const props = withDefaults(
     defineProps<{
-        modelValue?: Array<Entity>
+        modelValue?: Entity
         owner: Operator
         readonly?: boolean
-        showSummary?: boolean
     }>(),
     {
-        modelValue: () => [],
+        modelValue: () => Object.assign(new Entity(), { taxCategory: TaxCategory.Deductible }),
     }
 )
 
-const { items, handleSave } = useOwnedCollection({ props, emit })
-
-// set defaults
-const defaultValues = ref({ taxCategory: TaxCategory.Deductible })
+const item = useVModelField<Entity>(props, emit)
 </script>
