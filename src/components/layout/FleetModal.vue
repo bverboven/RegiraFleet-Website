@@ -19,7 +19,7 @@
                                         </h3>
                                     </slot>
                                     <div>
-                                        <LangSelector class="me-3" />
+                                        <LangSelector class="d-none d-sm-inline me-3" />
                                         <slot name="header-close-button" :handleClose="handleClose">
                                             <IconButton icon="close" :class="[isDanger ? 'btn-danger' : 'btn-outline-danger']" title="close" @click="handleClose" data-dismiss="modal" />
                                         </slot>

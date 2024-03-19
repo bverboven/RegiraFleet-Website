@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row form-buttons">
-            <div class="col-auto order-1">
+            <div class="col col-md-auto order-1">
                 <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col-md order-3 order-md-2">
                 <Feedback :feedback="feedback" />
             </div>
-            <div class="col-auto order-md-3">
+            <div class="col-auto order-2 order-md-3">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
                     <Icon name="popOut" />
                 </RouterLink>

@@ -36,35 +36,19 @@
                 <component :is="Component" :api="statsApi" />
             </RouterView>
         </template>
-
-        <div class="row">
-            <div class="col-md order-2 order-md-1 mb-2">
-                <RouterView name="filter" v-slot="{ Component: Filter }">
-                    <component :is="Filter" :filter="filter" />
-                </RouterView>
-            </div>
-            <div class="col-auto order-1 mb-2">
-                <NavLinks />
-            </div>
-        </div>
-        <RouterView name="results" v-slot="{ Component }">
-            <component :is="Component" :api="statsApi" />
-        </RouterView>
     </article>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue"
+import { computed } from "vue"
 import { useRouter } from "vue-router"
 import { Entity as Vehicle } from "@/entities/vehicles"
 import { Entity as VehicleType } from "@/entities/vehicle-types"
 import { Entity as Supplier } from "@/entities/intervention-operators"
 import { Entity as InterventionType } from "@/entities/intervention-types"
 import { useLang } from "@/regira_modules/vue"
-import NavLinks from "@/statistics/components/NavLinks.vue"
 
 const { translate, translateMessage } = useLang()
-const filter = ref({ year: new Date().getFullYear() })
 
 const router = useRouter()
 const statsApi = computed(() => router.currentRoute.value.meta?.api)

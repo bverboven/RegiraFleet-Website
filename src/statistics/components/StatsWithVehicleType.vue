@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-md order-2 order-md-1 mb-2">
-                <YearForm v-model="filter" @fetch-data="fetchData" @fetch-doc="fetchDoc" />
+                <Filter v-model="filter" @fetch-data="handleFetchData" @fetch-doc="fetchDoc" />
             </div>
             <div class="col-auto order-1 mb-2">
                 <NavLinks />
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue"
 import { useFetchStatistics } from "../functions"
-import YearForm from "./YearForm.vue"
+import Filter from "./YearVehicleTypeFilter.vue"
 import NavLinks from "./NavLinks.vue"
 import TableView from "./TableView.vue"
 
@@ -24,9 +24,14 @@ const props = defineProps<{
     api: string
 }>()
 
-const filter = ref({ year: new Date().getFullYear() })
+const filter = ref({ year: new Date().getFullYear(), vehicleTypeId: 0 })
 const { stats, errorMsg, isLoading, fetchData, fetchDoc } = useFetchStatistics(props, filter)
 
+function handleFetchData() {
+    console.debug("handleFetchData")
+    fetchData()
+}
+
 onMounted(fetchData)
-watch(() => props.api,fetchData)
+watch(() => props.api, fetchData)
 </script>
