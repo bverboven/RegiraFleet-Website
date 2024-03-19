@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, type Ref } from "vue"
+import { ref, computed, onMounted, watchEffect, type Ref } from "vue"
 import type Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 
@@ -25,17 +25,23 @@ const selected = computed({
     get() {
         return props.modelValue
     },
-    set(value) {
-        emit("update:idValue", value?.id)
-        emit("update:modelValue", value)
+    set(value: any) {
+        console.debug("setSelected", { value })
+        const item = items.value?.find((x) => x.id == parseInt(value))
+        emit("update:idValue", item?.id)
+        emit("update:modelValue", item)
     },
 })
 const { fromCache } = useEntityStore()
 
-const items = computed(() => (fromCache() as Array<Ref<Entity>>)!.map((x) => x.value))
+const items = ref<Array<Entity>>()
+const chachedRefItems = computed(() => fromCache() as Array<Ref<Entity>>)
+watchEffect(() => {
+    items.value = chachedRefItems.value!.map((x) => x.value)
+})
 onMounted(() => {
     console.debug("SelectorDropDown", { fromCache })
-    if (!selected.value && props.idValue) {
+    if (items.value?.length && !selected.value && props.idValue) {
         selected.value = items.value.find((x) => x.id == props.idValue)
     }
 })

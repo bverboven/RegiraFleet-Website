@@ -1,21 +1,19 @@
 <template>
     <form @submit.prevent="handleSubmit" :modelValue="item">
-        <div class="row mb-1">
-            <div class="col-auto mb-2">
+        <div class="row form-buttons">
+            <div class="col-auto order-1">
                 <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
-            <div class="col mb-2">
+            <div class="col-md order-3 order-md-2">
                 <Feedback :feedback="feedback" />
             </div>
-            <div class="col-auto">
-                <template v-if="isPopup">
-                    <RouterLink :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" target="_blank"><Icon name="popOut" /></RouterLink>
-                </template>
-                <template v-if="!isPopup && overviewUrl">
-                    <RouterLink :to="overviewUrl" class="btn btn-info py-1"
-                        ><Icon name="list" class="me-1" /> <span class="d-none d-sm-inline">{{ $t("overview") }}</span></RouterLink
-                    >
-                </template>
+            <div class="col-auto order-md-3">
+                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
+                    <Icon name="popOut" />
+                </RouterLink>
+                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1">
+                    <Icon name="list" /> <span class="d-none d-md-inline ms-1">{{ $t("overview") }}</span>
+                </RouterLink>
             </div>
         </div>
 

@@ -59,6 +59,11 @@
         "nl": "Naam organisatie",
         "fr": "Nom de l'entreprise"
     },
+    "confirm": {
+        "en": "Confirm",
+        "nl": "Bevestig",
+        "fr": "Confirmer"
+    },
     "contact": {
         "en": "Contact",
         "nl": "Contact",
@@ -228,6 +233,11 @@
         "en": "Overview",
         "nl": "Overzicht",
         "fr": "Aperçu"
+    },
+    "popOut": {
+        "en": "Pop out",
+        "nl": "Nieuw venster",
+        "fr": "Nouv. fenêtre"
     },
     "priceExcl": {
         "en": "Price (excl.)",

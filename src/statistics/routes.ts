@@ -3,10 +3,11 @@ import Permissions from "@/infrastructure/permissions"
 import StatisticsView from "@/views/StatisticsView.vue"
 import StatsPerVehicle from "./components/DefaultStats.vue"
 import StatsPerVehicleType from "./components/DefaultStats.vue"
-import StatsPerVehiclePerType from "@/views/Dummy.vue"
+import StatsPerVehiclePerType from "./components/DefaultStats.vue"
 import StatsPerSupplier from "./components/DefaultStats.vue"
 import StatsPerInterventionType from "./components/DefaultStats.vue"
 import StatsPerInterventionTypePerVehicleType from "./components/DefaultStats.vue"
+import YearVehicleTypeFilter from "./components/YearVehicleTypeFilter.vue"
 
 export default [
     // statistics
@@ -70,9 +71,10 @@ export default [
             },
             {
                 name: "stats-per-vehicle-per-type",
-                path: "per-vehicle-per-type/{year}",
+                path: "per-vehicle-per-type",
                 components: {
-                    default: StatsPerVehiclePerType,
+                    filter: YearVehicleTypeFilter,
+                    results: StatsPerVehiclePerType,
                 },
                 meta: {
                     title: {

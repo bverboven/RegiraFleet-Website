@@ -19,7 +19,7 @@
                                         </h3>
                                     </slot>
                                     <div>
-                                        <LangSelector class="me-3"/>
+                                        <LangSelector class="me-3" />
                                         <slot name="header-close-button" :handleClose="handleClose">
                                             <IconButton icon="close" :class="[isDanger ? 'btn-danger' : 'btn-outline-danger']" title="close" @click="handleClose" data-dismiss="modal" />
                                         </slot>
@@ -40,7 +40,7 @@
                                         </slot>
                                         <slot name="footer-submit-button" :handleClose="handleSubmit">
                                             <div>
-                                                <IconButton icon="submit" :class="isDanger ? 'btn-danger' : 'btn-success'" @click="handleSubmit">{{ $t("submit") }}</IconButton>
+                                                <IconButton icon="submit" :class="isDanger ? 'btn-danger' : 'btn-success'" @click="handleSubmit">{{ $t("confirm") }}</IconButton>
                                             </div>
                                         </slot>
                                     </div>
@@ -102,3 +102,9 @@ const handleClose = () => emit("close")
 const handleCancel = () => emit("cancel")
 const handleSubmit = () => emit("submit")
 </script>
+
+<style scoped>
+.modal-body {
+    padding-top: 0;
+}
+</style>

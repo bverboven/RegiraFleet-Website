@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md order-2 order-md-1 mb-2">
                 <YearForm v-model="filter" @fetch-data="fetchData" @fetch-doc="fetchDoc" />
             </div>
             <div class="col-auto order-1 mb-2">
                 <NavLinks />
             </div>
-        </div>
+        </div> -->
 
         <TableView :stats="stats" :error-msg="errorMsg" :is-loading="isLoading" />
     </div>
