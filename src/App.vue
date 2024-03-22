@@ -23,10 +23,10 @@
 
         <Teleport to="#loginModal">
             <LoginModal :is-visible="showLogin" :title="$t('signIn')">
-                <LoginForm :username="username" @forgot-password="openForgotPassword" />
+                <LoginForm :username="username" class="pt-2" @forgot-password="openForgotPassword" />
             </LoginModal>
             <ForgotPasswordModal :is-visible="showForgotPassword" @close="showForgotPassword = false">
-                <ForgotPassword :username="username" @login="openLogin" />
+                <ForgotPassword :username="username" class="pt-2" @login="openLogin" />
             </ForgotPasswordModal>
         </Teleport>
     </div>
