@@ -46,7 +46,7 @@ import { Entity as Vehicle } from "@/entities/vehicles"
 import { Entity as VehicleType } from "@/entities/vehicle-types"
 import { Entity as Supplier } from "@/entities/intervention-operators"
 import { Entity as InterventionType } from "@/entities/intervention-types"
-import { useLang } from "@/regira_modules/vue"
+import { useLang } from "@/regira_modules/vue/lang"
 
 const { translate, translateMessage } = useLang()
 

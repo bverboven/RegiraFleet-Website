@@ -11,7 +11,7 @@
 import { ref, computed, onMounted, type Ref } from "vue"
 import type Entity from "../data/Entity"
 import useEntityStore from "../data/store"
-import { whenAppReady } from "@/regira_modules/vue"
+import { whenAppReady } from "@/regira_modules/vue/app"
 
 const emit = defineEmits<{
     (e: "update:modelValue", args?: Entity): void

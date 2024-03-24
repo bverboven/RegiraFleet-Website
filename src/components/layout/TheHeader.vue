@@ -52,12 +52,10 @@ const { version } = useConfig()
 
 const showNavbarContent = ref(false)
 const showNavbarManagementDropdown = ref(false)
-const showNavbarStatisticsDropdown = ref(false)
 
 document.addEventListener("click", () => {
     showNavbarContent.value = false
     showNavbarManagementDropdown.value = false
-    showNavbarStatisticsDropdown.value = false
 })
 
 const app = getCurrentInstance()!
