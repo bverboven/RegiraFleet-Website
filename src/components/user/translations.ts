@@ -1,6 +1,16 @@
 import type { ITranslationMessage } from "@/regira_modules/vue/lang"
 
 export default {
+    demoInfoMessage: {
+        en: "In the demo-version you should first select a client organisation, then you can select a user or fill in the credentials manually",
+        nl: "In de demoversie moet u eerst een clientorganisatie selecteren. Vervolgens kunt u een gebruiker selecteren of de inloggegevens handmatig invullen.",
+        fr: "Dans la version démo, vous devez d'abord sélectionner une organisation cliente. Ensuite, vous pouvez sélectionner un utilisateur ou saisir les informations d'identification manuellement.",
+    },
+    client: {
+        en: "Organisation",
+        nl: "Organisatie",
+        fr: "Organisation",
+    },
     changePassword: {
         en: "Change password",
         nl: "Wachtwoord aanpassen",

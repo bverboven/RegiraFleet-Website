@@ -50,9 +50,14 @@
 
                         <FormSection :title="$t('interventionTypes')">
                             <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
-                            <div v-else class="row">
+                            <div v-else class="row" style="min-height: 10rem">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <InterventionTypeSelector
+                                        v-model="item.interventionTypes"
+                                        :filter-defaults="{ exclude: item.interventionTypes?.map((x) => x.id) }"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectType')"
+                                    />
                                     <FormLabel :label="$t('interventionType(s)')" />
                                 </div>
                             </div>

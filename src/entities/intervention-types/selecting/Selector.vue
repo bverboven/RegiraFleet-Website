@@ -34,7 +34,7 @@ const props = defineProps<{
 
 const { fromPool, list } = useEntityStore()
 const items = computed<Array<Entity>>({
-    get: () => props.modelValue || [],
+    get: () => fromPool(props.modelValue || []) as Array<Entity>,
     set: (value) => emit("update:modelValue", value as Array<Entity>),
 })
 

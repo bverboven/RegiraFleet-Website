@@ -53,7 +53,12 @@
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <InterventionTypeSelector
+                                        v-model="item.interventionTypes"
+                                        :filter-defaults="{ exclude: item.interventionTypes?.map((x) => x.id) }"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectType')"
+                                    />
                                     <FormLabel :label="$t('allowedInterventionTypes')" />
                                 </div>
                             </div>
