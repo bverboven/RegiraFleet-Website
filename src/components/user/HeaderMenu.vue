@@ -20,7 +20,7 @@
             </LoadingContainer>
             <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" style="min-width: 8rem" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
                 <li class="nav-item dropdown">
-                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">My account</router-link>
+                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">{{ $t("auth.myAccount") }}</router-link>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li class="nav-item dropdown">

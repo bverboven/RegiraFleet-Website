@@ -1,14 +1,14 @@
 <template>
     <form @submit.prevent="handleSubmit" ref="loginForm">
-        <p class="text-info">{{ t("demoInfoMessage") }}</p>
+        <p class="text-info">{{ $t("auth.demoInfoMessage") }}</p>
         <div class="mb-3 position-relative" v-if="failed">
             <div class="bg-danger border rounded text-light p-2">
-                {{ t("signInErrorMsg") }}
-                <span v-if="isLockedOut">{{ t("tryAgainInMin", { minutes: 5 }) }}</span>
+                {{ $t("auth.signInErrorMsg") }}
+                <span v-if="isLockedOut">{{ $t("auth.tryAgainInMin", { minutes: 5 }) }}</span>
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ t("client") }}</label>
+            <label class="col-sm-3 col-form-label">{{ $t("auth.client") }}</label>
             <div class="col-sm-9">
                 <select v-model="clientId" class="form-select">
                     <option v-for="client in clients" :key="client.id" :value="client.id">{{ client.title }}</option>
@@ -16,11 +16,11 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ t("username") }}</label>
+            <label class="col-sm-3 col-form-label">{{ $t("auth.username") }}</label>
             <div class="col-sm-9">
                 <div class="input-group">
                     <input class="form-control" autocomplete="username email" v-model="username" :disabled="signingIn" />
-                    <template v-if="clientId">
+                    <template v-if="demoUsers?.length">
                         <!-- <select v-model="user" class="form-select" @change="handleSelectUser(user!)">
                             <option v-for="item in demoUsers" :key="item.username" :value="item">{{ item.username }}</option>
                         </select> -->
@@ -37,21 +37,21 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ t("password") }}</label>
+            <label class="col-sm-3 col-form-label">{{ $t("auth.password") }}</label>
             <div class="col-sm-9">
                 <input type="password" class="form-control" autocomplete="password current-password" v-model="password" :disabled="signingIn" />
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button type="submit" class="btn btn-primary" :disabled="signingIn">{{ t("signIn") }}</button>
+                <button type="submit" class="btn btn-primary" :disabled="signingIn">{{ $t("auth.signIn") }}</button>
             </div>
             <div class="col-auto">
                 <span v-if="signingIn" class="text-info">
                     <Loading class="me-1" style="width: 2rem" />
-                    {{ t("signingIn") }}
+                    {{ $t("auth.signingIn") }}
                 </span>
-                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{ t("forgotPassword") }}</button>
+                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{ $t("auth.forgotPassword") }}</button>
             </div>
         </div>
     </form>
@@ -63,7 +63,6 @@ import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/reg
 import { Loading } from "@/regira_modules/vue/ui"
 import { useAxios } from "@/regira_modules/vue/http"
 import { useConfig } from "@/app-config"
-import { useUserLang } from "./useUserLang"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -84,9 +83,6 @@ const clientId = ref<string>()
 const clients = ref<Array<IClient>>()
 const demoUsers = ref<Array<IDemoUser>>()
 const user = ref<IDemoUser>()
-
-// translate
-const { t } = useUserLang()
 
 // auth
 const auth = useAuth()
