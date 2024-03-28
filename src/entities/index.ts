@@ -2,6 +2,7 @@ import type { App } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 
 import { plugin as countryPlugin } from "./countries"
+import { plugin as clientPlugin } from "./clients"
 import { plugin as brandPlugin } from "./brands"
 import { plugin as interventionPlugin } from "./interventions"
 import { plugin as interventionTypePlugin } from "./intervention-types"
@@ -19,3 +20,5 @@ export default {
         plugins.forEach((plugin) => app.use(plugin, { routes }))
     },
 }
+
+export { countryPlugin, clientPlugin, brandPlugin, interventionPlugin, interventionTypePlugin, interventionOperatorPlugin, vehiclePlugin, vehicleTypePlugin }

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit" ref="loginForm">
+    <form @submit.prevent="handleSubmit" ref="loginForm" :style="{ '_min-height': minHeight }">
         <p class="text-info">{{ $t("auth.demoInfoMessage") }}</p>
         <div class="mb-3 position-relative" v-if="failed">
             <div class="bg-danger border rounded text-light p-2">
@@ -7,14 +7,14 @@
                 <span v-if="isLockedOut">{{ $t("auth.tryAgainInMin", { minutes: 5 }) }}</span>
             </div>
         </div>
-        <div class="row mb-3">
+        <!-- <div class="row mb-3">
             <label class="col-sm-3 col-form-label">{{ $t("auth.client") }}</label>
             <div class="col-sm-9">
                 <select v-model="clientId" class="form-select">
                     <option v-for="client in clients" :key="client.id" :value="client.id">{{ client.title }}</option>
                 </select>
             </div>
-        </div>
+        </div> -->
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">{{ $t("auth.username") }}</label>
             <div class="col-sm-9">
@@ -28,7 +28,7 @@
                             Select user
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }" style="min-width: 12.5rem">
-                            <li v-for="item in demoUsers" :key="item.username">
+                            <li v-for="item in clientUsers" :key="item.username">
                                 <a class="dropdown-item" href="#" @click="handleSelectUser(item)">{{ item.title }}</a>
                             </li>
                         </ul>
@@ -58,11 +58,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, watchEffect } from "vue"
+import { ref, computed, onMounted, watch } from "vue"
 import { useLoginForm, type ILoginEmits, type ILoginProps, useAuth } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
 import { useAxios } from "@/regira_modules/vue/http"
 import { useConfig } from "@/app-config"
+import { type Entity as Client } from "@/entities/clients"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -72,7 +73,6 @@ const props: ILoginProps = defineProps<{
     signingIn?: boolean
 }>()
 
-type IClient = { id: string; code: string; title: string; defaultCulture: string }
 type IDemoUser = { username: string; title: string; clientId: string }
 
 const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
@@ -80,9 +80,10 @@ const { username, password, signingIn, failed, isLockedOut, handleSubmit, handle
 const appConfig = useConfig()
 const showUsersList = ref(false)
 const clientId = ref<string>()
-const clients = ref<Array<IClient>>()
+const clients = ref<Array<Client>>()
 const demoUsers = ref<Array<IDemoUser>>()
-const user = ref<IDemoUser>()
+const minHeight = computed(() => (showUsersList.value ? "30rem" : "10rem"))
+const clientUsers = computed<Array<IDemoUser>>(() => demoUsers.value?.filter((x) => !clientId.value || x.clientId == clientId.value) || [])
 
 // auth
 const auth = useAuth()
@@ -95,14 +96,12 @@ function handleSelectUser(item: { username: string; password?: string; clientId:
 onMounted(async () => {
     const axios = useAxios()
     clients.value = await axios.get(`demo-clients`).then((r) => r.data)
+    demoUsers.value = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
 })
 watch(clientId, () => {
-    auth.service.options.loginUrl = appConfig.loginUrl.replace("{clientId}", clientId.value).replace("{clientApp}", appConfig.clientApp)
-})
-watchEffect(async () => {
-    if (clientId.value) {
-        const items = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
-        demoUsers.value = items.filter((x: IDemoUser) => x.clientId == clientId.value)
-    }
+    auth.service.options.loginUrl = appConfig.loginUrl
+        .replace("{clientId}", "")
+        //.replace("{clientId}", clientId.value)
+        .replace("{clientApp}", appConfig.clientApp)
 })
 </script>

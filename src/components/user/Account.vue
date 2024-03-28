@@ -27,7 +27,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="col"></div>
+            <div class="col-auto">
+                <ClientSelector />
+            </div>
         </div>
     </section>
 
@@ -46,6 +48,7 @@ import { ref } from "vue"
 import { useAuthStore } from "@/regira_modules/vue/auth"
 import ChangePasswordForm from "./ChangePasswordForm.vue"
 import ChangePersonalData from "./ChangePersonalData.vue"
+import { ClientSelector } from "@/entities/clients"
 
 const showChangePassword = ref(false)
 const showChangePersonalData = ref(false)
