@@ -1,6 +1,6 @@
 <template>
-    <form @submit.prevent="handleSubmit" ref="loginForm" :style="{ '_min-height': minHeight }">
-        <p class="text-info">{{ $t("auth.demoInfoMessage") }}</p>
+    <form @submit.prevent="handleSubmit" ref="loginForm" :style="{ 'min-height': minHeight }">
+        <!-- <p class="text-info">{{ $t("auth.demoInfoMessage") }}</p> -->
         <div class="mb-3 position-relative" v-if="failed">
             <div class="bg-danger border rounded text-light p-2">
                 {{ $t("auth.signInErrorMsg") }}
@@ -82,7 +82,7 @@ const showUsersList = ref(false)
 const clientId = ref<string>()
 const clients = ref<Array<Client>>()
 const demoUsers = ref<Array<IDemoUser>>()
-const minHeight = computed(() => (showUsersList.value ? "30rem" : "10rem"))
+const minHeight = computed(() => (showUsersList.value ? "20rem" : "10rem"))
 const clientUsers = computed<Array<IDemoUser>>(() => demoUsers.value?.filter((x) => !clientId.value || x.clientId == clientId.value) || [])
 
 // auth
