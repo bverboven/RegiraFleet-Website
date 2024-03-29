@@ -8,6 +8,7 @@ export function useFetchStatistics(props: { api: string }, filter: Ref<{ year: n
     const errorMsg = ref<string>()
 
     async function fetchData() {
+        console.debug("stats.fetchData", { api: props.api, filter: { ...filter.value } })
         const axios = useAxios()
         const url = `stats/${props.api.replace("{year}", filter.value.year.toString()).replace("{vehicleTypeId}", filter.value.vehicleTypeId?.toString() || "")}/?asTable=true`
         const response = await axios.get(url)

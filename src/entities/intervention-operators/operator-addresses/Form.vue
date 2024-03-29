@@ -57,50 +57,62 @@ const translations: Record<string, ITranslationMessage> = {
     box: {
         en: "box",
         nl: "bus",
+        fr: "boîte",
     },
     BoxNr: {
         en: "Box nr",
         nl: "Busnr",
+        fr: "Boîte n°",
     },
     city: {
         en: "city",
         nl: "gemeente",
+        fr: "ville",
     },
     City: {
         en: "City",
         nl: "Gemeente",
+        fr: "Ville",
     },
     country: {
         en: "country",
         nl: "land",
+        fr: "pays",
     },
     Country: {
         en: "Country",
         nl: "Land",
+        fr: "Pays",
     },
     nr: {
         en: "nr",
         nl: "nr",
+        fr: "n°",
     },
     Number: {
         en: "Number",
         nl: "Nr",
+        fr: "Numéro",
     },
     street: {
         en: "street",
         nl: "straat",
+        fr: "rue",
     },
     Street: {
         en: "Street",
         nl: "Straat",
+        fr: "Rue",
     },
     zip: {
         en: "zip",
         nl: "postcode",
+        fr: "code postal",
     },
     Zip: {
         en: "Postal code",
         nl: "Postcode",
+        fr: "Code postal",
     },
 }
 const { translateMessage } = useLang()

@@ -3,7 +3,7 @@
         <template #title>
             <div class="d-flex justify-content-between">
                 <h3 class="p-2 mb-2">{{ $t("interventions") }}</h3>
-                <InterventionButton v-if="!readonly" :item-defaults="{ vehicle: owner, vehicleId: owner?.id }" class="btn btn-info py-1 my-1" @save="load"><Icon name="new" /></InterventionButton>
+                <InterventionButton v-if="!readonly" :item-defaults="{ operator: owner, operatorId: owner?.id }" class="btn btn-info py-1 my-1" @save="load"><Icon name="new" /></InterventionButton>
             </div>
         </template>
         <LoadingContainer :is-loading="isLoading">

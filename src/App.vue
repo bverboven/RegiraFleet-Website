@@ -23,10 +23,11 @@
 
         <Teleport to="#loginModal">
             <LoginModal :is-visible="showLogin" :title="$t('signIn')">
-                <LoginForm :username="username" @forgot-password="openForgotPassword" />
+                <DemoLoginForm v-if="isDemo" :username="username" class="pt-2" @forgot-password="openForgotPassword" />
+                <LoginForm v-else :username="username" class="pt-2" @forgot-password="openForgotPassword" />
             </LoginModal>
             <ForgotPasswordModal :is-visible="showForgotPassword" @close="showForgotPassword = false">
-                <ForgotPassword :username="username" @login="openLogin" />
+                <ForgotPassword :username="username" class="pt-2" @login="openLogin" />
             </ForgotPasswordModal>
         </Teleport>
     </div>
@@ -37,12 +38,14 @@ import { ref, computed } from "vue"
 import { Feedback, LoadingContainer } from "@/regira_modules/vue/ui"
 import { LoginModal, ForgotPasswordModal, useAuthStore } from "@/regira_modules/vue/auth"
 import { AppStatus } from "@/regira_modules/vue/app"
+import { useConfig } from "@/app-config"
 import Header from "@/components/layout/TheHeader.vue"
 import Footer from "@/components/layout/TheFooter.vue"
 import Main from "@/components/layout/Main.vue"
 import Offline from "@/components/layout/Offline.vue"
 import Debug from "@/components/layout/Debug.vue"
 import LoginForm from "@/components/user/LoginForm.vue"
+import DemoLoginForm from "@/components/user/LoginFormDemo.vue"
 import ForgotPassword from "@/components/user/ForgotPassword.vue"
 
 // const authStore = useAuthStore()
@@ -64,4 +67,7 @@ function openLogin(login?: string) {
     showForgotPassword.value = false
     username.value = login
 }
+
+const { isDemo } = useConfig()
+console.debug("app", { isDemo, config: useConfig() })
 </script>

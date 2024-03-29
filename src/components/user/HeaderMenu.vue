@@ -20,7 +20,27 @@
             </LoadingContainer>
             <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" style="min-width: 8rem" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
                 <li class="nav-item dropdown">
-                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">My account</router-link>
+                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">{{ $t("auth.myAccount") }}</router-link>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item dropdown">
+                    <button
+                        type="button"
+                        v-for="item in clients"
+                        :key="item.id"
+                        class="btn btn-link dropdown-item d-flex justify-content-between align-items-center"
+                        @click="
+                            () => {
+                                clientStore.setActiveClient(item.id)
+                                handleCloseMenu()
+                            }
+                        "
+                    >
+                        {{ item.title }}
+                        <span class="badge text-bg-success rounded-pill cursor pointer ms-2" :class="item.id == activeClient?.id ? 'opacity-100' : 'opacity-25'">
+                            <Icon name="check" />
+                        </span>
+                    </button>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li class="nav-item dropdown">
@@ -39,6 +59,7 @@ import { ref, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { LoadingContainer } from "@/regira_modules/vue/ui"
 import { useAuthStore } from "@/regira_modules/vue/auth"
+import { useEntityStore as useClientStore } from "@/entities/clients"
 
 const emit = defineEmits<{
     (e: "close"): void
@@ -49,6 +70,16 @@ const props = defineProps<{
 }>()
 
 const isLoading = ref(false)
+
+const authStore = useAuthStore()
+function handleLogout() {
+    handleCloseMenu()
+    authStore.logout()
+}
+
+const clientStore = useClientStore()
+const { items: clients, activeClient } = storeToRefs(clientStore)
+
 const showAccountDropdown = ref(props.showDropdown)
 watch(
     () => props.showDropdown,
@@ -59,13 +90,6 @@ const handleToggleDropDown = (e: Event) => {
     e.preventDefault()
     e.stopPropagation()
     showAccountDropdown.value = !showAccountDropdown.value
-}
-
-const authStore = useAuthStore()
-const { authData } = storeToRefs(authStore)
-function handleLogout() {
-    handleCloseMenu()
-    authStore.logout()
 }
 function handleCloseMenu() {
     if (showAccountDropdown.value) {

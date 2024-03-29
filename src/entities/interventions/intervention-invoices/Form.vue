@@ -27,6 +27,22 @@
                 <FormLabel :label="$t('priceExcl')" />
             </div>
             <div class="col-sm mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="euro" /></div>
+                    <input type="number" v-model="item.priceIncl" step="any" :readonly="readonly" class="form-control" />
+                </div>
+                <FormLabel :label="$t('priceIncl')" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm mb-2">
+                <div class="input-group">
+                    <div class="input-group-text"><Icon name="pay" /></div>
+                    <input type="number" v-model="item.taxAmount" step="any" :readonly="readonly" class="form-control" />
+                </div>
+                <FormLabel :label="$t('taxAmount')" />
+            </div>
+            <div class="col-sm mb-2">
                 <select v-model="item.taxCategory" :disabled="readonly" class="form-select">
                     <option :value="TaxCategory.Deductible">Deductible</option>
                     <option :value="TaxCategory.NotDeductible">Not Deductible</option>

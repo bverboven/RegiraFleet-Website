@@ -1,16 +1,18 @@
 <template>
     <form @submit.prevent="handleSubmit" :modelValue="item">
-        <div class="row">
-            <div class="col-auto mb-2 order-1">
+        <div class="row form-buttons">
+            <div class="col col-md-auto order-1">
                 <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
-            <div class="col-md mb-2 position-relative order-3 order-md-2">
+            <div class="col-md order-3 order-md-2">
                 <Feedback :feedback="feedback" />
             </div>
-            <div class="col col-md-auto order-2 order-md-3 text-end">
-                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1 ms-2" target="_blank"><Icon name="popOut" /></RouterLink>
-                <RouterLink v-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1 ms-1">
-                    <Icon name="list" /><span class="d-none d-md-inline ms-1">{{ $t("overview") }}</span>
+            <div class="col-auto order-2 order-md-3">
+                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
+                    <Icon name="popOut" />
+                </RouterLink>
+                <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1">
+                    <Icon name="list" /> <span class="d-none d-md-inline ms-1">{{ $t("overview") }}</span>
                 </RouterLink>
             </div>
         </div>
@@ -48,9 +50,14 @@
 
                         <FormSection :title="$t('interventionTypes')">
                             <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
-                            <div v-else class="row">
+                            <div v-else class="row" style="min-height: 10rem">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="item.interventionTypes" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <InterventionTypeSelector
+                                        v-model="item.interventionTypes"
+                                        :filter-defaults="{ exclude: item.interventionTypes?.map((x) => x.id) }"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectType')"
+                                    />
                                     <FormLabel :label="$t('interventionType(s)')" />
                                 </div>
                             </div>

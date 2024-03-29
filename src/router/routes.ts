@@ -1,7 +1,5 @@
 import type { RouteRecordRaw } from "vue-router"
-import Permissions from "@/infrastructure/permissions"
 import HomeView from "@/views/HomeView.vue"
-import Dummy from "@/views/Dummy.vue"
 
 import Login from "@/views/Login.vue"
 import AccountView from "@/views/AccountView.vue"

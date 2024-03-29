@@ -15,6 +15,11 @@
         "fr": "Regira gestionnaire de flotte",
         "nl": "Regira Vlootmanager"
     },
+    "cultures": {
+        "en-UK": "en",
+        "fr-BE": "fr",
+        "nl-BE": "nl"
+    },
 
     "entities": ["interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
     "dashboard": ["interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],

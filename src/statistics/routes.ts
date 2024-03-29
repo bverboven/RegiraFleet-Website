@@ -3,10 +3,11 @@ import Permissions from "@/infrastructure/permissions"
 import StatisticsView from "@/views/StatisticsView.vue"
 import StatsPerVehicle from "./components/DefaultStats.vue"
 import StatsPerVehicleType from "./components/DefaultStats.vue"
-import StatsPerVehiclePerType from "@/views/Dummy.vue"
+import StatsPerVehiclePerType from "./components/StatsWithVehicleType.vue"
 import StatsPerSupplier from "./components/DefaultStats.vue"
 import StatsPerInterventionType from "./components/DefaultStats.vue"
 import StatsPerInterventionTypePerVehicleType from "./components/DefaultStats.vue"
+import YearVehicleTypeFilter from "./components/YearVehicleTypeFilter.vue"
 
 export default [
     // statistics
@@ -70,16 +71,14 @@ export default [
             },
             {
                 name: "stats-per-vehicle-per-type",
-                path: "per-vehicle-per-type/{year}",
-                components: {
-                    default: StatsPerVehiclePerType,
-                },
+                path: "per-vehicle-per-type",
+                component: StatsPerVehiclePerType,
                 meta: {
                     title: {
                         en: "Totals per vehicle per type",
                         nl: "Totalen per voertuig per type",
                     },
-                    api: "per-vehicle/{vehicleTypeCode}/{year}",
+                    api: "per-vehicle/{vehicleTypeId}/{year}",
                 },
             },
             {

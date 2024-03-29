@@ -18,7 +18,7 @@ import { plugin as userPlugin } from "@/infrastructure/user-plugin"
 import DescriptionInput from "@/components/input/DescriptionInput.vue"
 import FleetModal from "@/components/layout/FleetModal.vue"
 import { plugin as statisticsPlugin } from "@/statistics"
-import entityPlugins from "./entities"
+import { default as entityPlugins, clientPlugin } from "@/entities"
 
 import App from "./App.vue"
 import loadingImg from "@/assets/images/loading.gif"
@@ -113,10 +113,14 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         // preloader
         app.use(preloaderPlugin)
 
+        // clients
+        app.use(clientPlugin)
+
         // auth
         app.use(authPlugin, {
             enabled: true,
             clientApp: processedConfig.clientApp,
+            loginUrl: processedConfig.loginUrl.replace(/{clientApp}/, processedConfig.clientApp).replace(/{clientId}/, localStorage.getItem("client") || ""),
             tokenManager: new CookieTokenManager(),
             axios,
             onAuthenticationChange: async (auth) => {
