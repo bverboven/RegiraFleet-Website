@@ -48,7 +48,7 @@ const { translateMessage } = useLang()
 const resetPasswordRoute = router.resolve({ name: "resetPassword" })
 const siteUrl = `${location.protocol}//${location.host}${config.baseUrl}${resetPasswordRoute.fullPath}`
 
-const { username, isLoading, isFormValid, isSuccess, handleSubmit } = useForgotPasswordForm(props, emit, { siteUrl, siteName: config.title })
+const { username, isLoading, isFormValid, isSuccess, handleSubmit } = useForgotPasswordForm(props, emit, { siteUrl, siteName: translateMessage(config.title) })
 
 const feedback = useFeedback()
 watchEffect(() => {
@@ -60,4 +60,4 @@ watchEffect(() => {
         feedback.reset()
     }
 })
-</script>./useUserLang
+</script>

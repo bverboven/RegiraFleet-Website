@@ -32,6 +32,18 @@ export class EntityService extends EntityServiceBase<Entity> {
         return await updateWithAttachments(this.config.api, item, async () => await super.update(item))
     }
 
+    protected override processItem(item: Entity | null) {
+        if (item != null) {
+            if (item.interventionDate) {
+                item.interventionDate = new Date(item.interventionDate)
+            }
+            if (item.invoice?.invoiceDate) {
+                item.invoice.invoiceDate = new Date(item.invoice.invoiceDate)
+            }
+        }
+
+        return item
+    }
     protected override prepareItem(item: Entity): Entity {
         item.attachments = item.attachments?.filter((x) => !x._deleted)
         return super.prepareItem(item)
