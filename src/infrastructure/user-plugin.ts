@@ -1,7 +1,8 @@
 import { type App, watch } from "vue"
-import { useAuthStore } from "@/regira_modules/vue/auth"
+import { useAuth, useAuthStore } from "@/regira_modules/vue/auth"
 import { useLang } from "@/regira_modules/vue/lang"
 import Permissions from "@/infrastructure/permissions"
+import { useConfig } from "@/app-config"
 
 export const plugin = {
     install(app: App) {
@@ -22,6 +23,8 @@ export const plugin = {
             localStorage.setItem("lang", newLangCode)
         })
 
+        const auth = useAuth()
+        const appConfig = useConfig()
         // make client persistent when logged off
         authStore.$onAction(
             ({ name, after }) =>
@@ -32,6 +35,8 @@ export const plugin = {
                         const clientId = authStore.getClaimValue("client") as string
                         if (clientId) {
                             localStorage.setItem("client", clientId)
+                            // update loginUrl to pass new clientId
+                            auth.service.options.loginUrl = appConfig.loginUrl.replace("{clientApp}", appConfig.clientApp).replace("{clientId}", clientId)
                         } else {
                             localStorage.removeItem("client")
                         }

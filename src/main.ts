@@ -120,7 +120,7 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         app.use(authPlugin, {
             enabled: true,
             clientApp: processedConfig.clientApp,
-            loginUrl: processedConfig.loginUrl.replace(/{clientApp}/, processedConfig.clientApp).replace(/{clientId}/, processedConfig.clientId || ""),
+            loginUrl: processedConfig.loginUrl.replace(/{clientApp}/, processedConfig.clientApp).replace(/{clientId}/, localStorage.getItem("client") || ""),
             tokenManager: new CookieTokenManager(),
             axios,
             onAuthenticationChange: async (auth) => {
