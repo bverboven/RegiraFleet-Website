@@ -61,9 +61,7 @@
 import { ref, computed, onMounted } from "vue"
 import { useLoginForm, type ILoginEmits, type ILoginProps } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
-//import { useAxios } from "@/regira_modules/vue/http"
 import { useConfig } from "@/app-config"
-//import { type Entity as Client } from "@/entities/clients"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -80,9 +78,8 @@ const { username, password, signingIn, failed, isLockedOut, handleSubmit, handle
 const appConfig = useConfig()
 const showUsersList = ref(false)
 const clientId = ref<string>()
-//const clients = ref<Array<Client>>()
 const demoUsers = ref<Array<IDemoUser>>()
-const minHeight = computed(() => (showUsersList.value ? "20rem" : "10rem"))
+const minHeight = computed(() => (showUsersList.value ? "15rem" : "10rem"))
 const clientUsers = computed<Array<IDemoUser>>(() => demoUsers.value?.filter((x) => !clientId.value || x.clientId == clientId.value) || [])
 
 // auth
@@ -93,8 +90,6 @@ function handleSelectUser(item: { username: string; password?: string; clientId:
 }
 
 onMounted(async () => {
-    //const axios = useAxios()
-    //clients.value = await axios.get(`demo-clients`).then((r) => r.data)
     demoUsers.value = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
 })
 </script>

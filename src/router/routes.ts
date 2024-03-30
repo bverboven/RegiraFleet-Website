@@ -3,7 +3,9 @@ import HomeView from "@/views/HomeView.vue"
 
 import Login from "@/views/Login.vue"
 import AccountView from "@/views/AccountView.vue"
-import AccountHome from "@/components/user/Account.vue"
+import AccountHome from "@/components/users/Home.vue"
+import ConfirmEmail from "@/components/users/ConfirmEmail.vue"
+import Admin from "@/views/ClientAdminView.vue"
 import ForgotPassword from "@/views/ForgotPassword.vue"
 import ResetPassword from "@/views/ResetPassword.vue"
 import Unauthorized from "@/views/Unauthorized.vue"
@@ -30,6 +32,12 @@ export const routes: Array<RouteRecordRaw> = [
         name: "icons",
         component: () => import("../views/Icons.vue"),
     },
+    // admin
+    {
+        path: "/admin",
+        name: "admin",
+        component: Admin,
+    },
     // account
     {
         name: "account",
@@ -49,6 +57,14 @@ export const routes: Array<RouteRecordRaw> = [
                 props: (to) => ({
                     username: to.query?.username,
                 }),
+                meta: {
+                    allowAnonymous: true,
+                },
+            },
+            {
+                path: "confirm-email",
+                name: "confirmEmail",
+                component: ConfirmEmail,
                 meta: {
                     allowAnonymous: true,
                 },

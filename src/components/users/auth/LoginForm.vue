@@ -38,7 +38,6 @@
 <script setup lang="ts">
 import { useLoginForm, type ILoginEmits, type ILoginProps } from "@/regira_modules/vue/auth"
 import { Loading } from "@/regira_modules/vue/ui"
-import { useUserLang } from "./useUserLang"
 
 interface IEmits extends ILoginEmits {}
 const emit = defineEmits<IEmits>()
@@ -49,7 +48,4 @@ const props: ILoginProps = defineProps<{
 }>()
 
 const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
-
-// translate
-const { t } = useUserLang()
 </script>

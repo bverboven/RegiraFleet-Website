@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router"
-import ForgotPassword from "@/components/user/ForgotPassword.vue"
+import ForgotPassword from "@/components/users/auth/ForgotPassword.vue"
 
 defineProps<{
     username?: string

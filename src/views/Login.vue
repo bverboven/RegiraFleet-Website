@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router"
-import LoginForm from "@/components/user/LoginForm.vue"
+import LoginForm from "@/components/users/auth/LoginForm.vue"
 
 defineProps<{
     username?: string

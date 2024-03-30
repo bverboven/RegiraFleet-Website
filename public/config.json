@@ -3,8 +3,8 @@
     "loginUrl": "auth/?clientApp={clientApp}&clientId={clientId}",
     "api": {
         "development": "https://localhost:7193/",
-        "_development": "https://fleet.regira.com/api",
-        "production": "https://fleet.regira.com/api"
+        "_development": "https://fleet-demo.regira.com/manager-api",
+        "production": "https://fleet.regira.com/manager-api"
     },
     "includeCredentials": false,
     "isDebug": true,

@@ -44,9 +44,9 @@ import Footer from "@/components/layout/TheFooter.vue"
 import Main from "@/components/layout/Main.vue"
 import Offline from "@/components/layout/Offline.vue"
 import Debug from "@/components/layout/Debug.vue"
-import LoginForm from "@/components/user/LoginForm.vue"
-import DemoLoginForm from "@/components/user/LoginFormDemo.vue"
-import ForgotPassword from "@/components/user/ForgotPassword.vue"
+import LoginForm from "@/components/users/auth/LoginForm.vue"
+import DemoLoginForm from "@/components/users/auth/LoginFormDemo.vue"
+import ForgotPassword from "@/components/users/auth/ForgotPassword.vue"
 
 // const authStore = useAuthStore()
 // const { enabled, isAuthenticated } = storeToRefs(authStore)

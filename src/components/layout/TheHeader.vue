@@ -42,7 +42,7 @@ import { ref, watchEffect, getCurrentInstance } from "vue"
 import { useConfig } from "@/app-config"
 import logo from "@/assets/images/logo-sm.png"
 import type { IConfig } from "@/regira_modules/vue/entities"
-import AccountMenu from "@/components/user/HeaderMenu.vue"
+import AccountMenu from "@/components/users/HeaderMenu.vue"
 import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
 import LangSelector from "./LangSelector.vue"
 
