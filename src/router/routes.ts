@@ -12,6 +12,7 @@ import Unauthorized from "@/views/Unauthorized.vue"
 import Forbidden from "@/views/Forbidden.vue"
 
 import NotFound from "@/views/NotFound.vue"
+import Permissions from "@/infrastructure/permissions"
 
 export const routes: Array<RouteRecordRaw> = [
     {
@@ -37,6 +38,9 @@ export const routes: Array<RouteRecordRaw> = [
         path: "/admin",
         name: "admin",
         component: Admin,
+        meta: {
+            permissions: [Permissions.ADMIN],
+        },
     },
     // account
     {

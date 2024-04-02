@@ -329,6 +329,11 @@
         "nl": "Plaats",
         "fr": "Emplacement"
     },
+    "manageClientUsers": {
+        "en": "Manage users",
+        "nl": "Beheer gebruikers",
+        "fr": "Gérer les utilisateurs"
+    },
     "mileage": {
         "en": "Mileage",
         "nl": "Kilometerstand",

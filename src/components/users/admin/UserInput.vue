@@ -16,7 +16,7 @@
                                 Write
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-outline-success py-1"><Icon name="new" /></button>
+                        <button type="submit" class="btn btn-outline-success py-1"><Icon name="new" class="me-1" /></button>
                     </div>
                 </div>
             </div>
@@ -28,21 +28,17 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { LoadingContainer } from "@/regira_modules/vue/ui"
-import { useConfig } from "@/app-config"
 import Entity from "./Entity"
-import { saveUser } from "./functions"
+import { saveUser, buildConfirmEmailUrl } from "./functions"
 
 const emit = defineEmits<{
     (e: "save", arg: { saved: Entity; isNew: boolean }): void
 }>()
 
-const config = useConfig()
 const router = useRouter()
+const siteUrl = buildConfirmEmailUrl(router)
 
 const item = ref<Entity>(new Entity())
-
-const confirmEmailRoute = router.resolve({ name: "confirmEmail" })
-const siteUrl = `${location.protocol}//${location.host}${config.baseUrl}${confirmEmailRoute.fullPath}`
 
 const isLoading = ref(false)
 async function handleSubmit() {

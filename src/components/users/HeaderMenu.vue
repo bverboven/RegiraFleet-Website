@@ -5,12 +5,6 @@
         </li>
         <li v-if="isAuthenticated" class="nav-item dropdown">
             <LoadingContainer :is-loading="isLoading" style="max-height: 2.5rem">
-                <!-- <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item">
-                    <Icon name="user" :title="$auth.authData.name" />
-                    <span class="ms-2 d-sm-none">
-                        {{ $auth.authData.name }}
-                    </span>
-                </router-link> -->
                 <a class="nav-link dropdown-toggle" @click="handleToggleDropDown" href="#" id="navbarAccountDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <Icon name="user" />
                     <span class="ms-2 d-sm-none d-lg-inline">
@@ -43,6 +37,12 @@
                     </button>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
+                <template v-if="$isAdmin">
+                    <li class="nav-item dropdown">
+                        <router-link :to="{ name: 'admin' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">{{ $t("manageClientUsers") }}</router-link>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                </template>
                 <li class="nav-item dropdown">
                     <button type="button" class="btn btn-link dropdown-item" @click="handleLogout">
                         <Icon name="exit" class="me-1" />

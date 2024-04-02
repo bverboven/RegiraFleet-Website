@@ -1,35 +1,22 @@
 <template>
-    <UserInput @save="load" />
+    <section>
+        <UserInput @save="load" />
 
-    <div v-for="item in items" :key="item.id!" class="row">
-        <div class="col mb-2">
-            <div class="input-group">
-                <div class="input-group-text"><Icon name="user" /></div>
-                <div class="form-control">
-                    {{ item.email }}
-                </div>
-                <div class="input-group-text">
-                    <label class="form-check-label mx-1">
-                        <input type="checkbox" v-model="item.permissions" value="can_read" class="form-check-input" />
-                        Read
-                    </label>
-                    <label class="form-check-label mx-1">
-                        <input type="checkbox" v-model="item.permissions" value="can_write" class="form-check-input" />
-                        Write
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-outline-success py-1"><Icon name="save" /></button>
-            </div>
-        </div>
-    </div>
+        <template v-if="items?.length">
+            <ListItem v-for="(item, i) in items" :key="item.id!" v-model="items[i]" />
+        </template>
+
+        <Debug :modelValue="{ items }" />
+    </section>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue"
 import { useAxios } from "@/regira_modules/vue/http"
-import type ClientUser from "./Entity"
-import UserInput from "./UserInput.vue"
 import { useAuthStore } from "@/regira_modules/vue/auth"
+import type ClientUser from "./Entity"
+import ListItem from "./ListItem.vue"
+import UserInput from "./UserInput.vue"
 
 const axios = useAxios()
 

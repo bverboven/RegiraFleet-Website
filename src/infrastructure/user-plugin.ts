@@ -7,10 +7,17 @@ import { useConfig } from "@/app-config"
 export const plugin = {
     install(app: App) {
         const authStore = useAuthStore()
-        Object.defineProperty(app.config.globalProperties, "$isReadonlyUser", {
-            get: () => authStore.authData.hasPermission(Permissions.CAN_READ) && !authStore.authData.hasPermission(Permissions.CAN_WRITE),
-            enumerable: true,
-            configurable: true,
+        Object.defineProperties(app.config.globalProperties, {
+            $isReadonlyUser: {
+                get: () => authStore.authData.hasPermission(Permissions.CAN_READ) && !authStore.authData.hasPermission(Permissions.CAN_WRITE),
+                enumerable: true,
+                configurable: true,
+            },
+            $isAdmin: {
+                get: () => authStore.authData.hasPermission(Permissions.ADMIN),
+                enumerable: true,
+                configurable: true,
+            },
         })
 
         // make langCode persistent
