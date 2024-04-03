@@ -20,3 +20,7 @@ export function buildConfirmEmailUrl(router: Router) {
     const confirmEmailRoute = router.resolve({ name: "confirmEmail" })
     return `${location.protocol}//${location.host}${baseUrl}${confirmEmailRoute.fullPath}`
 }
+
+export function isAdmin(item: Entity) {
+    return item?.permissions?.includes(Permissions.ADMIN) ?? false
+}

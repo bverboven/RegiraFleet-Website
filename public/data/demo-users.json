@@ -17,16 +17,19 @@
     },
     {
         "username": "tra_admin",
+        "password": "admin",
         "title": "Transport (admin)",
         "clientId": "11fc2d46df234aed8df1de9a7b0f114f"
     },
     {
         "username": "pol_admin",
+        "password": "admin",
         "title": "Police (admin)",
         "clientId": "232dfc2012b8491cb7d1aaee93007480"
     },
     {
         "username": "amb_admin",
+        "password": "admin",
         "title": "Ambulance (admin)",
         "clientId": "f64a75e938b64dfaae5eab03fe541972"
     }

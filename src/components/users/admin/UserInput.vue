@@ -5,15 +5,15 @@
                 <div class="col mb-2">
                     <div class="input-group">
                         <div class="input-group-text opacity-50"><Icon name="user" /></div>
-                        <input type="email" v-model="item.email" class="form-control" placeholder="email / username" />
+                        <input type="email" v-model="item.email" class="form-control" :placeholder="$t('usernameLabel')" />
                         <div class="input-group-text">
                             <label class="form-check-label mx-1">
                                 <input type="checkbox" v-model="item.permissions" value="can_read" class="form-check-input" />
-                                Read
+                                {{ $t("claims.canRead") }}
                             </label>
                             <label class="form-check-label mx-1">
                                 <input type="checkbox" v-model="item.permissions" value="can_write" class="form-check-input" />
-                                Write
+                                {{ $t("claims.canWrite") }}
                             </label>
                         </div>
                         <button type="submit" class="btn btn-outline-success py-1"><Icon name="new" class="me-1" /></button>

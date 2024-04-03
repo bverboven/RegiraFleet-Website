@@ -1,37 +1,37 @@
 import { createApp } from "vue"
 import { createPinia } from "pinia"
 import type { RouteRecordRaw } from "vue-router"
-import { routerFactory } from "./router"
 import { Anchor, FormSection, DateInput, FormLabel, NullableCheckBox, iconPlugin, loadingPlugin, screenPlugin, modalPlugin, feedbackPlugin, NullableLabel } from "@/regira_modules/vue/ui"
 import { focus, grow, clickOutside } from "@/regira_modules/vue/directives"
 import { AppStatus, plugin as appPlugin, whenAppReady } from "@/regira_modules/vue/app"
 import { plugin as langPlugin, useLang } from "@/regira_modules/vue/lang"
 import { plugin as isOnlinePlugin } from "@/regira_modules/vue/online"
 import { plugin as debugPlugin } from "@/regira_modules/vue/debug"
-import { preloaderPlugin, usePreloader } from "@/regira_modules/vue/entities"
-import { initAxios } from "@/regira_modules/vue/http/axios"
+import { preloaderPlugin, usePreloader, defaultPoolCache, PoolCache } from "@/regira_modules/vue/entities"
+import { initAxios } from "@/regira_modules/vue/http"
 import { plugin as authPlugin, CookieTokenManager } from "@/regira_modules/vue/auth"
 import { plugin as servicesPlugin, type IServiceProvider } from "@/regira_modules/vue/ioc"
 import { formatDateTime } from "@/regira_modules/vue/formatters"
 import appConfig, { createConfig, useConfig } from "@/app-config"
+import { routerFactory } from "@/router"
 import { plugin as userPlugin } from "@/infrastructure/user-plugin"
-import DescriptionInput from "@/components/input/DescriptionInput.vue"
-import FleetModal from "@/components/layout/FleetModal.vue"
 import { plugin as statisticsPlugin } from "@/statistics"
 import { default as entityPlugins, clientPlugin } from "@/entities"
 
-import App from "./App.vue"
-import loadingImg from "@/assets/images/loading.gif"
+import { Entity as Country } from "@/entities/countries"
+import { Entity as VehicleType } from "@/entities/vehicle-types"
+
+import App from "@/App.vue"
+import DescriptionInput from "@/components/input/DescriptionInput.vue"
+import FleetModal from "@/components/layout/FleetModal.vue"
 
 // date serialization to JSON (without timezone)
 import dateSerializer from "@/regira_modules/extensions/date-extensions"
 dateSerializer.use()
 
-// CSS
+// Assets
 import "./assets/main.scss"
-import { defaultPoolCache, PoolCache } from "@/regira_modules/vue/entities"
-import { Entity as Country } from "./entities/countries"
-import { Entity as VehicleType } from "./entities/vehicle-types"
+import loadingImg from "@/assets/images/loading.gif"
 
 // load config
 fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd")}`)
@@ -45,7 +45,7 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         const axios = initAxios({ api, includeCredentials })
 
         // load translations
-        const translations = await fetch(`${appConfig.baseUrl}/data/translations.json`).then((r) => r.json())
+        const translations = await fetch(`${appConfig.baseUrl}/data/translations.json?v=${formatDateTime(new Date(), "yyyyMMdd")}`).then((r) => r.json())
 
         // app
         const app = createApp(App)

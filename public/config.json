@@ -1,5 +1,5 @@
 {
-    "clientApp": "fleet-client",
+    "clientApp": "fleet-manager",
     "loginUrl": "auth/?clientApp={clientApp}&clientId={clientId}",
     "api": {
         "development": "https://localhost:7193/",
@@ -12,7 +12,7 @@
 
     "title": {
         "en": "Regira Fleet Manager",
-        "fr": "Regira gestionnaire de flotte",
+        "fr": "Regira Gestionnaire de Flotte",
         "nl": "Regira Vlootmanager"
     },
     "cultures": {

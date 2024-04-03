@@ -43,7 +43,7 @@ const props: IForgotPasswordProps = defineProps<{
 
 const config = useConfig()
 const router = useRouter()
-const { translateMessage } = useLang()
+const { translate, translateMessage } = useLang()
 
 const resetPasswordRoute = router.resolve({ name: "resetPassword" })
 const siteUrl = `${location.protocol}//${location.host}${config.baseUrl}${resetPasswordRoute.fullPath}`
@@ -53,9 +53,9 @@ const { username, isLoading, isFormValid, isSuccess, handleSubmit } = useForgotP
 const feedback = useFeedback()
 watchEffect(() => {
     if (isSuccess.value) {
-        feedback.success(translateMessage("passwordResetSent"))
+        feedback.success(translate("auth.passwordResetSent"))
     } else if (isSuccess.value === false) {
-        feedback.fail(translateMessage("passwordResetFailed"))
+        feedback.fail(translate("auth.passwordResetFailed"))
     } else {
         feedback.reset()
     }

@@ -14,32 +14,40 @@
             </LoadingContainer>
             <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" style="min-width: 8rem" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
                 <li class="nav-item dropdown">
-                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">{{ $t("auth.myAccount") }}</router-link>
+                    <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">
+                        <Icon name="client" class="me-1" />
+                        {{ $t("auth.myAccount") }}
+                    </router-link>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
-                <li class="nav-item dropdown">
-                    <button
-                        type="button"
-                        v-for="item in clients"
-                        :key="item.id"
-                        class="btn btn-link dropdown-item d-flex justify-content-between align-items-center"
-                        @click="
-                            () => {
-                                clientStore.setActiveClient(item.id)
-                                handleCloseMenu()
-                            }
-                        "
-                    >
-                        {{ item.title }}
-                        <span class="badge text-bg-success rounded-pill cursor pointer ms-2" :class="item.id == activeClient?.id ? 'opacity-100' : 'opacity-25'">
-                            <Icon name="check" />
-                        </span>
-                    </button>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
+                <template v-if="(clients?.length || 0) > 1">
+                    <li class="nav-item dropdown">
+                        <button
+                            type="button"
+                            v-for="item in clients"
+                            :key="item.id"
+                            class="btn btn-link dropdown-item px-2"
+                            @click="
+                                () => {
+                                    clientStore.setActiveClient(item.id)
+                                    handleCloseMenu()
+                                }
+                            "
+                        >
+                            <span class="badge text-bg-success rounded-pill cursor pointer px-1 mx-1" :class="item.id == activeClient?.id ? 'opacity-100' : 'opacity-25'">
+                                <Icon name="check" />
+                            </span>
+                            {{ item.title }}
+                        </button>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                </template>
                 <template v-if="$isAdmin">
                     <li class="nav-item dropdown">
-                        <router-link :to="{ name: 'admin' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">{{ $t("manageClientUsers") }}</router-link>
+                        <router-link :to="{ name: 'admin' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">
+                            <Icon name="people" class="me-1" />
+                            {{ $t("manageClientUsers") }}
+                        </router-link>
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                 </template>

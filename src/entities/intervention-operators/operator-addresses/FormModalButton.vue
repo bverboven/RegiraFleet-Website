@@ -3,7 +3,7 @@
         <slot><Icon name="connect" /></slot>
         <Teleport to="#modals">
             <MyModal :is-visible="isOpen" :title="modalTitle || $t('address')" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
-                <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
+                <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" class="pt-2" />
             </MyModal>
         </Teleport>
     </button>

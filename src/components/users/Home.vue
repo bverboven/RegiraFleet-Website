@@ -19,6 +19,12 @@
                             {{ $t("auth.personalData") }}
                         </button>
                     </li>
+                    <li v-if="$isAdmin" class="list-group-item">
+                        <router-link :to="{ name: 'admin' }" class="btn btn-default p-1">
+                            <Icon name="people" class="me-1" />
+                            {{ $t("manageClientUsers") }}
+                        </router-link>
+                    </li>
                     <li class="list-group-item">
                         <button type="button" class="btn btn-default p-1" @click="handleLogout">
                             <Icon name="exit" class="me-1" />
@@ -27,8 +33,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-auto">
-                <ClientSelector />
+            <div class="col-auto" v-show="(clientSelectorEl?.clientCount ?? 0) > 1">
+                <ClientSelector ref="clientSelectorEl" />
             </div>
         </div>
     </section>
@@ -57,4 +63,6 @@ const authStore = useAuthStore()
 const handleLogout = () => {
     authStore.logout()
 }
+
+const clientSelectorEl = ref<any>(null)
 </script>
