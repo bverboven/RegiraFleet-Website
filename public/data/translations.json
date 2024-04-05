@@ -424,6 +424,11 @@
         "nl": "Opnieuw",
         "fr": "Réinitialiser"
     },
+    "restore": {
+        "en": "Restore",
+        "nl": "Herstel",
+        "fr": "Restaurer"
+    },
     "results": {
         "en": "results",
         "nl": "resultaten",

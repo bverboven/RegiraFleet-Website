@@ -9,7 +9,7 @@
             @click="emit('restore')"
             :disabled="status != '' && status != FeedbackStatus.failed"
         >
-            <span v-if="showLabels" class="d-none d-md-inline ms-1">Restore</span>
+            <span v-if="showLabels" class="d-none d-md-inline ms-1">{{ $t("restore") }}</span>
         </IconButton>
         <template v-else>
             <IconButton v-if="!isArchived" type="submit" icon="save" class="btn-primary py-1 me-2" :disabled="readonly || (status != '' && status != FeedbackStatus.failed)">
@@ -81,6 +81,6 @@ const showLabels = computed(() => {
     do {
         formEl = formEl.parentElement
     } while (formEl.nodeName != "FORM" && formEl?.parentElement)
-    return !formEl || formEl.clientWidth > 467
+    return !formEl || formEl.clientWidth > 476
 })
 </script>
