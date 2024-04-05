@@ -1,5 +1,5 @@
 <template>
-    <form class="row row-cols-lg-auto align-items-center">
+    <form class="row row-cols-lg-auto align-items-center" @submit.prevent="$emit('fetch-data')">
         <div class="col"><input type="number" v-model="filter.year" class="form-control" @change="handleChange" /></div>
         <div class="col"><VehicleTypeSelector v-model="vehicleType" v-model:idValue="filter.vehicleTypeId" @change="handleChange" /></div>
         <div class="col-auto">
@@ -15,6 +15,7 @@
 import { ref } from "vue"
 import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import { type Entity as VehicleType, SelectorDropDown as VehicleTypeSelector } from "@/entities/vehicle-types"
+import type { IFilter } from "../filter"
 
 const emit = defineEmits<{
     (e: "update:modelValue", arg: Record<string, any>): void
@@ -23,12 +24,14 @@ const emit = defineEmits<{
 }>()
 const props = withDefaults(
     defineProps<{
-        modelValue: { year?: number }
+        modelValue: IFilter
     }>(),
-    { modelValue: () => ({ year: new Date().getFullYear(), vehicleTypeId: 0 }) }
+    {
+        modelValue: () => ({ year: new Date().getFullYear(), vehicleTypeId: 0 }),
+    }
 )
 
-const filter = useVModelField<{ year?: number }>(props, emit)
+const filter = useVModelField<IFilter>(props, emit)
 function handleChange() {
     console.debug("handleChange", { filter: { ...filter.value } })
     emit("update:modelValue", { ...filter.value })

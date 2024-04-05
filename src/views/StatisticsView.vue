@@ -33,14 +33,14 @@
 
         <template v-if="statsApi">
             <RouterView v-slot="{ Component }">
-                <component :is="Component" :api="statsApi" />
+                <component :is="Component" :api="statsApi" :filter="filter" />
             </RouterView>
         </template>
     </article>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
+import { ref, computed } from "vue"
 import { useRouter } from "vue-router"
 import { Entity as Vehicle } from "@/entities/vehicles"
 import { Entity as VehicleType } from "@/entities/vehicle-types"
@@ -49,6 +49,8 @@ import { Entity as InterventionType } from "@/entities/intervention-types"
 import { useLang } from "@/regira_modules/vue/lang"
 
 const { translate, translateMessage } = useLang()
+
+const filter = ref({ year: new Date().getFullYear() })
 
 const router = useRouter()
 const statsApi = computed(() => router.currentRoute.value.meta?.api)

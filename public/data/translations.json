@@ -394,6 +394,11 @@
         "nl": "Overzicht",
         "fr": "Aperçu"
     },
+    "perMonth": {
+        "en": "per month",
+        "nl": "per maand",
+        "fr": "par mois"
+    },
     "popOut": {
         "en": "Pop out",
         "nl": "Nieuw venster",

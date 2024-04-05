@@ -16,17 +16,19 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue"
 import { useFetchStatistics } from "../functions"
+import type { IFilter } from "../filter"
 import YearForm from "./YearForm.vue"
 import NavLinks from "./NavLinks.vue"
 import TableView from "./TableView.vue"
 
 const props = defineProps<{
     api: string
+    filter: IFilter
 }>()
 
-const filter = ref({ year: new Date().getFullYear() })
+const filter = ref<IFilter>(props.filter ?? { year: new Date().getFullYear() })
 const { stats, errorMsg, isLoading, fetchData, fetchDoc } = useFetchStatistics(props, filter)
 
 onMounted(fetchData)
-watch(() => props.api,fetchData)
+watch(() => props.api, fetchData)
 </script>

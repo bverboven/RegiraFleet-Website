@@ -7,7 +7,6 @@ import StatsPerVehiclePerType from "./components/StatsWithVehicleType.vue"
 import StatsPerSupplier from "./components/DefaultStats.vue"
 import StatsPerInterventionType from "./components/DefaultStats.vue"
 import StatsPerInterventionTypePerVehicleType from "./components/DefaultStats.vue"
-import YearVehicleTypeFilter from "./components/YearVehicleTypeFilter.vue"
 
 export default [
     // statistics

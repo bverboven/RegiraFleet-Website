@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { LoadingContainer } from "@/regira_modules/vue/ui"
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         stats?: Array<[]>
         isLoading: boolean
