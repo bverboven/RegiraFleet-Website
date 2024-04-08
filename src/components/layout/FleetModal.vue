@@ -57,8 +57,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { ModalType } from "@/regira_modules/vue/ui/modal"
-import "@/regira_modules/vue/ui/modal/style.scss"
 import LangSelector from "./LangSelector.vue"
+import "@/regira_modules/vue/ui/modal/style.scss"
 
 const emit = defineEmits<{
     (e: "submit"): void

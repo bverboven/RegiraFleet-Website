@@ -4,9 +4,6 @@
             <div class="col col-md-auto order-1">
                 <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
-            <div class="col-md order-3 order-md-2">
-                <Feedback :feedback="feedback" />
-            </div>
             <div class="col-auto order-2 order-md-3">
                 <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
                     <Icon name="popOut" />
@@ -15,11 +12,14 @@
                     <Icon name="list" /> <span class="d-none d-md-inline ms-1">{{ $t("overview") }}</span>
                 </RouterLink>
             </div>
+            <div class="col-md order-3 order-md-2">
+                <Feedback :feedback="feedback" />
+            </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <FormSection :title="$tm(config.detailsTitle)" :readonly="readonly">
+                <FormSection :title="$t(config.detailsTitle)" :readonly="readonly">
                     <div class="row">
                         <div class="col-md mb-2">
                             <div class="input-group">
