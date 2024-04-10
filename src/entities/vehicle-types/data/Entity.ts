@@ -1,6 +1,7 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
+import type { IHasTranslations, Translation } from "@/entities/translations"
 
-export class VehicleType extends EntityBase {
+export class VehicleType extends EntityBase implements IHasTranslations {
     id: number = 0
     code?: string
     title: string
@@ -8,6 +9,8 @@ export class VehicleType extends EntityBase {
     created?: Date
     lastModified?: Date
     isArchived?: boolean
+
+    translations?: Array<Translation>
 
     _deleted: boolean = false
 

@@ -35,8 +35,9 @@
                             <FormLabel :label="$t('code')" />
                         </div>
                     </div>
+                    <Overview v-if="false" v-model="item" />
                     <div class="row">
-                        <div class="col mb-2">
+                        <div class="col">
                             <DescriptionInput v-model="item.description" :label="$t('notes')" :readonly="readonly" />
                         </div>
                     </div>
@@ -60,6 +61,7 @@ import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/enti
 import config from "../config/config"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
+import { Overview } from "@/entities/translations"
 
 interface Emits extends /* @vue-ignore */ FormEmits<Entity> {}
 const emit = defineEmits<Emits>()
