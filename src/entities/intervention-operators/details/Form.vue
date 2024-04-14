@@ -47,6 +47,10 @@
 
                         <!-- Addresses -->
                         <Addresses v-model="item.addresses" :owner="item" :readonly="readonly" />
+                    </template>
+
+                    <template #extra>
+                        <Labels v-model="item.labels" :show-summary="item.id > 0" />
 
                         <FormSection :title="$t('interventionTypes')">
                             <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
@@ -103,6 +107,7 @@ import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/enti
 import { useLang } from "@/regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import { Entity as Intervention } from "../../interventions"
+import { Overview as Labels } from "../../entity-labels"
 import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { Overview as ContactData } from "../operator-contact-data"
@@ -133,7 +138,7 @@ const { translate } = useLang()
 const tabs = computed(() =>
     [
         Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
-        //Tab.create("contact", { icon: "contact" }),
+        Tab.create("extra", { icon: "tag", title: translate("extra") }),
         Tab.create("files", { icon: "attachment", title: translate("files") }),
         Tab.create("interventions", { icon: Intervention.name, title: translate("interventions"), isDisabled: !item.value?.id }),
     ].filter((x) => x)

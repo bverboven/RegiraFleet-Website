@@ -50,6 +50,8 @@
                             </div>
                         </FormSection>
 
+                        <Labels v-model="item.labels" :show-summary="item.id > 0" />
+
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
@@ -94,6 +96,7 @@ import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/enti
 import { useLang } from "@/regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import config from "../config/config"
+import { Overview as Labels } from "../../entity-labels"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as BrandSelector } from "../../brands"
 import { InputSelector as VehicleTypeSelector } from "../../vehicle-types"

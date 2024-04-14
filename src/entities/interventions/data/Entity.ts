@@ -2,6 +2,7 @@ import { EntityBase } from "@/regira_modules/vue/entities"
 import Invoice from "../intervention-invoices/Entity"
 import type { Entity as Vehicle } from "../../vehicles"
 import type { Entity as Operator } from "../../intervention-operators"
+import type { EntityLabel } from "@/entities/entity-labels"
 import type { Entity as InterventionType } from "../../intervention-types"
 import type { Entity as EntityAttachment } from "../../entity-attachments"
 
@@ -25,6 +26,7 @@ export class Intervention extends EntityBase {
     operator?: Operator
     invoice: Invoice = new Invoice()
     interventionType: InterventionType
+    labels?: Array<EntityLabel>
     attachments?: Array<EntityAttachment>
 
     override get $id(): string | number {

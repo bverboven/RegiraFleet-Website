@@ -10,14 +10,13 @@
                 </div>
             </template>
         </FileDropZone>
-        <!-- <BrowseButton class="btn btn-info" @browse="handleBrowse">Add new file</BrowseButton> -->
         <Debug :modelValue="items" />
     </FormSection>
 </template>
 
 <script setup lang="ts">
 import { FileDropZone } from "@/regira_modules/vue/ui"
-import { type Entity, List, BrowseButton, useEntityAttachments } from "../"
+import { type Entity, List, useEntityAttachments } from "../"
 
 const emit = defineEmits<{
     (e: "update:modelValue", args: Array<Entity>): void

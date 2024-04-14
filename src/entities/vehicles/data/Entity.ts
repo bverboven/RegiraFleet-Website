@@ -1,6 +1,7 @@
 import { EntityBase } from "@/regira_modules/vue/entities"
 import type { Entity as Brand } from "../../brands"
 import type { Entity as VehicleType } from "../../vehicle-types"
+import type { EntityLabel } from "@/entities/entity-labels"
 import type { Entity as InterventionType } from "@/entities/intervention-types"
 import type { Entity as EntityAttachment } from "../../entity-attachments"
 
@@ -19,6 +20,7 @@ export class Vehicle extends EntityBase {
 
     brand?: Brand
     vehicleType?: VehicleType
+    labels?: Array<EntityLabel>
     interventionTypes?: Array<InterventionType>
     attachments?: Array<EntityAttachment>
 

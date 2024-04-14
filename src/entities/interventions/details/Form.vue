@@ -76,16 +76,23 @@
                                     <FormLabel :label="$t('interventionDate')" />
                                 </div>
                             </div>
+                        </FormSection>
+
+                        <!-- <InvoiceOverview v-model="item.invoice" :owner="item" :readonly="readonly" /> -->
+
+                        <FormSection :title="$t('notes')">
                             <div class="row">
                                 <DescriptionInput v-model="item.description" :readonly="readonly" :label="$t('notes')" />
                             </div>
                         </FormSection>
-
-                        <!-- <InvoiceOverview v-model="item.invoice" :owner="item" :readonly="readonly" /> -->
                     </template>
 
                     <template #invoice>
                         <InvoiceOverview v-model="item.invoice" :owner="item" :readonly="readonly" />
+                    </template>
+
+                    <template #labels>
+                        <Labels v-model="item.labels" :show-summary="item.id > 0" />
                     </template>
 
                     <template #files>
@@ -126,6 +133,7 @@ import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
 import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
 import { useLang } from "@/regira_modules/vue/lang"
 import { DescriptionInput, FormButtonsRow } from "@/components/input"
+import { Overview as Labels } from "../../entity-labels"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { type Entity as Vehicle, InputSelector as VehicleSelector, useEntityStore as useVehicleStore } from "../../vehicles"
 import { InputSelector as InterventionTypeSelector } from "../../intervention-types"
@@ -219,6 +227,7 @@ const tabs = computed(() =>
     [
         Tab.create("form", { icon: "form", title: translate("form"), isDefault: true }),
         Tab.create("invoice", { icon: "invoice", title: translate("invoice") }),
+        Tab.create("labels", { icon: "tag", title: translate("labels") }),
         Tab.create("files", { icon: "attachment", title: translate("files") }),
     ].filter((x) => x)
 )

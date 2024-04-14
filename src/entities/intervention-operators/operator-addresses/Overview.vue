@@ -1,13 +1,15 @@
 <template>
-    <FormSection title="Address(es)">
+    <FormSection>
+        <template #title>
+            <div class="d-flex justify-content-between">
+                <h3 class="p-2 mb-2">{{ $t("address(es)") }}</h3>
+                <FormModalButton v-if="!readonly" :modal-title="$t('addressModalTitle', { name: owner.$title })" :item-defaults="defaultValues" class="btn btn-info py-1 my-1" @save="handleSave">
+                    <Icon name="new" />
+                </FormModalButton>
+            </div>
+        </template>
         <List v-if="items?.length" v-model="items" :readonly="readonly" />
         <p v-else class="text-info">{{ $t("noItems") }}</p>
-
-        <div v-if="!readonly" class="row mt-2">
-            <div class="col mb-2">
-                <FormModalButton :modal-title="`Address for ${owner.$title}`" :item-defaults="defaultValues" class="btn btn-info" @save="handleSave">{{ $t("addNewAddress") }}</FormModalButton>
-            </div>
-        </div>
     </FormSection>
 </template>
 

@@ -35,6 +35,7 @@ export class EntityService extends EntityServiceBase<Entity> {
     protected override prepareItem(item: Entity): Entity {
         item.addresses = item.addresses?.filter((x) => !x._deleted)
         item.contactData = item.contactData?.filter((x) => !x._deleted)
+        item.labels = item.labels?.filter((x) => !x._deleted)
         item.interventionTypes = item.interventionTypes?.filter((x) => !x._deleted)
         item.attachments = item.attachments?.filter((x) => !x._deleted)
 
