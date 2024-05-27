@@ -54,20 +54,15 @@ import ForgotPassword from "@/components/users/auth/ForgotPassword.vue"
 const showForgotPassword = ref(false)
 const username = ref<string>()
 function openForgotPassword(e?: string) {
-    console.debug("openForgotPassword", { evt: e })
     showForgotPassword.value = true
     username.value = e || ""
 }
 const authStore = useAuthStore()
-const showLogin = computed(() => {
-    console.debug("showLogin", { isRequired: authStore.isRequired, isAuthenticated: authStore.isAuthenticated })
-    return authStore.isRequired && !authStore.isAuthenticated
-})
+const showLogin = computed(() => authStore.isRequired && !authStore.isAuthenticated)
 function openLogin(login?: string) {
     showForgotPassword.value = false
     username.value = login
 }
 
 const { isDemo } = useConfig()
-console.debug("app", { isDemo, config: useConfig() })
 </script>
