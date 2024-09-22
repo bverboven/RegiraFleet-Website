@@ -5,7 +5,7 @@ export class EntitySearchObject extends SearchObjectBase {
     title?: string
 
     interventionTypeId?: number | Array<number>
-    supplierId?: number
+    operatorId?: number
     vehicleId?: number
     vehicleTypeId?: number
     brandId?: number

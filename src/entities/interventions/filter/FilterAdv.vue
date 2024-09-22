@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col mb-2">
-                <SupplierSelector v-model="supplier" v-model:idValue="searchObject.supplierId" :filter-defaults="{ hasIntervention: true }" placeholder="supplier" @select="handleUpdate" />
+                <SupplierSelector v-model="supplier" v-model:idValue="searchObject.operatorId" :filter-defaults="{ hasIntervention: true }" placeholder="supplier" @select="handleUpdate" />
             </div>
         </div>
         <div class="row">
