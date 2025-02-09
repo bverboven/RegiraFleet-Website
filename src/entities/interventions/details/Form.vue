@@ -43,6 +43,16 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col mb-2">
+                                    <InterventionTypeSelector
+                                        v-model="item.interventionType"
+                                        v-model:idValue="item.interventionTypeId"
+                                        :filter-defaults="interventionTypeFilterDefaults"
+                                        :readonly="readonly"
+                                        :placeholder="$t('selectType')"
+                                    />
+                                    <FormLabel :label="$t('interventionType')" />
+                                </div>
                                 <div class="col-md mb-2">
                                     <OperatorSelector
                                         v-model="item.operator"
@@ -53,16 +63,6 @@
                                         @update:modelValue="handleUpdateSupplier"
                                     />
                                     <FormLabel :label="$t('supplier')" />
-                                </div>
-                                <div class="col mb-2">
-                                    <InterventionTypeSelector
-                                        v-model="item.interventionType"
-                                        v-model:idValue="item.interventionTypeId"
-                                        :filter-defaults="interventionTypeFilterDefaults"
-                                        :readonly="readonly"
-                                        :placeholder="$t('selectType')"
-                                    />
-                                    <FormLabel :label="$t('interventionType')" />
                                 </div>
                             </div>
                             <div class="row">

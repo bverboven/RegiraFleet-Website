@@ -121,7 +121,7 @@ const props = withDefaults(
 
 const { service: entityService } = useEntityStore()
 
-const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
+const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm<Entity>({ entityService, props, emit })
 
 // Tabs
 const { translate } = useLang()

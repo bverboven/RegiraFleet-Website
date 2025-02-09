@@ -33,6 +33,8 @@ export class EntityService extends EntityServiceBase<Entity> {
     }
 
     protected override processItem(item: Entity | null) {
+        item = super.processItem(item);
+        
         if (item != null) {
             if (item.interventionDate) {
                 item.interventionDate = new Date(item.interventionDate)
