@@ -46,7 +46,6 @@ const props = defineProps<{
 }>()
 
 const item = useVModelField<Entity>(props, emit)
-console.debug("EntityAttachment", { item })
 
 function handleRemove() {
     item.value._deleted = !item.value._deleted

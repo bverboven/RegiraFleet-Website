@@ -43,7 +43,6 @@ export async function saveAll<T extends IEntity & { id: number; attachments?: Ar
     }
 }
 export async function save(api: string, items: Array<Entity>) {
-    console.debug("saving", { api, items })
     const promises = items.map((item) => {
         if (item.attachment?._file != null) {
             const axios: any = useAxios()
@@ -54,10 +53,12 @@ export async function save(api: string, items: Array<Entity>) {
                 const {
                     data: { item: saved },
                 } = await axios.upload(api, [item.attachment?._file], { ...item })
-                console.debug("upload", { saved, item })
                 item.objectId = saved.objectId
                 item.id = saved.id
                 item.attachmentId = saved.attachmentId
+                if (item.attachment != null && saved?.attachment != null) {
+                    item.attachment.id = saved.attachment.id
+                }
             }
         }
         return () => null
