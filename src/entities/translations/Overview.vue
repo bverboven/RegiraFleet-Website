@@ -11,7 +11,7 @@ import { computed } from "vue"
 import { storeToRefs } from "pinia"
 import { useVModelField } from "@/regira_modules/vue"
 import { useConfig } from "@/app-config"
-import { useEntityStore as useClientStore } from "@/entities/clients"
+import { useEntityStore as useTenantStore } from "@/entities/tenants"
 import type { IHasTranslations } from "./IHasTranslations"
 import Form from "./Form.vue"
 import Entity from "./Entity"
@@ -25,11 +25,11 @@ const props = defineProps<{
 
 const item = useVModelField<IHasTranslations>(props, emit)
 
-const { activeClient } = storeToRefs(useClientStore())
+const { activeTenant } = storeToRefs(useTenantStore())
 const { cultures } = useConfig()
 const translations = computed<Array<Entity>>(() =>
     Object.entries(cultures)
-        .filter(([culture]) => activeClient.value?.defaultCulture != culture)
+        .filter(([culture]) => activeTenant.value?.defaultCulture != culture)
         .map(([culture]) => item.value.translations?.find((t) => t.culture == culture) ?? Object.assign(new Entity(), { culture }))
 )
 

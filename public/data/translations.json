@@ -20,12 +20,12 @@
         "fr": "mot de passe actuel"
     },
     "auth.demoInfoMessage": {
-        "en": "In the demo-version you should first select a client organisation, then you can select a user or fill in the credentials manually",
-        "nl": "In de demoversie moet u eerst een clientorganisatie selecteren. Vervolgens kunt u een gebruiker selecteren of de inloggegevens handmatig invullen.",
-        "fr": "Dans la version démo, vous devez d'abord sélectionner une organisation cliente. Ensuite, vous pouvez sélectionner un utilisateur ou saisir les informations d'identification manuellement."
+        "en": "In the demo-version you should first select a tenant organisation, then you can select a user or fill in the credentials manually",
+        "nl": "In de demoversie moet u eerst een tenantorganisatie selecteren. Vervolgens kunt u een gebruiker selecteren of de inloggegevens handmatig invullen.",
+        "fr": "Dans la version démo, vous devez d'abord sélectionner une organisation de locataire. Ensuite, vous pouvez sélectionner un utilisateur ou saisir les informations d'identification manuellement."
     },
-    "auth.client": {
-        "en": "Organisation",
+    "auth.tenant": {
+        "en": "Tenant",
         "nl": "Organisatie",
         "fr": "Organisation"
     },
@@ -374,7 +374,7 @@
         "nl": "Plaats",
         "fr": "Emplacement"
     },
-    "manageClientUsers": {
+    "manageTenantUsers": {
         "en": "Manage users",
         "nl": "Beheer gebruikers",
         "fr": "Gérer les utilisateurs"

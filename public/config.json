@@ -1,6 +1,6 @@
 {
     "clientApp": "fleet-manager",
-    "loginUrl": "auth/?clientApp={clientApp}&clientId={clientId}",
+    "loginUrl": "auth/?clientApp={clientApp}&tenantId={tenantId}",
     "api": {
         "development": "https://localhost:7193/",
         "_development": "https://fleet-demo.regira.com/manager-api",

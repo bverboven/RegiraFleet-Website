@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1 class="text-center">
-            {{ $activeClient?.title || $tm(homeTitle) }}
+            {{ $activeTenant?.title || $tm(homeTitle) }}
         </h1>
 
         <Dashboard :items="dashboardItems" />

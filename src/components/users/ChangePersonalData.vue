@@ -76,7 +76,7 @@ async function handleSubmit() {
         await changePersonalData(model)
         feedback.success(translate("auth.personalDataChanged"))
         // refresh token to renew it's claims
-        await refreshToken({ clientId: authData.get("client") })
+        await refreshToken({ tenantId: authData.get("tenant") })
     } catch (err: any) {
         console.error("Changing personal data failed", { err })
         feedback.fail(translate("auth.changePersonalDataFailed"), err.response?.data)

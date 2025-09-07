@@ -1,9 +1,9 @@
-export class Client {
+export class Tenant {
     id: string
     code: string
     title: string
     defaultCulture: string
 }
-export const Entity = Client
+export const Entity = Tenant
 
-export default Client
+export default Tenant

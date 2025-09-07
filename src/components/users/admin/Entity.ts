@@ -1,10 +1,10 @@
-export class ClientUser {
+export class TenantUser {
     id?: string
     email: string
     displayName?: string
     permissions: Array<string> = []
 }
 
-export const Entity = ClientUser
+export const Entity = TenantUser
 
-export default ClientUser
+export default TenantUser

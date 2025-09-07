@@ -15,26 +15,26 @@
             <ul class="dropdown-menu dropdown-menu-start" :class="{ show: showAccountDropdown }" style="min-width: 8rem" aria-labelledby="navbarAccountDropdown" v-click-outside="handleCloseMenu">
                 <li class="nav-item dropdown">
                     <router-link :to="{ name: 'account' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">
-                        <Icon name="client" class="me-1" />
+                        <Icon name="tenant" class="me-1" />
                         {{ $t("auth.myAccount") }}
                     </router-link>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
-                <template v-if="(clients?.length || 0) > 1">
+                <template v-if="(tenants?.length || 0) > 1">
                     <li class="nav-item dropdown">
                         <button
                             type="button"
-                            v-for="item in clients"
+                            v-for="item in tenants"
                             :key="item.id"
                             class="btn btn-link dropdown-item px-2"
                             @click="
                                 () => {
-                                    clientStore.setActiveClient(item.id)
+                                    tenantStore.setActiveTenant(item.id)
                                     handleCloseMenu()
                                 }
                             "
                         >
-                            <span class="badge text-bg-success rounded-pill cursor pointer px-1 mx-1" :class="item.id == activeClient?.id ? 'opacity-100' : 'opacity-25'">
+                            <span class="badge text-bg-success rounded-pill cursor pointer px-1 mx-1" :class="item.id == activeTenant?.id ? 'opacity-100' : 'opacity-25'">
                                 <Icon name="check" />
                             </span>
                             {{ item.title }}
@@ -46,7 +46,7 @@
                     <li class="nav-item dropdown">
                         <router-link :to="{ name: 'admin' }" class="btn btn-link dropdown-item" @click="handleCloseMenu">
                             <Icon name="people" class="me-1" />
-                            {{ $t("manageClientUsers") }}
+                            {{ $t("manageTenantUsers") }}
                         </router-link>
                     </li>
                     <li><hr class="dropdown-divider" /></li>
@@ -67,7 +67,7 @@ import { ref, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { LoadingContainer } from "@/regira_modules/vue/ui"
 import { useAuthStore } from "@/regira_modules/vue/auth"
-import { useEntityStore as useClientStore } from "@/entities/clients"
+import { useEntityStore as useTenantStore } from "@/entities/tenants"
 
 const emit = defineEmits<{
     (e: "close"): void
@@ -85,8 +85,8 @@ function handleLogout() {
     authStore.logout()
 }
 
-const clientStore = useClientStore()
-const { items: clients, activeClient } = storeToRefs(clientStore)
+const tenantStore = useTenantStore()
+const { items: tenants, activeTenant } = storeToRefs(tenantStore)
 
 const showAccountDropdown = ref(props.showDropdown)
 watch(

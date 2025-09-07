@@ -3,34 +3,34 @@
         "username": "bwr_admin",
         "password": "admin",
         "title": "Brandweer (admin)",
-        "clientId": "1b615c0096c04eb2975ef84463aa8257"
+        "tenantId": "1b615c0096c04eb2975ef84463aa8257"
     },
     {
         "username": "bwr_read",
         "title": "Brandweer (read)",
-        "clientId": "1b615c0096c04eb2975ef84463aa8257"
+        "tenantId": "1b615c0096c04eb2975ef84463aa8257"
     },
     {
         "username": "bwr_write",
         "title": "Brandweer (write)",
-        "clientId": "1b615c0096c04eb2975ef84463aa8257"
+        "tenantId": "1b615c0096c04eb2975ef84463aa8257"
     },
     {
         "username": "tra_admin",
         "password": "admin",
         "title": "Transport (admin)",
-        "clientId": "11fc2d46df234aed8df1de9a7b0f114f"
+        "tenantId": "11fc2d46df234aed8df1de9a7b0f114f"
     },
     {
         "username": "pol_admin",
         "password": "admin",
         "title": "Police (admin)",
-        "clientId": "232dfc2012b8491cb7d1aaee93007480"
+        "tenantId": "232dfc2012b8491cb7d1aaee93007480"
     },
     {
         "username": "amb_admin",
         "password": "admin",
         "title": "Ambulance (admin)",
-        "clientId": "f64a75e938b64dfaae5eab03fe541972"
+        "tenantId": "f64a75e938b64dfaae5eab03fe541972"
     }
 ]

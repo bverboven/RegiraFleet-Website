@@ -6,11 +6,6 @@ export default {
         nl: "In de demoversie moet u eerst een clientorganisatie selecteren. Vervolgens kunt u een gebruiker selecteren of de inloggegevens handmatig invullen.",
         fr: "Dans la version démo, vous devez d'abord sélectionner une organisation cliente. Ensuite, vous pouvez sélectionner un utilisateur ou saisir les informations d'identification manuellement.",
     },
-    client: {
-        en: "Organisation",
-        nl: "Organisatie",
-        fr: "Organisation",
-    },
     changePassword: {
         en: "Change password",
         nl: "Wachtwoord aanpassen",
@@ -90,6 +85,11 @@ export default {
         en: "Unfortunately, signing in failed.",
         nl: "Helaas, het aanmelden is mislukt.",
         fr: "Malheureusement, la connexion a échoué.",
+    },
+    tenant: {
+        en: "Organisation",
+        nl: "Organisatie",
+        fr: "Organisation",
     },
     tryAgainInMin: {
         en: "Try again in {minutes} min.",

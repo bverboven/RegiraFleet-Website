@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-sm bg-body-tertiary" v-click-outside="handleCloseMenu">
         <router-link class="navbar-brand" :to="{ name: 'home' }" :title="`${$t('fleetManager')} v${version}`">
             <img :src="logo" style="height: 2rem; vertical-align: top" class="me-1" />
-            <span class="d-sm-none d-md-inline"> {{ $activeClient?.title || $t("fleetManager") }} </span>
+            <span class="d-sm-none d-md-inline"> {{ $activeTenant?.title || $t("fleetManager") }} </span>
         </router-link>
         <button class="navbar-toggler" type="button" @click.stop="showNavbarContent = !showNavbarContent">
             <span class="navbar-toggler-icon"></span>

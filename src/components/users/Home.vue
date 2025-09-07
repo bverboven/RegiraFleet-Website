@@ -22,7 +22,7 @@
                     <li v-if="$isAdmin" class="list-group-item">
                         <router-link :to="{ name: 'admin' }" class="btn btn-default p-1">
                             <Icon name="people" class="me-1" />
-                            {{ $t("manageClientUsers") }}
+                            {{ $t("manageTenantUsers") }}
                         </router-link>
                     </li>
                     <li class="list-group-item">
@@ -33,8 +33,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-auto" v-show="(clientSelectorEl?.clientCount ?? 0) > 1">
-                <ClientSelector ref="clientSelectorEl" />
+            <div class="col-auto" v-show="(tenantSelectorEl?.tenantCount ?? 0) > 1">
+                <TenantSelector ref="tenantSelectorEl" />
             </div>
         </div>
     </section>
@@ -54,7 +54,7 @@ import { ref } from "vue"
 import { useAuthStore } from "@/regira_modules/vue/auth"
 import ChangePasswordForm from "./ChangePasswordForm.vue"
 import ChangePersonalData from "./ChangePersonalData.vue"
-import { ClientSelector } from "@/entities/clients"
+import { TenantSelector } from "@/entities/tenants"
 
 const showChangePassword = ref(false)
 const showChangePersonalData = ref(false)
@@ -64,5 +64,5 @@ const handleLogout = () => {
     authStore.logout()
 }
 
-const clientSelectorEl = ref<any>(null)
+const tenantSelectorEl = ref<any>(null)
 </script>

@@ -16,7 +16,7 @@ import appConfig, { createConfig, useConfig } from "@/app-config"
 import { routerFactory } from "@/router"
 import { plugin as userPlugin } from "@/infrastructure/user-plugin"
 import { plugin as statisticsPlugin } from "@/statistics"
-import { default as entityPlugins, clientPlugin } from "@/entities"
+import { default as entityPlugins, tenantPlugin } from "@/entities"
 
 import { Entity as Country } from "@/entities/countries"
 import { Entity as VehicleType } from "@/entities/vehicle-types"
@@ -114,14 +114,14 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         // preloader
         app.use(preloaderPlugin)
 
-        // clients
-        app.use(clientPlugin)
+        // tenants
+        app.use(tenantPlugin)
 
         // auth
         app.use(authPlugin, {
             enabled: true,
             clientApp: processedConfig.clientApp,
-            loginUrl: processedConfig.loginUrl.replace(/{clientApp}/, processedConfig.clientApp).replace(/{clientId}/, localStorage.getItem("client") || ""),
+            loginUrl: processedConfig.loginUrl.replace(/{clientApp}/, processedConfig.clientApp).replace(/{tenantId}/, localStorage.getItem("tenant") || ""),
             tokenManager: new LocalStorageTokenManager(),
             axios,
             onAuthenticationChange: async (auth) => {

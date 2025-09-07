@@ -8,10 +8,10 @@
             </div>
         </div>
         <!-- <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ $t("auth.client") }}</label>
+            <label class="col-sm-3 col-form-label">{{ $t("auth.tenant") }}</label>
             <div class="col-sm-9">
-                <select v-model="clientId" class="form-select">
-                    <option v-for="client in clients" :key="client.id" :value="client.id">{{ client.title }}</option>
+                <select v-model="tenantId" class="form-select">
+                    <option v-for="tenant in tenants" :key="tenant.id" :value="tenant.id">{{ tenant.title }}</option>
                 </select>
             </div>
         </div> -->
@@ -28,7 +28,7 @@
                             Select user
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }" style="min-width: 12.5rem">
-                            <li v-for="item in clientUsers" :key="item.username">
+                            <li v-for="item in tenantUsers" :key="item.username">
                                 <a class="dropdown-item" href="#" @click="handleSelectUser(item)">{{ item.title }}</a>
                             </li>
                         </ul>
@@ -71,19 +71,19 @@ const props: ILoginProps = defineProps<{
     signingIn?: boolean
 }>()
 
-type IDemoUser = { username: string; title: string; clientId: string }
+type IDemoUser = { username: string; title: string; tenantId: string }
 
 const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
 
 const appConfig = useConfig()
 const showUsersList = ref(false)
-const clientId = ref<string>()
+const tenantId = ref<string>()
 const demoUsers = ref<Array<IDemoUser>>()
 const minHeight = computed(() => (showUsersList.value ? "15rem" : "10rem"))
-const clientUsers = computed<Array<IDemoUser>>(() => demoUsers.value?.filter((x) => !clientId.value || x.clientId == clientId.value) || [])
+const tenantUsers = computed<Array<IDemoUser>>(() => demoUsers.value?.filter((x) => !tenantId.value || x.tenantId == tenantId.value) || [])
 
 // auth
-function handleSelectUser(item: { username: string; password?: string; clientId: string }) {
+function handleSelectUser(item: { username: string; password?: string; tenantId: string }) {
     username.value = item.username
     password.value = item.password || "demo"
     showUsersList.value = false

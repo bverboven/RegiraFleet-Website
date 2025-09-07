@@ -11,14 +11,14 @@ export const useEntityStore = defineStore(Entity.name, () => {
 
     async function load(): Promise<void> {
         const axios = useAxios()
-        items.value = await axios.get(`clients`).then((r) => r.data)
+        items.value = await axios.get(`tenants`).then((r) => r.data)
     }
-    async function setActiveClient(id: string) {
-        await refreshToken({ clientId: id })
+    async function setActiveTenant(id: string) {
+        await refreshToken({ tenantId: id })
     }
-    const activeClient = computed(() => items.value?.find((x) => x.id == getClaimValue("client")))
+    const activeTenant = computed(() => items.value?.find((x) => x.id == getClaimValue("tenant")))
 
-    // load clients when authenticated (client-plugin should be registered before auth-plugin)
+    // load tenants when authenticated (tenant-plugin should be registered before auth-plugin)
     authStore.$onAction(
         ({ name, after }) =>
             ["login", "refresh", "validateToken"].includes(name) &&
@@ -32,10 +32,10 @@ export const useEntityStore = defineStore(Entity.name, () => {
 
     return {
         items,
-        activeClient,
+        activeTenant,
 
         load,
-        setActiveClient,
+        setActiveTenant,
     }
 })
 

@@ -32,20 +32,20 @@ export const plugin = {
 
         const auth = useAuth()
         const appConfig = useConfig()
-        // make client persistent when logged off
+        // make tenant persistent when logged off
         authStore.$onAction(
             ({ name, after }) =>
                 ["login", "refresh"].includes(name) &&
                 after(() => {
                     if (authStore.isAuthenticated) {
-                        // client
-                        const clientId = authStore.getClaimValue("client") as string
-                        if (clientId) {
-                            localStorage.setItem("client", clientId)
-                            // update loginUrl to pass new clientId
-                            auth.service.options.loginUrl = appConfig.loginUrl.replace("{clientApp}", appConfig.clientApp).replace("{clientId}", clientId)
+                        // tenant
+                        const tenantId = authStore.getClaimValue("tenant") as string
+                        if (tenantId) {
+                            localStorage.setItem("tenant", tenantId)
+                            // update loginUrl to pass new tenantId
+                            auth.service.options.loginUrl = appConfig.loginUrl.replace("{clientApp}", appConfig.clientApp).replace("{tenantId}", tenantId)
                         } else {
-                            localStorage.removeItem("client")
+                            localStorage.removeItem("tenant")
                         }
                     }
                 })
