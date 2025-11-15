@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col mb-2" v-if="resultCount != null">
                 <span class="text-info">{{ resultCount }} results</span>
-                <small v-if="filterIsActive" class="ms-2 italic-muted">(Filters are applied)</small>
+                <small v-if="filterIsActive" class="ms-2 italic-muted">({{ $t("filtersAreApplied") }})</small>
             </div>
             <div class="col mb-2 text-end">
                 <IconButton icon="clear" @click="handleReset" :showText="true" />

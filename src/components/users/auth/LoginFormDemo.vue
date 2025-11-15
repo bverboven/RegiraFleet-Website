@@ -19,15 +19,18 @@
             <label class="col-sm-3 col-form-label">{{ $t("auth.username") }}</label>
             <div class="col-sm-9">
                 <div class="input-group">
-                    <input class="form-control" autocomplete="username email" v-model="username" :disabled="signingIn" />
+                    <input class="form-control" autocomplete="username email" v-model="username"
+                        :disabled="signingIn" />
                     <template v-if="demoUsers?.length">
                         <!-- <select v-model="user" class="form-select" @change="handleSelectUser(user!)">
                             <option v-for="item in demoUsers" :key="item.username" :value="item">{{ item.username }}</option>
                         </select> -->
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" @click="showUsersList = !showUsersList">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" @click="showUsersList = !showUsersList">
                             Select user
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }" style="min-width: 12.5rem">
+                        <ul class="dropdown-menu dropdown-menu-end" :class="{ show: showUsersList }"
+                            style="min-width: 12.5rem">
                             <li v-for="item in tenantUsers" :key="item.username">
                                 <a class="dropdown-item" href="#" @click="handleSelectUser(item)">{{ item.title }}</a>
                             </li>
@@ -39,7 +42,8 @@
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">{{ $t("auth.password") }}</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" autocomplete="password current-password" v-model="password" :disabled="signingIn" />
+                <input type="password" class="form-control" autocomplete="password current-password" v-model="password"
+                    :disabled="signingIn" />
             </div>
         </div>
         <div class="row">
@@ -51,7 +55,9 @@
                     <Loading class="me-1" style="width: 2rem" />
                     {{ $t("auth.signingIn") }}
                 </span>
-                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{ $t("auth.forgotPassword") }}</button>
+                <button v-else type="button" class="btn btn-link" @click="handleForgotPassword">{{
+                    $t("auth.forgotPassword")
+                    }}</button>
             </div>
         </div>
     </form>
@@ -63,7 +69,7 @@ import { useLoginForm, type ILoginEmits, type ILoginProps } from "@/regira_modul
 import { Loading } from "@/regira_modules/vue/ui"
 import { useConfig } from "@/app-config"
 
-interface IEmits extends ILoginEmits {}
+interface IEmits extends ILoginEmits { }
 const emit = defineEmits<IEmits>()
 
 const props: ILoginProps = defineProps<{
@@ -75,7 +81,7 @@ type IDemoUser = { username: string; title: string; tenantId: string }
 
 const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
 
-const appConfig = useConfig()
+const { baseUrl } = useConfig()
 const showUsersList = ref(false)
 const tenantId = ref<string>()
 const demoUsers = ref<Array<IDemoUser>>()
@@ -89,7 +95,5 @@ function handleSelectUser(item: { username: string; password?: string; tenantId:
     showUsersList.value = false
 }
 
-onMounted(async () => {
-    demoUsers.value = await fetch(`${appConfig.baseUrl}/data/demo-users.json`).then((r) => r.json())
-})
+onMounted(async () => demoUsers.value = await fetch(`${baseUrl}/data/demo-users.json`).then((r) => r.json()))
 </script>
