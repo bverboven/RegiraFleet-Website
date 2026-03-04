@@ -2,8 +2,8 @@ import { EntityBase } from "@/regira_modules/vue/entities"
 import type { Entity as Address } from "../operator-addresses"
 import { ContactDataTypes, type Entity as ContactData } from "../operator-contact-data"
 import type { EntityLabel } from "@/entities/entity-labels"
-import type { Entity as InterventionType } from "@/entities/intervention-types"
 import type { Entity as EntityAttachment } from "@/entities/entity-attachments"
+import type { OperatorInterventionType } from "./OperatorInterventionType"
 
 export class InterventionOperator extends EntityBase {
     id: number = 0
@@ -21,7 +21,7 @@ export class InterventionOperator extends EntityBase {
     addresses?: Array<Address>
     contactData?: Array<ContactData>
     labels?: Array<EntityLabel>
-    interventionTypes?: Array<InterventionType>
+    interventionTypes?: Array<OperatorInterventionType>
     attachments?: Array<EntityAttachment>
 
     override get $id(): string | number {

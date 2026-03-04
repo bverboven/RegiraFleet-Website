@@ -34,13 +34,12 @@ const props = defineProps<{
 
 const { fromPool, list } = useEntityStore()
 const items = computed<Array<Entity>>({
-    get: () => fromPool(props.modelValue || []) as Array<Entity>,
+    get: () => props.modelValue || [] as Array<Entity>,
     set: (value) => emit("update:modelValue", value as Array<Entity>),
 })
 
 const newItem = ref<Entity>()
 function handleSelect(selected?: Entity) {
-    console.debug("handleSelect", { selected })
     if (selected == null) {
         return
     }
@@ -59,9 +58,8 @@ function handleSelect(selected?: Entity) {
     newItem.value = undefined
 }
 function handleRemove(selected: Entity) {
-    console.debug("handleRemove", { selected })
     selected._deleted = !selected._deleted
-    const newVal = [...items.value] // items.value.filter((x) => x.$id != selected?.$id)
+    const newVal = [...items.value]
     emit(
         "update:idsValue",
         newVal.map((x) => x.id!)

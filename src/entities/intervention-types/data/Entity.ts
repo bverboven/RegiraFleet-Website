@@ -17,6 +17,10 @@ export class InterventionType extends EntityBase {
     override get $title(): string | undefined {
         return this.title
     }
+
+    static create(values?: object): InterventionType {
+        return Object.assign(new InterventionType(), values || {})
+    }
 }
 
 export const Entity = InterventionType

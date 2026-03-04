@@ -2,8 +2,8 @@ import { EntityBase } from "@/regira_modules/vue/entities"
 import type { Entity as Brand } from "../../brands"
 import type { Entity as VehicleType } from "../../vehicle-types"
 import type { EntityLabel } from "@/entities/entity-labels"
-import type { Entity as InterventionType } from "@/entities/intervention-types"
 import type { Entity as EntityAttachment } from "../../entity-attachments"
+import type { VehicleInterventionType } from "./VehicleInterventionType"
 
 export class Vehicle extends EntityBase {
     id: number = 0
@@ -21,7 +21,7 @@ export class Vehicle extends EntityBase {
     brand?: Brand
     vehicleType?: VehicleType
     labels?: Array<EntityLabel>
-    interventionTypes?: Array<InterventionType>
+    interventionTypes?: Array<VehicleInterventionType>
     attachments?: Array<EntityAttachment>
 
     override get $id(): string | number {

@@ -53,15 +53,11 @@
                         <Labels v-model="item.labels" :show-summary="item.id > 0" />
 
                         <FormSection :title="$t('interventionTypes')">
-                            <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
+                            <p v-if="readonly && !itemInterventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
                             <div v-else class="row" style="min-height: 10rem">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector
-                                        v-model="item.interventionTypes"
-                                        :filter-defaults="{ exclude: item.interventionTypes?.map((x) => x.id) }"
-                                        :readonly="readonly"
-                                        :placeholder="$t('selectType')"
-                                    />
+                                    <InterventionTypeSelector v-model="itemInterventionTypes" :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }" :readonly="readonly"
+                                        :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('interventionType(s)')" />
                                 </div>
                             </div>
@@ -87,15 +83,13 @@
             </div>
         </div>
 
-        <Debug
-            :modelValue="{
-                ...item,
-                addresses: item.addresses?.map(({ id, street, city, countryCode }) => ({ id, street, city, countryCode })),
-                contactData: item.contactData?.map(({ id, value, dataType }) => ({ id, value, dataType })),
-                interventionTypes: item.interventionTypes?.map(({ id, title }) => ({ id, title })),
-                attachments: item.attachments?.map(({ id, attachment, newFileName }) => ({ id, fileName: attachment?.fileName, newFileName })),
-            }"
-        />
+        <Debug :modelValue="{
+            ...item,
+            addresses: item.addresses?.map(({ id, street, city, countryCode }) => ({ id, street, city, countryCode })),
+            contactData: item.contactData?.map(({ id, value, dataType }) => ({ id, value, dataType })),
+            interventionTypes: itemInterventionTypes?.map(({ id, title }) => ({ id, title })),
+            attachments: item.attachments?.map(({ id, attachment, newFileName }) => ({ id, fileName: attachment?.fileName, newFileName })),
+        }" />
     </form>
 </template>
 
@@ -115,8 +109,10 @@ import { Overview as Addresses } from "../operator-addresses"
 import Interventions from "../operator-interventions/Overview.vue"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
+import { OperatorInterventionType } from "../data/OperatorInterventionType"
+import InterventionType from "@/entities/intervention-types/data/Entity"
 
-interface Emits extends /* @vue-ignore */ FormEmits<Entity> {}
+interface Emits extends /* @vue-ignore */ FormEmits<Entity> { }
 const emit = defineEmits<Emits>()
 const props = withDefaults(
     defineProps<{
@@ -132,6 +128,20 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
+
+const itemInterventionTypes = computed({
+    get: () => item.value?.interventionTypes?.map((x) => InterventionType.create({ ...x.interventionType, _deleted: x._deleted })) || [],
+    set: (values: any[]) => {
+        item.value = entityService.toEntity({
+            ...item.value,
+            interventionTypes: values.map((x) => OperatorInterventionType.create({
+                ...(item.value?.interventionTypes?.find((it) => it.interventionTypeId === x.id)
+                    || { interventionType: x, interventionTypeId: x.id, operatorId: item.value?.id }),
+                _deleted: x._deleted
+            })),
+        })
+    },
+})
 
 // Tabs
 const { translate } = useLang()

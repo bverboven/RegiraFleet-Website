@@ -25,7 +25,9 @@
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <div class="input-group">
-                                        <div class="input-group-text"><Icon name="code" /></div>
+                                        <div class="input-group-text">
+                                            <Icon name="code" />
+                                        </div>
                                         <input v-model="item.code" required :readonly="readonly" :placeholder="$t('vehicleCodePlaceholder')" class="form-control" />
                                     </div>
                                     <FormLabel :label="$t('code')" />
@@ -42,7 +44,9 @@
                                 </div>
                                 <div class="col-md mb-2">
                                     <div class="input-group">
-                                        <div class="input-group-text"><Icon name="title" /></div>
+                                        <div class="input-group-text">
+                                            <Icon name="title" />
+                                        </div>
                                         <input v-model="item.model" :readonly="readonly" class="form-control" :placeholder="$t('modelPlaceholder')" />
                                     </div>
                                     <FormLabel :label="$t('model')" />
@@ -55,12 +59,8 @@
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector
-                                        v-model="item.interventionTypes"
-                                        :filter-defaults="{ exclude: item.interventionTypes?.map((x) => x.id) }"
-                                        :readonly="readonly"
-                                        :placeholder="$t('selectType')"
-                                    />
+                                    <InterventionTypeSelector v-model="itemInterventionTypes" :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }" :readonly="readonly"
+                                        :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('allowedInterventionTypes')" />
                                 </div>
                             </div>
@@ -78,13 +78,11 @@
             </div>
         </div>
 
-        <Debug
-            :modelValue="{
-                ...item,
-                brand: item.brand ? `${item.brand.title} #${item.brand.id}` : undefined,
-                vehicleType: item.vehicleType ? `${item.vehicleType.title} #${item.vehicleType.id}` : undefined,
-            }"
-        />
+        <Debug :modelValue="{
+            ...item,
+            brand: item.brand ? `${item.brand.title} #${item.brand.id}` : undefined,
+            vehicleType: item.vehicleType ? `${item.vehicleType.title} #${item.vehicleType.id}` : undefined,
+        }" />
     </form>
 </template>
 
@@ -105,8 +103,10 @@ import { Selector as InterventionTypeSelector } from "../../intervention-types"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import Interventions from "../vehicle-interventions/Overview.vue"
+import { VehicleInterventionType } from "../data/VehicleInterventionType"
+import InterventionType from "@/entities/intervention-types/data/Entity"
 
-interface Emits extends /* @vue-ignore */ FormEmits<Entity> {}
+interface Emits extends /* @vue-ignore */ FormEmits<Entity> { }
 const emit = defineEmits<Emits>()
 const props = withDefaults(
     defineProps<{
@@ -122,6 +122,20 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm<Entity>({ entityService, props, emit })
+
+const itemInterventionTypes = computed({
+    get: () => item.value?.interventionTypes?.map((x) => InterventionType.create({ ...x.interventionType, _deleted: x._deleted })) || [],
+    set: (values: any[]) => {
+        item.value = entityService.toEntity({
+            ...item.value,
+            interventionTypes: values.map((x) => VehicleInterventionType.create({
+                ...(item.value?.interventionTypes?.find((it) => it.interventionTypeId === x.id)
+                    || { interventionType: x, interventionTypeId: x.id, vehicleId: item.value?.id }),
+                _deleted: x._deleted
+            })),
+        })
+    },
+})
 
 // Tabs
 const { translate } = useLang()
