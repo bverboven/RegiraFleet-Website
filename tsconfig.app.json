@@ -8,6 +8,7 @@
 
     "baseUrl": ".",
     "paths": {
+      "@/regira_modules/*": ["./node_modules/regira_modules/dist/*"],
       "@/*": ["./src/*"]
     },
     "jsx": "preserve",

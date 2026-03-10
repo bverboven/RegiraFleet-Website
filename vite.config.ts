@@ -12,6 +12,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
+            "@/regira_modules": fileURLToPath(new URL("./node_modules/regira_modules/dist", import.meta.url)),
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
         preserveSymlinks: true,
@@ -22,13 +23,5 @@ export default defineConfig({
     esbuild: {
         //drop: ["console", "debugger"],
     },
-    base: "/manager/",
-    server: {
-        fs: {
-            allow: [
-                "D:/Projects/Regira", // added to enable symlink...
-                "C:/Projects/Regira",
-            ],
-        },
-    },
+    base: "/manager/"
 })

@@ -30,6 +30,7 @@ import dateSerializer from "@/regira_modules/extensions/date-extensions"
 dateSerializer.use()
 
 // Assets
+import "@/regira_modules/vue/ui/autocomplete/style.scss"
 import "./assets/base.scss"
 import "./assets/main.scss"
 import loadingImg from "@/assets/images/loading.gif"
