@@ -21,7 +21,7 @@
             <div class="col">
                 <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
-                        <FormSection :title="$t(config.detailsTitle)">
+                        <FormSection :title="$t(config.detailsTitle || '')">
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <VehicleSelector

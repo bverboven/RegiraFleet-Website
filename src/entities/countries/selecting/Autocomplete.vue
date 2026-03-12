@@ -29,13 +29,15 @@ const { fromCache } = useEntityStore()
 const items = computed<Array<Entity>>(() => (fromCache() as Array<Ref<Entity>>).map((x: Ref<Entity>) => x.value))
 
 const search = (q: string = "") =>
-    items.value
-        .filter((itemRef) => {
-            const upperQ = q.toUpperCase()
-            const keywords = upperQ.split(" ")
-            return !q || keywords.some((kw) => itemRef.title!.toUpperCase().includes(kw)) || getInitials(itemRef.title!).startsWith(upperQ)
-        })
-        .slice(0, props.maxResults)
+    Promise.resolve(
+        items.value
+            .filter((itemRef) => {
+                const upperQ = q.toUpperCase()
+                const keywords = upperQ.split(" ")
+                return !q || keywords.some((kw) => itemRef.title!.toUpperCase().includes(kw)) || getInitials(itemRef.title!).startsWith(upperQ)
+            })
+            .slice(0, props.maxResults)
+    )
 const idSelector = (item?: Entity) => item?.id as string
 const displayItemFormatter = (item?: Entity) => item?.title as string
 

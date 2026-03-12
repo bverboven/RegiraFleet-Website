@@ -11,7 +11,7 @@ export function addServices(serviceProvider: IServiceProvider) {
 }
 
 export function addIcons(icons: IIconProvider) {
-    icons.add(Entity.name, config.icon)
+    icons.add(Entity.name, config.icon!)
 }
 
 export default {

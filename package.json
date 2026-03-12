@@ -19,7 +19,7 @@
     "lodash": "^4.17.23",
     "marked": "^17.0.4",
     "pinia": "^3.0.4",
-    "regira_modules": "github:bverboven/Regira-JsLib",
+    "regira_modules": "github:bverboven/Regira-JsLib#v3.0.2",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3",
     "vuedraggable": "^4.1.0"

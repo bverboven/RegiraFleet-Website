@@ -137,7 +137,7 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
                     await preload(preloaderTypes as any)
 
                     // ready
-                    app.config.globalProperties.$setCulture(auth.culture)
+                    app.config.globalProperties.$setCulture(auth.culture!)
                     app.config.globalProperties.$setAppStatus(AppStatus.Ready)
 
                     setLangCode(auth.culture!.split("-")[0])
@@ -149,7 +149,7 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
                         router,
                         routes: router.getRoutes(),
                         cache: defaultPoolCache,
-                        icons: app.config.globalProperties.$icons.map,
+                        icons: (app.config.globalProperties.$icons as any).map,
                     })
                 } else {
                     app.config.globalProperties.$feedback.fail(`User logged out`)

@@ -1,7 +1,7 @@
 <template>
     <select v-model="selected" class="form-select">
         <slot name="empty"><option value=""></option></slot>
-        <option v-for="item in items" :value="item" :key="item.id">{{ item.fileName }} ({{ formatFileSize(item.attachment?.length) }})</option>
+        <option v-for="item in items" :value="item" :key="item.id">{{ item.fileName }} ({{ formatFileSize(item.attachment?.length ?? 0) }})</option>
     </select>
 </template>
 

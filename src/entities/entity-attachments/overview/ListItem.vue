@@ -19,7 +19,7 @@
                 <input v-else v-model.lazy="item.fileName" :readonly="readonly" @update:model-value="onChangeFilename" maxlength="256" class="form-control" autocomplete="__away" />
                 <span class="input-group-text" style="width: 5rem; overflow: hidden">
                     <span class="w-100 text-end">
-                        {{ formatFileSize(item.attachment?.length) }}
+                        {{ formatFileSize(item.attachment?.length ?? 0) }}
                     </span>
                 </span>
                 <FormModalButton v-if="!readonly" v-model="item" @save="$emit('update:modelValue', item)" class="btn btn-outline-secondary"><Icon name="edit" /></FormModalButton>

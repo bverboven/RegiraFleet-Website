@@ -10,7 +10,7 @@
                     <input v-model="item.fileName" class="form-control" />
                     <span class="input-group-text" style="width: 5rem; overflow: hidden">
                         <span class="w-100 text-end">
-                            {{ formatFileSize(item.attachment?.length) }}
+                            {{ formatFileSize(item.attachment?.length ?? 0) }}
                         </span>
                     </span>
                 </div>

@@ -18,7 +18,7 @@ export function useFetchStatistics(props: { api: string }, filter: Ref<{ year: n
         const axios = useAxios()
         const url = `stats/${props.api.replace("{year}", filter.value.year.toString()).replace("{vehicleTypeId}", filter.value.vehicleTypeId?.toString() || "")}/xlsx`
         const blob = await axios.getFile(url)
-        await saveAs(blob, blob.name || `${props.api}-${filter.value.year}.${type}`)
+        await saveAs(blob, (blob as any).name || `${props.api}-${filter.value.year}.${type}`)
     }
 
     return {

@@ -35,6 +35,7 @@ const props = defineProps<{
     filterDefaults?: Record<string, any>
     closeOnSave?: boolean
     placeholder?: string
+    readonly?: boolean
 }>()
 
 const { fromPool, list } = useEntityStore()

@@ -2,10 +2,12 @@
     <form @submit.prevent="handleSubmit" :modelValue="item">
         <div class="row form-buttons">
             <div class="col col-md-auto order-1">
-                <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
+                <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0"
+                    @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col-auto order-2 order-md-3">
-                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
+                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }"
+                    class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
                     <Icon name="popOut" />
                 </RouterLink>
                 <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1">
@@ -21,25 +23,29 @@
             <div class="col">
                 <TabContainer :tabs="tabs" :active="initialTab" :use-route-nav="!isPopup">
                     <template #form>
-                        <FormSection :title="$t(config.detailsTitle)">
+                        <FormSection :title="$t(config.detailsTitle ?? config.routePrefix)">
                             <div class="row">
                                 <div class="col-md mb-2">
                                     <div class="input-group">
                                         <div class="input-group-text">
                                             <Icon name="code" />
                                         </div>
-                                        <input v-model="item.code" required :readonly="readonly" :placeholder="$t('vehicleCodePlaceholder')" class="form-control" />
+                                        <input v-model="item.code" required :readonly="readonly"
+                                            :placeholder="$t('vehicleCodePlaceholder')" class="form-control" />
                                     </div>
                                     <FormLabel :label="$t('code')" />
                                 </div>
                                 <div class="col-md mb-2">
-                                    <VehicleTypeSelector v-model="item.vehicleType" v-model:idValue="item.vehicleTypeId as number" :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <VehicleTypeSelector v-model="item.vehicleType"
+                                        v-model:idValue="item.vehicleTypeId as number" :readonly="readonly"
+                                        :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('type')" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md mb-2">
-                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number" :readonly="readonly" :placeholder="$t('selectBrand')" />
+                                    <BrandSelector v-model="item.brand" v-model:idValue="item.brandId as number"
+                                        :readonly="readonly" :placeholder="$t('selectBrand')" />
                                     <FormLabel :label="$t('brand')" />
                                 </div>
                                 <div class="col-md mb-2">
@@ -47,7 +53,8 @@
                                         <div class="input-group-text">
                                             <Icon name="title" />
                                         </div>
-                                        <input v-model="item.model" :readonly="readonly" class="form-control" :placeholder="$t('modelPlaceholder')" />
+                                        <input v-model="item.model" :readonly="readonly" class="form-control"
+                                            :placeholder="$t('modelPlaceholder')" />
                                     </div>
                                     <FormLabel :label="$t('model')" />
                                 </div>
@@ -59,8 +66,9 @@
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="itemInterventionTypes" :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }" :readonly="readonly"
-                                        :placeholder="$t('selectType')" />
+                                    <InterventionTypeSelector v-model="itemInterventionTypes"
+                                        :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }"
+                                        :readonly="readonly" :placeholder="$t('selectType')" />
                                     <FormLabel :label="$t('allowedInterventionTypes')" />
                                 </div>
                             </div>

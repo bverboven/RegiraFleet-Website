@@ -48,7 +48,7 @@ export async function save(api: string, items: Array<Entity>) {
             const axios: any = useAxios()
             return async () => {
                 if (item.fileName != null && item.fileName != item.attachment!._file!.name) {
-                    item.attachment!._file = await fileToBlob(item.attachment!._file, item.fileName)
+                    item.attachment!._file = await fileToBlob(item.attachment!._file as File, item.fileName)
                 }
                 const {
                     data: { item: saved },
@@ -96,7 +96,7 @@ export function useEntityAttachments<T extends Entity>({ props, emit }: Input<T>
     function handleBrowse(files: Array<Blob>) {
         const entityAttachments = files.map((file) => createEntity(file))
         entityAttachments.forEach((item) => {
-            const minId = Math.min(min(items.value, (x) => x.id) || 0, 0) - 1
+            const minId = Math.min((min(items.value, (x) => x.id) as number) || 0, 0) - 1
             item.id = minId
         })
         emit("update:modelValue", [...items.value, ...entityAttachments])

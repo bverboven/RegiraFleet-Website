@@ -46,7 +46,7 @@ defineExpose({
     reset: () => autoEl.value.reset(),
 })
 
-const search = (q: string) => props.items.filter((item) => item.attachment?.fileName?.startsWith(q))
+const search = (q: string) => Promise.resolve(props.items.filter((item) => item.attachment?.fileName?.startsWith(q)))
 const idSelector = (item?: Entity) => item?.$id?.toString()
 const displayItemFormatter = (item?: Entity) => item?.attachment?.fileName as string
 </script>

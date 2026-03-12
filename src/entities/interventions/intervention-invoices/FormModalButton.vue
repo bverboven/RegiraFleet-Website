@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-default" @click="handleOpen">
         <slot><Icon name="invoice" /></slot>
         <Teleport to="#modals">
-            <MyModal :is-visible="isOpen" :title="modalTitle || $tm(config.detailsTitle)" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
+            <MyModal :is-visible="isOpen" :title="modalTitle" :showFooter="!readonly" @close="handleCancel" @cancel="handleCancel" @submit="handleSubmit">
                 <Form v-model="item" :item-defaults="itemDefaults" :readonly="readonly" />
             </MyModal>
         </Teleport>
@@ -28,5 +28,5 @@ const props = defineProps<{
 }>()
 
 const { item, isOpen, handleOpen, handleCancel, handleSubmit } = useOwnedModal(Entity, { props, emit })
-const modalTitle = computed(() => props.modalTitle ?? `Invoice ${props.modelValue?.invoiceNumber}` ?? "New Invoice")
+const modalTitle = computed(() => props.modalTitle ?? `Invoice ${props.modelValue?.invoiceNumber ?? 'New'}`)
 </script>
