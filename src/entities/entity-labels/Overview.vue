@@ -1,5 +1,5 @@
 <template>
-    <FormSection :title="$t('labels')" :show-summary="false">
+    <FormSection :title="$t('labels')" :show-summary="showSummary">
         <Draggable v-model="items" item-key="id" handle=".drag-handle" ghost-class="ghost" style="max-height: 25vh; overflow: auto">
             <template #item="{ element, index }">
                 <InlineInput
@@ -18,10 +18,10 @@
             </div>
         </div>
 
-        <!-- <template #summary>
+        <template #summary>
             <Summary v-if="items?.length" :items="items" />
             <p v-else class="text-info">{{ $t("noItems") }}</p>
-        </template> -->
+        </template>
     </FormSection>
 </template>
 
