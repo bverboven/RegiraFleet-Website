@@ -15,26 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import type { IFilter } from "../filter"
 
 const emit = defineEmits<{
-    (e: "update:modelValue", arg: Record<string, any>): void
     (e: "fetch-data"): void
     (e: "fetch-doc", type: string): void
 }>()
-const props = withDefaults(
-    defineProps<{
-        modelValue: IFilter
-    }>(),
-    {
-        modelValue: () => ({ year: new Date().getFullYear() }),
-    }
-)
 
-const filter = useVModelField<IFilter>(props, emit)
+const filter = defineModel<IFilter>({ default: () => ({ year: new Date().getFullYear() }) })
 function handleChange() {
-    emit("update:modelValue", { ...filter.value })
+    filter.value = { ...filter.value }
     emit("fetch-data")
 }
 </script>

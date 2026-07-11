@@ -1,4 +1,4 @@
-import { isUrl, isEmail, isPhone, isDate } from "@/regira_modules/utilities/string-utility"
+import { isUrl, isEmail, isPhone, isDate } from "regira_modules/utilities/string-utility"
 import LabelTypes from "./LabelTypes"
 
 export function getLabelType(value: string) {

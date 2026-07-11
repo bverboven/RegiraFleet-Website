@@ -12,23 +12,25 @@
 </template>
 
 <script setup lang="ts">
-import { useFilter, type FilterEmits } from "@/regira_modules/vue/entities"
+import { useFilter, type FilterEmits } from "regira_modules/vue/entities"
 import SearchObject from "./SearchObject"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 
-interface Emits extends /* @vue-ignore */ FilterEmits {}
-
-const emit = defineEmits<Emits>()
-const props = withDefaults(
-    defineProps<{
-        modelValue: SearchObject
-        resultCount?: number | null
-    }>(),
-    {
-        modelValue: () => new SearchObject(),
+interface Emits extends /* @vue-ignore */ FilterEmits<SearchObject> {}
+const emit = defineEmits<
+    Emits & {
+        "update:modelValue": (value: SearchObject) => true
+        filter: (value: SearchObject) => true
+        "toggle-adv": () => void
+        close: () => void
     }
-)
-const searchObject = useVModelField<SearchObject>(props, emit)
+>()
+
+const props = defineProps<{
+    resultCount?: number
+}>()
+const searchObject = defineModel<SearchObject>({
+    default: () => new SearchObject(),
+})
 
 const { filterIsActive, handleReset, handleUpdate } = useFilter({ searchObject, emit, Constructor: SearchObject })
 </script>

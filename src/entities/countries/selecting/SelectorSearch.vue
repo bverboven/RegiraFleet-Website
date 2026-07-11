@@ -9,7 +9,7 @@
                 <div class="position-relative h-100 overflow-hidden">
                     <Feedback v-bind="{ feedback }" :hideCloseButton="true" class="my-2" />
                     <div v-if="selected?.id" class="position-absolute is-selected d-inline-block py-2 pe-2">
-                        <IconButton icon="selected" @click="handleSelect(null)" />
+                        <IconButton icon="selected" @click="handleSelect(undefined)" />
                         {{ selected.$title }}
                     </div>
                 </div>
@@ -71,9 +71,8 @@
 
 <script setup lang="ts">
 import { onMounted, type Ref } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { useSearchView } from "@/regira_modules/vue/entities"
-import { Paging, LoadingContainer, Feedback, ButtonType } from "@/regira_modules/vue/ui"
+import { useSearchView } from "regira_modules/vue/entities"
+import { Paging, LoadingContainer, Feedback, ButtonType } from "regira_modules/vue/ui"
 import ResultSummary from "@/components/ResultSummary.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"
@@ -82,16 +81,12 @@ import Filter from "../filter/Filter.vue"
 import useEntityStore from "../data/store"
 import List from "../selecting/SelectorList.vue"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", selected: Entity | null): void
-}>()
 const props = defineProps<{
-    modelValue?: Entity | null
     filterDefaults?: Record<string, any>
     pageSize?: number
 }>()
 
-const selected = useVModelField<Entity | null>(props, emit)
+const selected = defineModel<Entity>()
 
 const { service, fromCache } = useEntityStore()
 
@@ -131,9 +126,9 @@ async function handleRequestRemove(item: Entity) {
     handleRemove(item)
 }
 
-function handleSelect(item: Entity | null) {
+function handleSelect(item?: Entity) {
     feedback.success(item != null ? `${item.$title} selected` : `selection removed`)
-    emit("update:modelValue", item)
+    selected.value = item
 }
 
 //onMounted(searchHandler)

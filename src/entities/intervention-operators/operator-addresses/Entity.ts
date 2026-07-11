@@ -1,4 +1,4 @@
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 import { Country } from '../../countries/data/Entity';
 
 export class Address extends EntityBase {

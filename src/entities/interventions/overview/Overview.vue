@@ -15,7 +15,7 @@
                 <Feedback v-bind="{ feedback }" :hideCloseButton="true" />
             </div>
             <div class="col-auto order-2 order-lg-3 ps-2">
-                <RouterLink v-if="!$isReadonlyUser" :to="{ name: Entity.name + 'Details', params: { id: 'new' } }" class="btn btn-info">
+                <RouterLink v-if="!$isReadonlyUser" :to="{ name: config.key + 'Details', params: { id: 'new' } }" class="btn btn-info">
                     <Icon name="new" /><span class="d-none d-sm-inline ms-1">{{ $t("new") }}</span>
                 </RouterLink>
                 <button v-else type="button" class="btn btn-info" disabled>
@@ -68,9 +68,9 @@
 </template>
 
 <script setup lang="ts">
-import { useSearchView, useRouteOverview, type OverviewEmits } from "@/regira_modules/vue/entities"
-import { Paging, LoadingContainer, Feedback } from "@/regira_modules/vue/ui"
-import { useAuthStore } from "@/regira_modules/vue/auth"
+import { useSearchView, useRouteOverview, type OverviewEmits } from "regira_modules/vue/entities"
+import { Paging, LoadingContainer, Feedback } from "regira_modules/vue/ui"
+import { useAuthStore } from "regira_modules/vue/auth"
 import ResultSummary from "@/components/ResultSummary.vue"
 import config from "../config/config"
 import Entity from "../data/Entity"

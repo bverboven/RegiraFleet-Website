@@ -1,4 +1,4 @@
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 import Invoice from "../intervention-invoices/Entity"
 import type { Entity as Vehicle } from "../../vehicles"
 import type { Entity as Operator } from "../../intervention-operators"

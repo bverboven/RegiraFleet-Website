@@ -63,17 +63,12 @@
 </template>
 
 <script setup lang="ts">
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import Entity from "./Entity"
 import { TaxCategory } from "./TaxCategory"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", value: Entity): void
-}>()
-const props = defineProps<{
-    modelValue: Entity
+defineProps<{
     readonly?: boolean
 }>()
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 </script>

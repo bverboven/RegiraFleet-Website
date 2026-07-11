@@ -37,9 +37,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue"
-import { get } from "@/regira_modules/vue/ioc"
-import { createFromComputedPool } from "@/regira_modules/vue/vue-helper"
-import { formatDate } from "@/regira_modules/vue/formatters"
+import { get } from "regira_modules/vue/ioc"
+import { createFromComputedPool } from "regira_modules/vue/vue-helper"
+import { formatDate } from "regira_modules/vue/formatters"
 import type Supplier from "../data/Entity"
 import { Entity, type EntityService, FormModalButton as InterventionButton } from "../../interventions"
 import { FormModalButton as VehicleButton, useEntityStore as useVehicleStore } from "../../vehicles"

@@ -1,6 +1,6 @@
 import { ref, type Ref } from "vue"
-import { saveAs } from "@/regira_modules/utilities/file-utility"
-import { useAxios } from "@/regira_modules/vue/http"
+import { saveAs } from "regira_modules/utilities/file-utility"
+import { useAxios } from "regira_modules/vue/http"
 
 export function useFetchStatistics(props: { api: string }, filter: Ref<{ year: number; vehicleTypeId?: number }>) {
     const stats = ref<any>([[]])

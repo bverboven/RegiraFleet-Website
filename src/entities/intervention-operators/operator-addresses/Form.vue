@@ -37,20 +37,15 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { useLang, type ITranslationMessage } from "@/regira_modules/vue/lang"
+import { useLang, type ITranslationMessage } from "regira_modules/vue/lang"
 import { type Entity as Country, InputSelector as CountrySelector } from "../../countries"
 import type Entity from "./Entity"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", item: Entity): void
-}>()
-const props = defineProps<{
-    modelValue: Entity
+defineProps<{
     readonly?: boolean
 }>()
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 const country = ref<Country>()
 
 const translations: Record<string, ITranslationMessage> = {

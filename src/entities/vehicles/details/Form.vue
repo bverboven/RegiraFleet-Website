@@ -6,7 +6,7 @@
                     @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col-auto order-2 order-md-3">
-                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }"
+                <RouterLink v-if="isPopup" :to="{ name: `${config.key}Details`, params: { id: item.$id } }"
                     class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
                     <Icon name="popOut" />
                 </RouterLink>
@@ -97,9 +97,9 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
-import { Feedback, TabContainer, Tab } from "@/regira_modules/vue/ui"
-import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
-import { useLang } from "@/regira_modules/vue/lang"
+import { Feedback, TabContainer, Tab } from "regira_modules/vue/ui"
+import { useForm, type FormEmits, formDefaults } from "regira_modules/vue/entities"
+import { useLang } from "regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import config from "../config/config"
 import { Overview as Labels } from "../../entity-labels"

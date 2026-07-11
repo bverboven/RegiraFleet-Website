@@ -19,21 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import type Entity from "./Entity"
 import ActionButton from "./ActionButton.vue"
 import { getDataType } from "./functions"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", item: Entity): void
-}>()
-const props = defineProps<{
-    modelValue: Entity
+defineProps<{
     readonly?: boolean
 }>()
 
 function handleChangeValue() {
     item.value.dataType = getDataType(item.value)
 }
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 </script>

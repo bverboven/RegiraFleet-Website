@@ -1,4 +1,4 @@
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 import type { Entity as Address } from "../operator-addresses"
 import { ContactDataTypes, type Entity as ContactData } from "../operator-contact-data"
 import type { EntityLabel } from "@/entities/entity-labels"

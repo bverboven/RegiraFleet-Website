@@ -21,7 +21,26 @@
         "nl-BE": "nl"
     },
 
-    "entities": ["interventions", "intervention-operators", "brands", "intervention-types", "vehicles", "vehicle-types"],
-    "dashboard": ["interventions", "vehicles", "intervention-operators", "intervention-types", "vehicle-types", "brands"],
-    "navbar": ["interventions", "vehicles", "intervention-operators"]
+    "navigation": {
+        "groups": [
+            {
+                "id": "Interventions",
+                "title": "interventions",
+                "description": "interventionsDescription",
+                "icon": "bi bi-wrench-adjustable"
+            },
+            {
+                "id": "Vehicles",
+                "title": "vehicles",
+                "description": "vehiclesDescription",
+                "icon": "bi bi-car-front"
+            }
+        ],
+        "entities": ["Intervention", "InterventionOperator", "Brand", "InterventionType", "Vehicle", "VehicleType"],
+        "dashboard": [
+            ["Interventions", ["Intervention", "InterventionOperator", "InterventionType"]],
+            ["Vehicles", ["Vehicle", "VehicleType", "Brand"]]
+        ],
+        "navbar": ["Intervention", "Vehicle", "InterventionOperator"]
+    }
 }

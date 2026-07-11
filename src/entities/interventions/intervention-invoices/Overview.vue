@@ -9,21 +9,13 @@ import { type Entity as Operator } from "../"
 import Entity from "./Entity"
 import Form from "./Form.vue"
 import { TaxCategory } from "./TaxCategory"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", args: Entity): void
+defineProps<{
+    owner: Operator
+    readonly?: boolean
 }>()
-const props = withDefaults(
-    defineProps<{
-        modelValue?: Entity
-        owner: Operator
-        readonly?: boolean
-    }>(),
-    {
-        modelValue: () => Object.assign(new Entity(), { taxCategory: TaxCategory.Deductible }),
-    }
-)
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({
+    default: () => Object.assign(new Entity(), { taxCategory: TaxCategory.Deductible }),
+})
 </script>

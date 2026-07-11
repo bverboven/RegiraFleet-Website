@@ -65,8 +65,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { storeToRefs } from "pinia"
-import { LoadingContainer } from "@/regira_modules/vue/ui"
-import { useAuthStore } from "@/regira_modules/vue/auth"
+import { LoadingContainer } from "regira_modules/vue/ui"
+import { useAuthStore } from "regira_modules/vue/auth"
 import { useEntityStore as useTenantStore } from "@/entities/tenants"
 
 const emit = defineEmits<{

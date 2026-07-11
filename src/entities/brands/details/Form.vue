@@ -5,7 +5,7 @@
                 <FormButtonsRow :item="item" :readonly="readonly" :feedback="feedback" :show-delete="item?.id > 0" @cancel="handleCancel" @remove="handleRemove" @restore="handleRestore" />
             </div>
             <div class="col-auto order-2 order-md-3">
-                <RouterLink v-if="isPopup" :to="{ name: `${Entity.name}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
+                <RouterLink v-if="isPopup" :to="{ name: `${config.key}Details`, params: { id: item.$id } }" class="btn btn-default py-1" target="_blank" :title="$t('popOut')">
                     <Icon name="popOut" />
                 </RouterLink>
                 <RouterLink v-else-if="overviewUrl" :to="overviewUrl" class="btn btn-info py-1">
@@ -55,9 +55,9 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from "vue-router"
-import { Feedback } from "@/regira_modules/vue/ui"
+import { Feedback } from "regira_modules/vue/ui"
 import { FormButtonsRow } from "@/components/input"
-import { useForm, type FormEmits, formDefaults } from "@/regira_modules/vue/entities"
+import { useForm, type FormEmits, formDefaults } from "regira_modules/vue/entities"
 import config from "../config/config"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"

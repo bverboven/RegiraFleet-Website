@@ -78,8 +78,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { useFilter, type FilterEmits } from "@/regira_modules/vue/entities"
+import { useFilter, type FilterEmits } from "regira_modules/vue/entities"
 import { type Entity as InterventionType, InputSelector as InterventionTypeSelector, Selector as InterventionTypesSelector } from "../../intervention-types"
 import { type Entity as Supplier, InputSelector as SupplierSelector } from "../../intervention-operators"
 import { type Entity as Vehicle, InputSelector as VehicleSelector } from "../../vehicles"
@@ -87,15 +86,21 @@ import { type Entity as VehicleType, InputSelector as VehicleTypeSelector } from
 import { type Entity as Brand, InputSelector as BrandSelector } from "../../brands"
 import SearchObject from "./SearchObject"
 
-interface Emits extends /* @vue-ignore */ FilterEmits {}
+interface Emits extends /* @vue-ignore */ FilterEmits<SearchObject> {}
+const emit = defineEmits<
+    Emits & {
+        "update:modelValue": (value: SearchObject) => true
+        filter: (value: SearchObject) => true
+        "toggle-adv": () => void
+        close: () => void
+    }
+>()
 
-const emit = defineEmits<Emits>()
 const props = defineProps<{
-    modelValue: SearchObject
-    resultCount?: number | null
+    resultCount?: number
 }>()
 
-const searchObject = useVModelField<SearchObject>(props, emit)
+const searchObject = defineModel<SearchObject>({ required: true })
 
 const interventionType = ref<InterventionType>()
 const interventionTypes = ref<Array<InterventionType>>()

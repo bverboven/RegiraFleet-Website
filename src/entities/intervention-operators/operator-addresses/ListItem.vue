@@ -18,20 +18,15 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import { format } from "./formatter"
 import type Entity from "./Entity"
 import FormModalButton from "./FormModalButton.vue"
 import AddressButton from "./AddressButton.vue"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", item: Entity): void
-}>()
-const props = defineProps<{
-    modelValue: Entity
+defineProps<{
     readonly?: boolean
 }>()
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 const address = computed(() => format(item.value))
 </script>

@@ -14,22 +14,12 @@
 </template>
 
 <script setup lang="ts">
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import type Entity from "./Entity"
 import ListItem from "./ListItem.vue"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", args: Array<Entity>): void
+defineProps<{
+    readonly?: boolean
 }>()
-const props = withDefaults(
-    defineProps<{
-        modelValue?: Array<Entity>
-        readonly?: boolean
-    }>(),
-    {
-        modelValue: () => [],
-    }
-)
 
-const items = useVModelField<Array<Entity>>(props, emit)
+const items = defineModel<Array<Entity>>({ default: () => [] })
 </script>

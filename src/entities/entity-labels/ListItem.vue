@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { isUrl, isEmail, isPhone, isDate } from "@/regira_modules/utilities/string-utility"
+import { isUrl, isEmail, isPhone, isDate } from "regira_modules/utilities/string-utility"
 import type Entity from "./Entity"
 import LabelIcon from "./LabelIcon.vue"
 

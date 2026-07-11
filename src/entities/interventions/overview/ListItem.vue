@@ -1,8 +1,8 @@
 <template>
     <div class="row border-bottom border-bottom-1 py-2">
         <div class="col-auto">
-            <router-link :to="{ name: Entity.name + 'Details', params: { id: item.$id } }" class="btn btn-link p-1">
-                <Icon :name="Entity.name" />
+            <router-link :to="{ name: config.key + 'Details', params: { id: item.$id } }" class="btn btn-link p-1">
+                <Icon :name="config.key" />
             </router-link>
         </div>
         <div class="col-2 col-md-1">
@@ -41,14 +41,14 @@
 </template>
 
 <script setup lang="ts">
-import { useVModelField, createFromComputedPool } from "@/regira_modules/vue/vue-helper"
-import { formatDate, formatShortDate } from "@/regira_modules/vue/formatters"
-import { ModalType, ConfirmButton } from "@/regira_modules/vue/ui"
-import type { SaveResult } from "@/regira_modules/vue/entities"
+import { formatDate, formatShortDate } from "regira_modules/vue/formatters"
+import { ModalType, ConfirmButton } from "regira_modules/vue/ui"
+import type { SaveResult } from "regira_modules/vue/entities"
 import { FormModalButton as VehicleButton, useEntityStore as useVehicleStore } from "../../vehicles"
 import { FormModalButton as OperatorButton, useEntityStore as useOperatorStore } from "../../intervention-operators"
 import { FormModalButton as InterventionTypeButton, useEntityStore as useInterventionTypeStore } from "../../intervention-types"
 import Entity from "../data/Entity"
+import config from "../config/config"
 
 const emit = defineEmits<{
     (e: "update:modelValue", args: Entity): void
@@ -58,13 +58,12 @@ const emit = defineEmits<{
     (e: "request-remove", args: Entity): void
 }>()
 const props = defineProps<{
-    modelValue: Entity
     readonly?: boolean
 }>()
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 
-const getVehicle = createFromComputedPool(useVehicleStore()) as any
-const getOperator = createFromComputedPool(useOperatorStore()) as any
-const getInterventionType = createFromComputedPool(useInterventionTypeStore()) as any
+const { fromPool: getVehicle } = useVehicleStore()
+const { fromPool: getOperator } = useOperatorStore()
+const { fromPool: getInterventionType } = useInterventionTypeStore()
 </script>

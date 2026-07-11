@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { useLang, translate, type IFormatInput } from "@/regira_modules/vue/lang"
+import { useLang, translate, type IFormatInput } from "regira_modules/vue/lang"
 import translations from "./translations"
 
 export function useUserLang() {

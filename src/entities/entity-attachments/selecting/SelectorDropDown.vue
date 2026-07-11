@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { computed, watchEffect } from "vue"
-import { formatFileSize } from "@/regira_modules/utilities/file-utility"
+import { formatFileSize } from "regira_modules/utilities/file-utility"
 import type Entity from "../data/Entity"
 
 const emit = defineEmits<{

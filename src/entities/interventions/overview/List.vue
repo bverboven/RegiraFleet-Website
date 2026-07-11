@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import type { OverviewEmits } from "@/regira_modules/vue/entities"
+import type { OverviewEmits } from "regira_modules/vue/entities"
 import useEntityStore from "../data/store"
 import type Entity from "../data/Entity"
 import ListItem from "./ListItem.vue"

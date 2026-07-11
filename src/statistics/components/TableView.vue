@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { LoadingContainer } from "@/regira_modules/vue/ui"
+import { LoadingContainer } from "regira_modules/vue/ui"
 
 withDefaults(
     defineProps<{

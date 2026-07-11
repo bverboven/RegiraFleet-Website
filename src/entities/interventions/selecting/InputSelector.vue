@@ -2,7 +2,7 @@
     <div class="input-selector input-group text-nowrap">
         <slot name="prepend">
             <FormModalButton v-model="item" :item-defaults="itemDefaults" :close-on-save="closeOnSave" class="btn btn-outline-secondary" @save="({ saved }) => handleSelect(saved)">
-                <Icon :name="Entity.name" v-if="item?.id" /><Icon v-else name="new" />
+                <Icon :name="config.key" v-if="item?.id" /><Icon v-else name="new" />
             </FormModalButton>
         </slot>
         <slot>
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, type Ref } from "vue"
 import Entity from "../data/Entity"
+import config from "../config/config"
 import useEntityStore from "../data/store"
 import FormModalButton from "../details/FormModalButton.vue"
 import Autocomplete from "./Autocomplete.vue"

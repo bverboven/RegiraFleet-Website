@@ -9,21 +9,13 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { storeToRefs } from "pinia"
-import { useVModelField } from "@/regira_modules/vue"
 import { useConfig } from "@/app-config"
 import { useEntityStore as useTenantStore } from "@/entities/tenants"
 import type { IHasTranslations } from "./IHasTranslations"
 import Form from "./Form.vue"
 import Entity from "./Entity"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", arg: IHasTranslations): void
-}>()
-const props = defineProps<{
-    modelValue: IHasTranslations
-}>()
-
-const item = useVModelField<IHasTranslations>(props, emit)
+const item = defineModel<IHasTranslations>({ required: true })
 
 const { activeTenant } = storeToRefs(useTenantStore())
 const { cultures } = useConfig()
@@ -35,6 +27,5 @@ const translations = computed<Array<Entity>>(() =>
 
 function updateTranslations() {
     item.value.translations = translations.value
-    emit("update:modelValue", item.value)
 }
 </script>

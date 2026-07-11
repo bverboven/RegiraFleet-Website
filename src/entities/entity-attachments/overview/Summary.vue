@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatFileSize } from "@/regira_modules/utilities/file-utility"
+import { formatFileSize } from "regira_modules/utilities/file-utility"
 import type Entity from "../data/Entity"
 import { download } from "../data/functions"
 

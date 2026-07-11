@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watchEffect, type Ref } from "vue"
-import { useAppStore } from "@/regira_modules/vue/app"
+import { useAppStore } from "regira_modules/vue/app"
 import type Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 

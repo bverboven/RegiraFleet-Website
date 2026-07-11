@@ -23,22 +23,22 @@
 </template>
 
 <script setup lang="ts">
-import type { IPagingInfo } from "@/regira_modules/vue/entities"
+import type { IPagingInfo } from "regira_modules/vue/entities"
 import { computed } from "vue"
 import type Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import type SearchObject from "../filter/SearchObject"
 
 interface Emits {
-    (e: "select", selected: Entity | null): void
+    (e: "select", selected?: Entity): void
     (e: "update:modelValue", args: Array<Entity>): void
     (e: "update:searchObject", args: SearchObject): void
     (e: "update:pagingInfo", args: IPagingInfo): void
 }
 const emit = defineEmits<Emits>()
 const props = defineProps<{
-    modelValue?: Array<Entity> | null
-    selected?: Entity | null
+    modelValue?: Array<Entity>
+    selected?: Entity
 }>()
 
 const isSelected = computed(() => (item: Entity) => item.$id == props.selected?.$id)
@@ -49,6 +49,6 @@ const items = computed<Array<Entity>>({
 })
 
 function handleSelect(item: Entity) {
-    emit("select", item?.$id !== props.selected?.$id ? item : null)
+    emit("select", item?.$id !== props.selected?.$id ? item : undefined)
 }
 </script>

@@ -1,4 +1,4 @@
-import { EntityBase, type IEntity } from "@/regira_modules/vue/entities"
+import { EntityBase, type IEntity } from "regira_modules/vue/entities"
 
 export class EntityLabel extends EntityBase {
     id: number = 0

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { groupBy } from "@/regira_modules/utilities/array-utility"
+import { groupBy } from "regira_modules/utilities/array-utility"
 import Entity from "./Entity"
 
 const props = defineProps<{

@@ -1,5 +1,5 @@
-import { type AxiosWithFilesInstance, createQueryString } from "@/regira_modules/vue/http"
-import { EntityServiceBase, type ListResult, type IConfig } from "@/regira_modules/vue/entities"
+import { type AxiosWithFilesInstance, createQueryString } from "regira_modules/vue/http"
+import { EntityServiceBase, type ListResult, type IConfig } from "regira_modules/vue/entities"
 import { Entity as EntityAttachment, insertWithAttachments, updateWithAttachments, createEntity, save as saveAttachments } from "../../entity-attachments"
 import Entity from "./Entity"
 

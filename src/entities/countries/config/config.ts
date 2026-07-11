@@ -1,4 +1,4 @@
-import type { IConfig } from "@/regira_modules/vue/entities"
+import type { IConfig } from "regira_modules/vue/entities"
 import Entity from "../data/Entity"
 
 const api = "/countries"
@@ -6,12 +6,14 @@ const api = "/countries"
 const config: IConfig = {
     id: Entity.name,
     key: "Country",
+    isComplex: false,
     requires: ["Stakeholder"],
 
     routePrefix: "country",
     baseQueryParams: {
         //include: [],
     },
+    initialQuery: {},
     nav: [],
 
     overviewTitle: "countries",

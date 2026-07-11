@@ -1,4 +1,4 @@
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 import { TaxCategory } from "./TaxCategory"
 
 export class Invoice extends EntityBase {

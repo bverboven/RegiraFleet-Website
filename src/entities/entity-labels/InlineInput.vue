@@ -24,35 +24,20 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useVModelField } from "@/regira_modules/vue"
 import Entity from "./Entity"
 import { getLabelType } from "./functions"
 import LabelIcon from "./LabelIcon.vue"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", arg: Entity): void
-}>()
-const props = withDefaults(
-    defineProps<{
-        modelValue?: Entity
-    }>(),
-    {
-        modelValue: () => new Entity(),
-    }
-)
-
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ default: () => new Entity() })
 
 function handleUpdate() {
     if (item.value.value) {
         console.debug("handleUpdate", { item: item.value })
         item.value.labelType = getLabelType(item.value.value).toString()
-        emit("update:modelValue", item.value)
     }
 }
 function handleRemove() {
     item.value._deleted = !item.value._deleted
-    emit("update:modelValue", item.value)
 }
 
 const labelTitleInput = ref<any>(null)

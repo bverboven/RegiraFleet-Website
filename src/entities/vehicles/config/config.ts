@@ -1,4 +1,4 @@
-import type { IConfig } from "@/regira_modules/vue/entities"
+import type { IConfig } from "regira_modules/vue/entities"
 import Entity from "../data/Entity"
 
 const api = "/vehicles"
@@ -6,11 +6,14 @@ const api = "/vehicles"
 const config: IConfig = {
     id: Entity.name,
     key: "Vehicle",
+    requires: [],
+    isComplex: true,
 
     routePrefix: "vehicles",
     baseQueryParams: {
         includes: ["Brand", "VehicleType"],
     },
+    initialQuery: {},
 
     overviewTitle: "vehicles",
     detailsTitle: "vehicle",

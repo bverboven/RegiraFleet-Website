@@ -13,28 +13,17 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
 import { type Entity as VehicleType, SelectorDropDown as VehicleTypeSelector } from "@/entities/vehicle-types"
 import type { IFilter } from "../filter"
 
 const emit = defineEmits<{
-    (e: "update:modelValue", arg: Record<string, any>): void
     (e: "fetch-data"): void
     (e: "fetch-doc", type: string): void
 }>()
-const props = withDefaults(
-    defineProps<{
-        modelValue: IFilter
-    }>(),
-    {
-        modelValue: () => ({ year: new Date().getFullYear(), vehicleTypeId: 0 }),
-    }
-)
 
-const filter = useVModelField<IFilter>(props, emit)
+const filter = defineModel<IFilter>({ default: () => ({ year: new Date().getFullYear(), vehicleTypeId: 0 }) })
 function handleChange() {
-    console.debug("handleChange", { filter: { ...filter.value } })
-    emit("update:modelValue", { ...filter.value })
+    filter.value = { ...filter.value }
     emit("fetch-data")
 }
 

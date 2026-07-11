@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { FileDropZone } from "@/regira_modules/vue/ui"
+import { FileDropZone } from "regira_modules/vue/ui"
 import { type Entity, List, useEntityAttachments } from "../"
 
 const emit = defineEmits<{

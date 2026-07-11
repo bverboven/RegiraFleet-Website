@@ -1,8 +1,8 @@
 <template>
     <div class="row border-bottom border-bottom-1 py-2">
         <div class="col-auto">
-            <router-link :to="{ name: Entity.name + 'Details', params: { id: item.$id } }" class="btn btn-link p-1">
-                <Icon :name="Entity.name" />
+            <router-link :to="{ name: config.key + 'Details', params: { id: item.$id } }" class="btn btn-link p-1">
+                <Icon :name="config.key" />
             </router-link>
         </div>
         <div class="col-2 col-lg-1 text-truncate">
@@ -30,11 +30,11 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { distinctBy } from "@/regira_modules/utilities/array-utility"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { ModalType, ConfirmButton } from "@/regira_modules/vue/ui"
-import type { SaveResult } from "@/regira_modules/vue/entities"
+import { distinctBy } from "regira_modules/utilities/array-utility"
+import { ModalType, ConfirmButton } from "regira_modules/vue/ui"
+import type { SaveResult } from "regira_modules/vue/entities"
 import Entity from "../data/Entity"
+import config from "../config/config"
 import { AddressButton, formatCity } from "../operator-addresses"
 import { Entity as ContactData, ActionButton } from "../operator-contact-data"
 
@@ -46,11 +46,10 @@ const emit = defineEmits<{
     (e: "request-remove", args: Entity): void
 }>()
 const props = defineProps<{
-    modelValue: Entity
     readonly?: boolean
 }>()
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 const getContactData = computed(() => (item: Entity) => distinctBy(item.contactData || [], (cd: ContactData) => cd.dataType) as Array<ContactData>)
 
 const getLocation = computed(() => (item: Entity) => formatCity(item.$address))

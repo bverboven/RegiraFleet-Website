@@ -43,21 +43,13 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import { Loading } from "@/regira_modules/vue/ui"
+import { Loading } from "regira_modules/vue/ui"
 import Permissions from "@/infrastructure/permissions"
 import Entity from "./Entity"
 import { saveUser, isAdmin } from "./functions"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", arg: Entity): void
-}>()
-const props = defineProps<{
-    modelValue: Entity
-}>()
-
 const isLoading = ref(false)
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ required: true })
 const isAdminUser = computed(() => isAdmin(item.value))
 
 function toggleCanRead() {
@@ -74,7 +66,6 @@ async function handleUpdateUser() {
     isLoading.value = true
     try {
         await saveUser(item.value)
-        emit("update:modelValue", item.value)
     } finally {
         isLoading.value = false
     }
@@ -84,7 +75,7 @@ async function handleRemoveUser() {
     isLoading.value = true
     try {
         await saveUser(itemWithoutPermissions)
-        emit("update:modelValue", itemWithoutPermissions)
+        item.value = itemWithoutPermissions
     } finally {
         isLoading.value = false
     }

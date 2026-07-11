@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue"
-import { Autocomplete } from "@/regira_modules/vue/ui"
+import { Autocomplete } from "regira_modules/vue/ui"
 
 import Entity from "../data/Entity"
 

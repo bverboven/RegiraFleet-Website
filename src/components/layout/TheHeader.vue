@@ -8,19 +8,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse bg-light px-2 px-md-0 pt-2 pt-sm-0" :class="{ show: showNavbarContent }">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item py-2 py-sm-0 d-none">
                     <router-link class="nav-link" aria-current="page" :to="{ name: 'home' }" :title="`${$t('fleetManager')} v${version}`">{{ $t("fleetManager") }}</router-link>
                 </li>
-                <!-- <li class="nav-item">
-                        <router-link class="nav-link" :to="{ name: 'brands' }">Brands</router-link>
-                    </li> -->
-                <li v-for="navItem in navbarItems" :key="navItem.id" class="nav-item py-2 py-sm-0">
-                    <RouterLink :to="{ name: navItem.id + 'Overview', query: navItem.initialQuery || {} }" class="nav-link" @click="handleCloseMenu">
-                        <icon :name="navItem.id" />
-                        <span class="d-sm-none d-lg-inline ms-2">{{ $t(navItem.overviewTitle || '') }}</span>
-                    </RouterLink>
-                </li>
+            </ul>
+            <NavBar class="navbar-nav ms-1 mb-2 mb-lg-0" @select="handleCloseMenu" />
+            <!-- statistics is not an entity config, so it keeps its hand-placed menu item next to the generated links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <StatisticsMenuItem class="py-2 py-sm-0" />
             </ul>
             <form class="d-flex mb-4 mb-sm-0">
@@ -38,10 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, getCurrentInstance } from "vue"
+import { ref } from "vue"
 import { useConfig } from "@/app-config"
 import logo from "@/assets/images/logo-sm.png"
-import type { IConfig } from "@/regira_modules/vue/entities"
+import { NavBar } from "@/components/entity-navigation"
 import AccountMenu from "@/components/users/HeaderMenu.vue"
 import { HeaderMenuItem as StatisticsMenuItem } from "@/statistics"
 import LangSelector from "./LangSelector.vue"
@@ -49,32 +44,12 @@ import LangSelector from "./LangSelector.vue"
 const { version } = useConfig()
 
 const showNavbarContent = ref(false)
-const showNavbarManagementDropdown = ref(false)
 
 document.addEventListener("click", () => {
     showNavbarContent.value = false
-    showNavbarManagementDropdown.value = false
 })
-
-const app = getCurrentInstance()!
-const configs = Object.entries(app.appContext.config.globalProperties.$configs).map(([_, config]: any) => config as IConfig)
-
-const { navbar: navbarKeys } = useConfig()
-const navbarItems = ref<Array<IConfig>>([])
 
 function handleCloseMenu() {
     showNavbarContent.value = false
 }
-
-watchEffect(() => {
-    navbarItems.value = []
-    navbarKeys.forEach((key: string) => {
-        const config = configs.find((d) => d.routePrefix == key)
-        if (config == null) {
-            console.warn(`Could not find navbar item ${key}`)
-        } else {
-            navbarItems.value.push(config)
-        }
-    })
-})
 </script>

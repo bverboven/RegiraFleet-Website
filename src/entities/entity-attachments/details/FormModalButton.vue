@@ -11,24 +11,16 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useVModelField } from "@/regira_modules/vue/vue-helper"
-import type { SaveResult } from "@/regira_modules/vue/entities"
+import type { SaveResult } from "regira_modules/vue/entities"
 import type Entity from "../data/Entity"
 import Form from "./Form.vue"
 
 const emit = defineEmits<{
-    (e: "update:modelValue", args?: Entity): void
     (e: "save", args: SaveResult<Entity>): void
     (e: "cancel"): void
 }>()
-const props = withDefaults(
-    defineProps<{
-        modelValue?: Entity
-    }>(),
-    { modelValue: () => ({ id: 0 } as Entity) }
-)
 
-const item = useVModelField<Entity>(props, emit)
+const item = defineModel<Entity>({ default: () => ({ id: 0 }) as Entity })
 const isOpen = ref(false)
 
 function handleCancel() {

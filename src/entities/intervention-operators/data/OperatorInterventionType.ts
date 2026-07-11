@@ -1,5 +1,5 @@
 import type InterventionType from "@/entities/intervention-types/data/Entity"
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 
 export class OperatorInterventionType extends EntityBase {
     id: number = 0

@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useOwnedCollection } from "@/regira_modules/vue/entities"
+import { useOwnedCollection } from "regira_modules/vue/entities"
 import type { Entity as Owner } from "../"
 import { Entity, List, getDataType } from "./"
 

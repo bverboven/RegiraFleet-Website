@@ -2,7 +2,7 @@
     <div class="input-group text-nowrap">
         <slot name="prepend">
             <div class="input-group-text">
-                <Icon :name="Entity.name" />
+                <Icon :name="config.key" />
             </div>
         </slot>
         <slot>
@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import { ref, type Ref, computed, onMounted } from "vue"
 import Entity from "../data/Entity"
+import config from "../config/config"
 import useEntityStore from "../data/store"
 import Autocomplete from "./Autocomplete.vue"
 import SelectorModalButton from "./SelectorModalButton.vue"

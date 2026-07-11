@@ -1,4 +1,4 @@
-import { EntityBase } from "@/regira_modules/vue/entities"
+import { EntityBase } from "regira_modules/vue/entities"
 import type { IHasTranslations, Translation } from "@/entities/translations"
 
 export class VehicleType extends EntityBase implements IHasTranslations {

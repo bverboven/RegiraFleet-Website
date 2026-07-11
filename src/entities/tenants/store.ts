@@ -1,7 +1,7 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
-import { useAxios } from "@/regira_modules/vue/http"
-import { useAuthStore } from "@/regira_modules/vue/auth"
+import { useAxios } from "regira_modules/vue/http"
+import { useAuthStore } from "regira_modules/vue/auth"
 import Entity from "./Entity"
 
 export const useEntityStore = defineStore(Entity.name, () => {
