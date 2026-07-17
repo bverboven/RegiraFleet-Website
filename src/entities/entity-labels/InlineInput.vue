@@ -4,11 +4,11 @@
             <Icon name="move" />
         </span>
         <span class="input-group-text"><Icon name="tag" /></span>
-        <input v-model.trim="item.title" maxlength="256" class="form-control" @keydown.enter.prevent="handleUpdate" :placeholder="$t('labelName')" ref="labelTitleInput" />
+        <input v-model.trim="item.title" maxlength="64" class="form-control" @keydown.enter.prevent="handleUpdate" :placeholder="$t('labelName')" ref="labelTitleInput" />
         <span class="input-group-text"><LabelIcon :item="item" /></span>
         <input
             v-model.trim="item.value"
-            maxlength="256"
+            maxlength="512"
             class="form-control"
             @blur="handleUpdate"
             @keydown.enter.prevent="handleUpdate"

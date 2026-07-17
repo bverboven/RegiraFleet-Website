@@ -1,12 +1,18 @@
 <template>
     <FormSection :title="$t('files')">
-        <List v-model="items" :readonly="readonly" />
+        <ListItem
+            v-for="(row, i) in items"
+            :key="row.$id"
+            v-model="items[i]!"
+            :class="{ 'is-deleted': row._deleted }"
+            class="mb-2"
+            :readonly="readonly"
+            @change="sync"
+        />
         <FileDropZone v-if="!readonly" @drop-files="handleBrowse" @click="triggerBrowse()">
             <template #default="{ isDropping }">
-                <div class="file-drop-zone row align-items-center justify-content-center m-2 mb-3" :class="{ dropping: isDropping }" style="min-height: 20rem">
-                    <div class="col-auto">
-                        <span class="italic-muted text-info">{{ $t("addNewFile(s)") }}</span>
-                    </div>
+                <div class="text-center text-info p-4 my-2 border rounded" :class="{ 'border-info bg-light': isDropping }">
+                    {{ $t("addNewFile(s)") }}
                 </div>
             </template>
         </FileDropZone>
@@ -15,22 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { FileDropZone } from "regira_modules/vue/ui"
-import { type Entity, List, useEntityAttachments } from "../"
+import { FileDropZone, FormSection } from "regira_modules/vue/ui"
+import { Debug } from "regira_modules/vue/debug"
+import { useEntityAttachments } from "../data/functions"
+import type Entity from "../data/Entity"
+import ListItem from "./ListItem.vue"
 
-const emit = defineEmits<{
-    (e: "update:modelValue", args: Array<Entity>): void
-    (e: "sort", args: any): void
-}>()
-const props = withDefaults(
-    defineProps<{
-        modelValue?: Array<Entity>
-        readonly?: boolean
-    }>(),
-    {
-        modelValue: () => [],
-    }
-)
+const emit = defineEmits<{ (e: "update:modelValue", v: Array<Entity>): void }>()
+const props = withDefaults(defineProps<{ modelValue?: Array<Entity>; readonly?: boolean }>(), { modelValue: () => [] })
 
-const { items, triggerBrowse, handleBrowse } = useEntityAttachments({ props, emit })
+const { items, sync, triggerBrowse, handleBrowse } = useEntityAttachments({ props, emit })
 </script>

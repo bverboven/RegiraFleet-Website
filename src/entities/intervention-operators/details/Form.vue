@@ -53,11 +53,20 @@
                         <Labels v-model="item.labels" :show-summary="item.id > 0" />
 
                         <FormSection :title="$t('interventionTypes')">
-                            <p v-if="readonly && !itemInterventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
+                            <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
                             <div v-else class="row" style="min-height: 10rem">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="itemInterventionTypes" :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }" :readonly="readonly"
-                                        :placeholder="$t('selectType')" />
+                                    <InputSelectorInline v-model="item.interventionTypes"
+                                        :row-key="(r) => r.interventionTypeId" :exclude-key="(r) => r.interventionTypeId">
+                                        <template #chip="{ row }">
+                                            <InterventionTypeButton :modelValue="row.interventionType" />
+                                        </template>
+                                        <template #selector="{ add, exclude }">
+                                            <InterventionTypeSelector :filter-defaults="{ exclude }"
+                                                :placeholder="$t('selectType')"
+                                                @select="(it?: InterventionType) => it && add(OperatorInterventionType.create({ interventionTypeId: it.id, interventionType: it, operatorId: item.id }))" />
+                                        </template>
+                                    </InputSelectorInline>
                                     <FormLabel :label="$t('interventionType(s)')" />
                                 </div>
                             </div>
@@ -87,7 +96,7 @@
             ...item,
             addresses: item.addresses?.map(({ id, street, city, countryCode }) => ({ id, street, city, countryCode })),
             contactData: item.contactData?.map(({ id, value, dataType }) => ({ id, value, dataType })),
-            interventionTypes: itemInterventionTypes?.map(({ id, title }) => ({ id, title })),
+            interventionTypes: item.interventionTypes?.map((x) => x.interventionType?.title),
             attachments: item.attachments?.map(({ id, attachment, newFileName }) => ({ id, fileName: attachment?.fileName, newFileName })),
         }" />
     </form>
@@ -97,12 +106,12 @@
 import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "regira_modules/vue/ui"
-import { useForm, type FormEmits, formDefaults } from "regira_modules/vue/entities"
+import { useForm, InputSelectorInline, type FormEmits, formDefaults } from "regira_modules/vue/entities"
 import { useLang } from "regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import { Entity as Intervention } from "../../interventions"
 import { Overview as Labels } from "../../entity-labels"
-import { Selector as InterventionTypeSelector } from "../../intervention-types"
+import { InputSelector as InterventionTypeSelector, FormModalButton as InterventionTypeButton } from "../../intervention-types"
 import { Overview as EntityAttachments } from "../../entity-attachments"
 import { Overview as ContactData } from "../operator-contact-data"
 import { Overview as Addresses } from "../operator-addresses"
@@ -129,20 +138,6 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm({ entityService, props, emit })
-
-const itemInterventionTypes = computed({
-    get: () => item.value?.interventionTypes?.map((x) => InterventionType.create({ ...x.interventionType, _deleted: x._deleted })) || [],
-    set: (values: any[]) => {
-        item.value = entityService.toEntity({
-            ...item.value,
-            interventionTypes: values.map((x) => OperatorInterventionType.create({
-                ...(item.value?.interventionTypes?.find((it) => it.interventionTypeId === x.id)
-                    || { interventionType: x, interventionTypeId: x.id, operatorId: item.value?.id }),
-                _deleted: x._deleted
-            })),
-        })
-    },
-})
 
 // Tabs
 const { translate } = useLang()

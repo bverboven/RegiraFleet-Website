@@ -41,7 +41,7 @@
 
     <Teleport to="#modals">
         <MyModal :is-visible="showChangePassword" :title="$t('auth.changePassword')" :show-footer="false" @close="showChangePassword = false" @cancel="showChangePassword = false">
-            <ChangePasswordForm :username="$auth.authData?.name ?? ''" />
+            <ChangePasswordForm @success="showChangePassword = false" />
         </MyModal>
         <MyModal :is-visible="showChangePersonalData" :title="$t('auth.changePassword')" :show-footer="false" @close="showChangePersonalData = false" @cancel="showChangePersonalData = false">
             <ChangePersonalData />
@@ -52,7 +52,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useAuthStore } from "regira_modules/vue/auth"
-import ChangePasswordForm from "./ChangePasswordForm.vue"
+import { ChangePasswordForm } from "regira_modules/vue/auth"
 import ChangePersonalData from "./ChangePersonalData.vue"
 import { TenantSelector } from "@/entities/tenants"
 

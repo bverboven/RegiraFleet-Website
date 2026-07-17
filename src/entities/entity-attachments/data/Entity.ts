@@ -1,48 +1,37 @@
 import { EntityBase } from "regira_modules/vue/entities"
 import Attachment from "../attachments/Entity"
 
+// The owned join row on the parent (`parent.attachments`).
 export class EntityAttachment extends EntityBase {
-    id: number = 0
-    title?: string
+    id = 0
     objectId?: number
-    objectType?: string
     attachmentId?: number
-    sortOrder?: number
     uri?: string
-
-    newFileName?: string
-    newContentType?: string
+    newFileName?: string // edited name for an existing file — applied on flush
     attachment?: Attachment
+    _deleted = false // marked-delete (undoable) — filtered out in the host service's prepareItem
 
-    _deleted: boolean = false
-
-    override get $id(): string | number {
+    override get $id() {
         return this.id || "new"
     }
-    override get $title(): string | undefined {
-        return this.title
+    override get $title() {
+        return this.fileName
     }
     get fileName() {
         return this.attachment?.fileName
     }
-    set fileName(value) {
-        this.attachment ??= new Attachment()
-        this.attachment.fileName = value
+    set fileName(v) {
+        ;(this.attachment ??= new Attachment()).fileName = v
     }
 
-    static create(values?: object): EntityAttachment {
-        if ((values as EntityAttachment)?.attachment && !((values as EntityAttachment)?.attachment instanceof Attachment)) {
-            ;(values as EntityAttachment).attachment = Attachment.create((values as EntityAttachment).attachment)
-        }
-
-        const item = Object.assign(new EntityAttachment(), values || {})
-        if (item.id > 0 && item.fileName && !item.newFileName) {
-            item.newFileName = item.fileName
-        }
+    static create(v?: object): EntityAttachment {
+        const a = (v as EntityAttachment)?.attachment
+        if (a && !(a instanceof Attachment)) (v as EntityAttachment).attachment = Attachment.create(a)
+        const item = Object.assign(new EntityAttachment(), v || {})
+        if (item.id > 0 && item.fileName && !item.newFileName) item.newFileName = item.fileName
         return item
     }
 }
 
 export const Entity = EntityAttachment
-
 export default EntityAttachment

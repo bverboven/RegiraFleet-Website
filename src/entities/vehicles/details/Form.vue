@@ -66,9 +66,17 @@
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InterventionTypeSelector v-model="itemInterventionTypes"
-                                        :filter-defaults="{ exclude: itemInterventionTypes?.map((x) => x.id) }"
-                                        :readonly="readonly" :placeholder="$t('selectType')" />
+                                    <InputSelectorInline v-model="item.interventionTypes"
+                                        :row-key="(r) => r.interventionTypeId" :exclude-key="(r) => r.interventionTypeId">
+                                        <template #chip="{ row }">
+                                            <InterventionTypeButton :modelValue="row.interventionType" />
+                                        </template>
+                                        <template #selector="{ add, exclude }">
+                                            <InterventionTypeSelector :filter-defaults="{ exclude }"
+                                                :placeholder="$t('selectType')"
+                                                @select="(it?: InterventionType) => it && add(VehicleInterventionType.create({ interventionTypeId: it.id, interventionType: it, vehicleId: item.id }))" />
+                                        </template>
+                                    </InputSelectorInline>
                                     <FormLabel :label="$t('allowedInterventionTypes')" />
                                 </div>
                             </div>
@@ -98,7 +106,7 @@
 import { computed } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 import { Feedback, TabContainer, Tab } from "regira_modules/vue/ui"
-import { useForm, type FormEmits, formDefaults } from "regira_modules/vue/entities"
+import { useForm, InputSelectorInline, type FormEmits, formDefaults } from "regira_modules/vue/entities"
 import { useLang } from "regira_modules/vue/lang"
 import { FormButtonsRow } from "@/components/input"
 import config from "../config/config"
@@ -107,7 +115,7 @@ import { Overview as EntityAttachments } from "../../entity-attachments"
 import { InputSelector as BrandSelector } from "../../brands"
 import { InputSelector as VehicleTypeSelector } from "../../vehicle-types"
 import { Entity as Intervention } from "../../interventions"
-import { Selector as InterventionTypeSelector } from "../../intervention-types"
+import { InputSelector as InterventionTypeSelector, FormModalButton as InterventionTypeButton } from "../../intervention-types"
 import Entity from "../data/Entity"
 import useEntityStore from "../data/store"
 import Interventions from "../vehicle-interventions/Overview.vue"
@@ -130,20 +138,6 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm<Entity>({ entityService, props, emit })
-
-const itemInterventionTypes = computed({
-    get: () => item.value?.interventionTypes?.map((x) => InterventionType.create({ ...x.interventionType, _deleted: x._deleted })) || [],
-    set: (values: any[]) => {
-        item.value = entityService.toEntity({
-            ...item.value,
-            interventionTypes: values.map((x) => VehicleInterventionType.create({
-                ...(item.value?.interventionTypes?.find((it) => it.interventionTypeId === x.id)
-                    || { interventionType: x, interventionTypeId: x.id, vehicleId: item.value?.id }),
-                _deleted: x._deleted
-            })),
-        })
-    },
-})
 
 // Tabs
 const { translate } = useLang()
