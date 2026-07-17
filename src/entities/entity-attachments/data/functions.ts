@@ -1,110 +1,76 @@
-import { computed } from "vue"
-import { browse as browseFiles, fileToBlob, saveAs } from "regira_modules/utilities/file-utility"
-import { min } from "regira_modules/utilities/array-utility"
+import { ref, watch } from "vue"
+import { browse, fileToBlob, saveAs } from "regira_modules/utilities/file-utility"
 import { enqueue } from "regira_modules/utilities/promise-utility"
-import { useAxios } from "regira_modules/vue/http/axios"
-import type { IEntity } from "regira_modules/vue/entities/abstractions/IEntity"
-import { Entity as Attachment } from "../attachments/Entity"
+import { useAxios } from "regira_modules/vue/http"
 import Entity from "./Entity"
+import Attachment from "../attachments/Entity"
 
+// Stage a picked/dropped file: keep the Blob in memory + an object URL for instant preview/download.
 export function createEntity(file: Blob & { name?: string }): Entity {
     const item = new Entity()
-    item.attachment = new Attachment()
-    item.attachment._file = file
-    item.attachment.fileName = file.name
-    item.attachment.contentType = file.type
-    item.attachment.length = file.size
+    item.attachment = Object.assign(new Attachment(), { _file: file, fileName: file.name, contentType: file.type, length: file.size })
     item.uri = URL.createObjectURL(file)
     return item
 }
-export function browse({ multiple = true, accept }: { multiple?: boolean; accept?: string } = {}): Promise<Array<Blob>> {
-    return browseFiles({ multiple, accept })
+
+export function useEntityAttachments({ props, emit }: { props: { modelValue?: Array<Entity> }; emit: (e: "update:modelValue", v: Array<Entity>) => void }) {
+    // Map incoming JSON rows to instances ONCE and own the array; emitting it up shares the refs, so in-place
+    // edits (rename, _deleted) persist without re-mapping. Re-map only when the host swaps in a new record.
+    const items = ref<Array<Entity>>((props.modelValue ?? []).map((x) => Entity.create(x)))
+    watch(
+        () => props.modelValue,
+        (v) => {
+            if (v && v !== items.value) items.value = v.map((x) => Entity.create(x))
+        }
+    )
+    const sync = () => emit("update:modelValue", items.value)
+
+    function handleBrowse(files: Array<Blob>) {
+        const minId = Math.min(0, ...items.value.map((x) => x.id))
+        files.forEach((f, i) => {
+            const e = createEntity(f)
+            e.id = minId - 1 - i // negative temp ids, like any new owned row
+            items.value.push(e)
+        })
+        sync()
+    }
+    async function triggerBrowse(opts: { multiple?: boolean; accept?: string } = {}) {
+        handleBrowse(await browse(opts))
+    }
+
+    return { items, sync, triggerBrowse, handleBrowse }
 }
 
-export async function insertWithAttachments<T extends IEntity & { id: number; attachments?: Array<Entity> }>(api: string, item: T, insertFunc: () => Promise<T | null>): Promise<T | null> {
-    if (!item.attachments?.length) {
-        return await insertFunc()
-    }
+// Insert needs the parent's id before it can POST files → save the record first, then upload.
+export async function insertWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, insert: () => Promise<T | null>): Promise<T | null> {
     const attachments = item.attachments
+    if (!attachments?.length) return await insert()
     delete item.attachments
-    const saved = await insertFunc()
-    saved!.attachments = attachments
-    await saveAll(api, saved!)
-    attachments!.forEach((x) => delete x.attachment!._file)
+    const saved = await insert()
+    if (saved == null) return null // insert failed — nothing to attach files to
+    saved.attachments = attachments
+    await saveAll(api, saved)
+    attachments.forEach((x) => delete x.attachment?._file) // free the blobs
     return saved
 }
-export async function updateWithAttachments<T extends IEntity & { id: number; attachments?: Array<Entity> }>(api: string, item: T, updateFunc: () => Promise<T | null>): Promise<T | null> {
+export async function updateWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, update: () => Promise<T | null>): Promise<T | null> {
     await saveAll(api, item)
-    return await updateFunc()
+    item.attachments?.forEach((x) => delete x.attachment?._file) // free the blobs, like insert
+    return await update()
 }
-export async function saveAll<T extends IEntity & { id: number; attachments?: Array<Entity> }>(api: string, item: T) {
-    if (item.attachments?.length) {
-        await save(`${api}/${item!.id}/files`, item.attachments!)
-    }
-}
-export async function save(api: string, items: Array<Entity>) {
-    const promises = items.map((item) => {
-        if (item.attachment?._file != null) {
-            const axios: any = useAxios()
-            return async () => {
-                if (item.fileName != null && item.fileName != item.attachment!._file!.name) {
-                    item.attachment!._file = await fileToBlob(item.attachment!._file as File, item.fileName)
-                }
-                const {
-                    data: { item: saved },
-                } = await axios.upload(api, [item.attachment?._file], { ...item })
-                item.objectId = saved.objectId
-                item.id = saved.id
-                item.attachmentId = saved.attachmentId
-                if (item.attachment != null && saved?.attachment != null) {
-                    item.attachment.id = saved.attachment.id
-                }
-            }
-        }
-        return () => null
-    })
-    await enqueue(promises)
+async function saveAll(api: string, item: { id: number; attachments?: Array<Entity> }) {
+    const pending = (item.attachments ?? []).filter((x) => x.attachment?._file != null && !x._deleted)
+    await enqueue(
+        pending.map((x) => async () => {
+            // re-wrap under the edited name so the uploaded file carries it
+            if (x.fileName && x.fileName !== x.attachment!._file!.name) x.attachment!._file = await fileToBlob(x.attachment!._file as File, x.fileName)
+            const {
+                data: { item: saved },
+            } = await useAxios().upload(`${api}/${item.id}/files`, [x.attachment!._file!]) // field name "file"; baseURL-relative
+            Object.assign(x, { id: saved.id, objectId: saved.objectId, attachmentId: saved.attachmentId })
+        })
+    )
 }
 export async function download(item: Entity) {
-    const axios: any = useAxios()
-    const file = item.attachment?._file || (await axios.getFile(item.uri))
-    await saveAs(file, item.fileName)
-}
-
-// export function toEntity(item: object = {}) {
-//     return item instanceof Entity ? item : Object.assign(new Entity(), item || {})
-// }
-
-type Input<T> = {
-    props: { modelValue?: Array<T> }
-    emit: any
-}
-export function useEntityAttachments<T extends Entity>({ props, emit }: Input<T>) {
-    const items = computed({
-        get() {
-            return props.modelValue?.map((x) => Entity.create(x)) || ([] as Array<T>)
-        },
-        set(value) {
-            emit("update:modelValue", value)
-        },
-    })
-
-    async function triggerBrowse({ multiple, accept }: { multiple?: boolean; accept?: string } = {}) {
-        const files = await browse({ multiple, accept })
-        handleBrowse(files)
-    }
-    function handleBrowse(files: Array<Blob>) {
-        const entityAttachments = files.map((file) => createEntity(file))
-        entityAttachments.forEach((item) => {
-            const minId = Math.min((min(items.value, (x) => x.id) as number) || 0, 0) - 1
-            item.id = minId
-        })
-        emit("update:modelValue", [...items.value, ...entityAttachments])
-    }
-
-    return {
-        items,
-        triggerBrowse,
-        handleBrowse,
-    }
+    await saveAs(item.attachment?._file ?? (await useAxios().getFile(item.uri!)), item.fileName)
 }
