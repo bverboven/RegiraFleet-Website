@@ -7,11 +7,13 @@
     },
     {
         "username": "bwr_read",
+        "password": "admin",
         "title": "Brandweer (read)",
         "tenantId": "1b615c0096c04eb2975ef84463aa8257"
     },
     {
         "username": "bwr_write",
+        "password": "admin",
         "title": "Brandweer (write)",
         "tenantId": "1b615c0096c04eb2975ef84463aa8257"
     },
