@@ -162,8 +162,8 @@ const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore 
 
 const { service: operatorService } = useOperatorStore()
 const { service: vehicleService } = useVehicleStore()
-const selectedOperator = ref<Operator | null>(null)
-const selectedVehicle = ref<Vehicle | null>(null)
+const selectedOperator = ref<Operator | undefined>(undefined)
+const selectedVehicle = ref<Vehicle | undefined>(undefined)
 const allowedInterventionTypeIds = computed<Array<number>>(() => {
     let ids: Array<number> = []
     if (selectedOperator.value?.interventionTypes?.length) {
@@ -196,7 +196,7 @@ watchEffect(async () => {
     if (item.value.operatorId) {
         selectedOperator.value = await operatorService.details(item.value.operatorId)
     } else {
-        selectedOperator.value = null
+        selectedOperator.value = undefined
     }
 })
 // vehicle details
@@ -204,7 +204,7 @@ watchEffect(async () => {
     if (item.value.vehicleId) {
         selectedVehicle.value = await vehicleService.details(item.value.vehicleId)
     } else {
-        selectedVehicle.value = null
+        selectedVehicle.value = undefined
     }
 })
 

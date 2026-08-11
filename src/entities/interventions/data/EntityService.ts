@@ -9,14 +9,14 @@ export class EntityService extends EntityServiceBase<Entity> {
         console.debug("InterventionService", this, { config })
     }
 
-    override async insert(item: Entity): Promise<Entity | null> {
+    override async insert(item: Entity): Promise<Entity | undefined> {
         return await insertWithAttachments(this.config.api, item, async () => await super.insert(item))
     }
-    override async update(item: Entity): Promise<Entity | null> {
+    override async update(item: Entity): Promise<Entity | undefined> {
         return await updateWithAttachments(this.config.api, item, async () => await super.update(item))
     }
 
-    protected override processItem(item: Entity | null) {
+    protected override processItem(item: Entity | undefined) {
         item = super.processItem(item);
         
         if (item != null) {

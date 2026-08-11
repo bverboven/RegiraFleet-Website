@@ -42,18 +42,18 @@ export function useEntityAttachments({ props, emit }: { props: { modelValue?: Ar
 }
 
 // Insert needs the parent's id before it can POST files → save the record first, then upload.
-export async function insertWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, insert: () => Promise<T | null>): Promise<T | null> {
+export async function insertWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, insert: () => Promise<T | undefined>): Promise<T | undefined> {
     const attachments = item.attachments
     if (!attachments?.length) return await insert()
     delete item.attachments
     const saved = await insert()
-    if (saved == null) return null // insert failed — nothing to attach files to
+    if (saved == null) return undefined // insert failed — nothing to attach files to
     saved.attachments = attachments
     await saveAll(api, saved)
     attachments.forEach((x) => delete x.attachment?._file) // free the blobs
     return saved
 }
-export async function updateWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, update: () => Promise<T | null>): Promise<T | null> {
+export async function updateWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, update: () => Promise<T | undefined>): Promise<T | undefined> {
     await saveAll(api, item)
     item.attachments?.forEach((x) => delete x.attachment?._file) // free the blobs, like insert
     return await update()
