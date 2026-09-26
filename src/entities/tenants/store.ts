@@ -1,7 +1,7 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
 import { useAxios } from "regira_modules/vue/http"
-import { useAuthStore } from "regira_modules/vue/auth"
+import { onAuthenticated, useAuthStore } from "regira_modules/vue/auth"
 import Entity from "./Entity"
 
 export const useEntityStore = defineStore(Entity.name, () => {
@@ -18,17 +18,9 @@ export const useEntityStore = defineStore(Entity.name, () => {
     }
     const activeTenant = computed(() => items.value?.find((x) => x.id == getClaimValue("tenant")))
 
-    // load tenants when authenticated (tenant-plugin should be registered before auth-plugin)
-    authStore.$onAction(
-        ({ name, after }) =>
-            ["login", "refresh", "validateToken"].includes(name) &&
-            after(() => {
-                console.debug("authStore.$onAction", { name, authStore })
-                if (authStore.isAuthenticated) {
-                    load()
-                }
-            })
-    )
+    // load tenants once a token is present: sign-in, refresh (tenant switch), or a stored token restored on reload;
+    // re-validating the same token does not reload them
+    onAuthenticated(() => load())
 
     return {
         items,

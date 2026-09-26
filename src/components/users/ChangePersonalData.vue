@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue"
 import { useAxios } from "regira_modules/vue/http"
-import { LoadingContainer, Feedback, useFeedback } from "regira_modules/vue/ui"
+import { LoadingContainer, Feedback, toFeedbackError, useFeedback } from "regira_modules/vue/ui"
 import { useAuthStore } from "regira_modules/vue/auth"
 import { useLang } from "regira_modules/vue/lang"
 import { useConfig } from "@/app-config"
@@ -78,8 +78,9 @@ async function handleSubmit() {
         // refresh token to renew it's claims
         await refreshToken({ tenantId: authData.get("tenant") })
     } catch (err: any) {
-        console.error("Changing personal data failed", { err })
-        feedback.fail(translate("auth.changePersonalDataFailed"), err.response?.data)
+        // not the error itself: an axios error carries the request, Authorization header included
+        console.error("Changing personal data failed", { status: err.response?.status, message: err.message })
+        feedback.fail(translate("auth.changePersonalDataFailed"), toFeedbackError(err))
     } finally {
         isLoading.value = false
     }
