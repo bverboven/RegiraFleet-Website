@@ -17,6 +17,8 @@ export class Vehicle extends EntityBase {
 
     created: Date
     lastModified?: Date
+    // sent back on save: the API answers 409 when someone else saved in between
+    concurrencyToken?: string
 
     brand?: Brand
     vehicleType?: VehicleType

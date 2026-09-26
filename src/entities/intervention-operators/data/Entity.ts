@@ -17,6 +17,8 @@ export class InterventionOperator extends EntityBase {
     created?: Date
     lastModified?: Date
     isArchived?: boolean
+    // sent back on save: the API answers 409 when someone else saved in between
+    concurrencyToken?: string
 
     addresses?: Array<Address>
     contactData?: Array<ContactData>

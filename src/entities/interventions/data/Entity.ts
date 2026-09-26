@@ -21,6 +21,8 @@ export class Intervention extends EntityBase {
     lastModified?: Date
 
     isArchived?: boolean
+    // sent back on save: the API answers 409 when someone else saved in between
+    concurrencyToken?: string
 
     vehicle?: Vehicle
     operator?: Operator
