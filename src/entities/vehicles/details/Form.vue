@@ -74,7 +74,7 @@
                                         <template #selector="{ add, exclude }">
                                             <InterventionTypeSelector :filter-defaults="{ exclude }"
                                                 :placeholder="$t('selectType')"
-                                                @select="(it?: InterventionType) => it && add(VehicleInterventionType.create({ interventionTypeId: it.id, interventionType: it, vehicleId: item.id }))" />
+                                                @select="(it?: InterventionType) => it && add(linkTo(it))" />
                                         </template>
                                     </InputSelectorInline>
                                     <FormLabel :label="$t('allowedInterventionTypes')" />
@@ -138,6 +138,10 @@ const props = withDefaults(
 const { service: entityService } = useEntityStore()
 
 const { item, feedback, handleCancel, handleSubmit, handleRemove, handleRestore } = useForm<Entity>({ entityService, props, emit })
+
+function linkTo(it: InterventionType) {
+    return VehicleInterventionType.create({ interventionTypeId: it.id, interventionType: it, vehicleId: item.value.id })
+}
 
 // Tabs
 const { translate } = useLang()
