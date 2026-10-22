@@ -20,7 +20,12 @@ export function useEntityAttachments({ props, emit }: { props: { modelValue?: Ar
     watch(
         () => props.modelValue,
         (v) => {
-            if (v && v !== items.value) items.value = v.map((x) => Entity.create(x))
+            if (v && v !== items.value) {
+                // an object URL holds its file in memory until revoked: release the staged previews the new rows no longer show
+                const kept = new Set(v.map((x) => x.uri))
+                for (const x of items.value) if (x.uri?.startsWith("blob:") && !kept.has(x.uri)) URL.revokeObjectURL(x.uri)
+                items.value = v.map((x) => Entity.create(x))
+            }
         }
     )
     const sync = () => emit("update:modelValue", items.value)
@@ -45,13 +50,17 @@ export function useEntityAttachments({ props, emit }: { props: { modelValue?: Ar
 export async function insertWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, insert: () => Promise<T | undefined>): Promise<T | undefined> {
     const attachments = item.attachments
     if (!attachments?.length) return await insert()
-    delete item.attachments
-    const saved = await insert()
-    if (saved == null) return undefined // insert failed — nothing to attach files to
-    saved.attachments = attachments
-    await saveAll(api, saved)
-    attachments.forEach((x) => delete x.attachment?._file) // free the blobs
-    return saved
+    delete item.attachments // the insert must POST without attachments; restored below so a failed save never loses the staged files
+    try {
+        const saved = await insert()
+        if (saved == null) return undefined // insert failed — nothing to attach files to
+        saved.attachments = attachments
+        await saveAll(api, saved)
+        attachments.forEach((x) => delete x.attachment?._file) // free the blobs
+        return saved
+    } finally {
+        item.attachments = attachments // the caller's live entity keeps its rows on every failure path
+    }
 }
 export async function updateWithAttachments<T extends { id: number; attachments?: Array<Entity> }>(api: string, item: T, update: () => Promise<T | undefined>): Promise<T | undefined> {
     await saveAll(api, item)

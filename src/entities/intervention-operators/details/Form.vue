@@ -56,7 +56,7 @@
                             <p v-if="readonly && !item.interventionTypes?.length" class="text-info">{{ $t("noItems") }}</p>
                             <div v-else class="row" style="min-height: 10rem">
                                 <div class="col mb-2">
-                                    <InputSelectorInline v-model="item.interventionTypes"
+                                    <InputSelectorInline v-model="item.interventionTypes" :readonly="readonly" :labels="{ remove: $t('remove'), restore: $t('restore') }"
                                         :row-key="(r) => r.interventionTypeId" :exclude-key="(r) => r.interventionTypeId">
                                         <template #chip="{ row }">
                                             <InterventionTypeButton :modelValue="row.interventionType" />

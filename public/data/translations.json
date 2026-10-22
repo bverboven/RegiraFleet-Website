@@ -598,5 +598,65 @@
         "en": "Welcome {name}",
         "nl": "Welkom {name}",
         "fr": "Bienvenue {name}"
+    },
+    "clear": {
+        "en": "Clear",
+        "nl": "Wissen",
+        "fr": "Effacer"
+    },
+    "select": {
+        "en": "Select",
+        "nl": "Selecteren",
+        "fr": "Sélectionner"
+    },
+    "remove": {
+        "en": "Remove",
+        "nl": "Verwijderen",
+        "fr": "Supprimer"
+    },
+    "search": {
+        "en": "Search",
+        "nl": "Zoeken",
+        "fr": "Rechercher"
+    },
+    "advancedSearch": {
+        "en": "Advanced search",
+        "nl": "Geavanceerd zoeken",
+        "fr": "Recherche avancée"
+    },
+    "close": {
+        "en": "Close",
+        "nl": "Sluiten",
+        "fr": "Fermer"
+    },
+    "auth.notConfirmed": {
+        "en": "This account is not confirmed yet. Follow the link we mailed you.",
+        "nl": "Dit account is nog niet bevestigd. Volg de link die we je mailden.",
+        "fr": "Ce compte n'est pas encore confirmé. Suivez le lien que nous vous avons envoyé."
+    },
+    "auth.confirmEmail": {
+        "en": "Confirm email address",
+        "nl": "E-mailadres bevestigen",
+        "fr": "Confirmer l'adresse e-mail"
+    },
+    "auth.confirmEmailMsg": {
+        "en": "Choose your password to finish your account. Already have one? Leave both fields empty.",
+        "nl": "Kies je wachtwoord om je account te vervolledigen. Heb je er al een? Laat beide velden leeg.",
+        "fr": "Choisissez votre mot de passe pour terminer votre compte. Vous en avez déjà un ? Laissez les deux champs vides."
+    },
+    "auth.emailConfirmed": {
+        "en": "Your email address is confirmed. You can sign in now.",
+        "nl": "Je e-mailadres is bevestigd. Je kan nu aanmelden.",
+        "fr": "Votre adresse e-mail est confirmée. Vous pouvez vous connecter."
+    },
+    "auth.confirmEmailFailed": {
+        "en": "Confirming your email address failed",
+        "nl": "Je e-mailadres bevestigen is mislukt",
+        "fr": "La confirmation de votre adresse e-mail a échoué"
+    },
+    "auth.confirmEmailNoToken": {
+        "en": "This link is incomplete: open the link from the invitation mail.",
+        "nl": "Deze link is onvolledig: open de link uit de uitnodigingsmail.",
+        "fr": "Ce lien est incomplet : ouvrez le lien de l'e-mail d'invitation."
     }
 }

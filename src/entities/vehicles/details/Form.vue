@@ -66,7 +66,7 @@
                         <FormSection :title="$t('interventionType')">
                             <div class="row">
                                 <div class="col mb-2">
-                                    <InputSelectorInline v-model="item.interventionTypes"
+                                    <InputSelectorInline v-model="item.interventionTypes" :readonly="readonly" :labels="{ remove: $t('remove'), restore: $t('restore') }"
                                         :row-key="(r) => r.interventionTypeId" :exclude-key="(r) => r.interventionTypeId">
                                         <template #chip="{ row }">
                                             <InterventionTypeButton :modelValue="row.interventionType" />

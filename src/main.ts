@@ -23,11 +23,12 @@ import { focus, grow, clickOutside } from "regira_modules/vue/directives"
 import { plugin as isOnlinePlugin } from "regira_modules/vue/online"
 import { plugin as debugPlugin } from "regira_modules/vue/debug"
 import { preloaderPlugin, usePreloader, defaultPoolCache, PoolCache } from "regira_modules/vue/entities"
-import { plugin as authPlugin, LocalStorageTokenManager } from "regira_modules/vue/auth"
+import { plugin as authPlugin, LocalStorageTokenManager, onAuthenticated } from "regira_modules/vue/auth"
 import { formatDateTime } from "regira_modules/vue/formatters"
 import appConfig, { createConfig, useConfig } from "@/app-config"
 import { routerFactory } from "@/router"
 import { plugin as userPlugin } from "@/infrastructure/user-plugin"
+import { shownAccount } from "@/infrastructure/account"
 import { plugin as statisticsPlugin } from "@/statistics"
 import { default as entityPlugins, tenantPlugin } from "@/entities"
 
@@ -138,6 +139,19 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
         // debug (needs the router; shows only when ?debug=1 / isDebug)
         app.use(debugPlugin, { isDebug: config.isDebug })
 
+        // The pool holds the active tenant's rows (vehicle types, countries, ...) for this tab: another account, or a tenant
+        // switch, drops them and preloads the new tenant's, or the pickers keep offering the previous tenant's rows
+        let pooledAccount: string | undefined // the user and tenant whose rows the pool holds
+        let pooling: Promise<unknown> = Promise.resolve()
+        function poolFor(account: string | undefined) {
+            if (account !== pooledAccount) {
+                defaultPoolCache.clear()
+                pooledAccount = account
+                pooling = account ? usePreloader().preload([Country, VehicleType] as any) : Promise.resolve()
+            }
+            return pooling
+        }
+
         // auth last (needs the router on the app)
         app.use(authPlugin, {
             enabled: true,
@@ -152,16 +166,16 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
                     app.config.globalProperties.$feedback.success(welcomeMsg)
 
                     // preloading
-                    const preloaderTypes = [Country, VehicleType]
-                    const { preload } = usePreloader()
-                    await preload(preloaderTypes as any)
+                    await poolFor(shownAccount(auth))
 
                     // ready
-                    app.config.globalProperties.$setCulture(auth.culture!)
+                    const culture = Array.isArray(auth.culture) ? (auth.culture[0] as string) : auth.culture
+                    if (culture) {
+                        app.config.globalProperties.$setCulture(culture)
+                    }
                     app.config.globalProperties.$setAppStatus(AppStatus.Ready)
 
-                    const lang = (Array.isArray(auth.culture) ? (auth.culture![0] as string) : (auth.culture as string)).split("-")[0]
-                    setLangCode(lang || "en")
+                    setLangCode(culture?.split("-")[0] || "en")
 
                     document.title = translateMessage(processedConfig.title)
 
@@ -174,10 +188,13 @@ fetch(`${appConfig.baseUrl}/config.json?v=${formatDateTime(new Date(), "yyyyMMdd
                         icons: (app.config.globalProperties.$icons as any).map,
                     })
                 } else {
+                    poolFor(undefined) // the next account must not see the previous one's rows
                     app.config.globalProperties.$feedback.fail(`User logged out`)
                 }
             },
         })
+        // onAuthenticationChange only hears signing in and out; a tenant switch refreshes the token, which this hears
+        onAuthenticated(() => poolFor(shownAccount()), { immediate: false })
         app.use(userPlugin)
 
         // mount
