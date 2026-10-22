@@ -43,12 +43,12 @@ const props: ForgotPasswordFormProps = defineProps<{
 
 const config = useConfig()
 const router = useRouter()
-const { translate, translateMessage } = useLang()
+const { translate } = useLang()
 
 const resetPasswordRoute = router.resolve({ name: "resetPassword" })
 const siteUrl = `${location.protocol}//${location.host}${config.baseUrl}${resetPasswordRoute.fullPath}`
 
-const { username, isLoading, isFormValid, isSuccess, handleSubmit } = useForgotPasswordForm(props, emit, { siteUrl, siteName: translateMessage(config.title) })
+const { username, isLoading, isFormValid, isSuccess, handleSubmit } = useForgotPasswordForm(props, emit, { siteUrl }) // the mail subject comes from the API's AccountEmails:SiteName
 
 const feedback = useFeedback()
 watchEffect(() => {

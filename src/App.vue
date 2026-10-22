@@ -22,7 +22,7 @@
         </footer>
 
         <Teleport to="#loginModal">
-            <LoginModal v-if="showLogin" :title="$t('signIn')">
+            <LoginModal v-if="showLogin" :title="$t('signIn')" :show-close="!authStore.isRequired">
                 <DemoLoginForm v-if="isDemo" :username="username" class="pt-2" @forgot-password="openForgotPassword" />
                 <LoginForm v-else :username="username" class="pt-2" @forgot-password="openForgotPassword" />
             </LoginModal>

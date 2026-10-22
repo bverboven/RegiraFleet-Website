@@ -3,8 +3,11 @@
         <!-- <p class="text-info">{{ $t("auth.demoInfoMessage") }}</p> -->
         <div class="mb-3 position-relative" v-if="failed">
             <div class="bg-danger border rounded text-light p-2">
-                {{ $t("auth.signInErrorMsg") }}
-                <span v-if="isLockedOut">{{ $t("auth.tryAgainInMin", { minutes: 5 }) }}</span>
+                <template v-if="isNotAllowed">{{ $t("auth.notConfirmed") }}</template>
+                <template v-else>
+                    {{ $t("auth.signInErrorMsg") }}
+                    <span v-if="isLockedOut">{{ $t("auth.tryAgainInMin", { minutes: 5 }) }}</span>
+                </template>
             </div>
         </div>
         <!-- <div class="row mb-3">
@@ -16,10 +19,10 @@
             </div>
         </div> -->
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ $t("auth.username") }}</label>
+            <label for="login-username" class="col-sm-3 col-form-label">{{ $t("auth.username") }}</label>
             <div class="col-sm-9">
                 <div class="input-group">
-                    <input class="form-control" autocomplete="username email" v-model="username"
+                    <input id="login-username" name="username" class="form-control" autocomplete="username" v-model="username"
                         :disabled="signingIn" />
                     <template v-if="demoUsers?.length">
                         <!-- <select v-model="user" class="form-select" @change="handleSelectUser(user!)">
@@ -40,9 +43,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{{ $t("auth.password") }}</label>
+            <label for="login-password" class="col-sm-3 col-form-label">{{ $t("auth.password") }}</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" autocomplete="password current-password" v-model="password"
+                <input id="login-password" name="password" type="password" class="form-control" autocomplete="current-password" v-model="password"
                     :disabled="signingIn" />
             </div>
         </div>
@@ -79,7 +82,7 @@ const props: LoginFormProps = defineProps<{
 
 type IDemoUser = { username: string; title: string; tenantId: string }
 
-const { username, password, signingIn, failed, isLockedOut, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
+const { username, password, signingIn, failed, isLockedOut, isNotAllowed, handleSubmit, handleForgotPassword } = useLoginForm(props, emit)
 
 const { baseUrl } = useConfig()
 const showUsersList = ref(false)

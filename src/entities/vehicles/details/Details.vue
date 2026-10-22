@@ -10,7 +10,8 @@
 
 <script setup lang="ts">
 import { RouterView, useRouter } from "vue-router"
-import { onAuthenticated } from "regira_modules/vue/auth"
+import { onAuthenticated, useAuth, useGlobalAuth } from "regira_modules/vue/auth"
+import { shownAccount } from "@/infrastructure/account"
 import { LoadingContainer, Feedback } from "regira_modules/vue/ui"
 import { useDetails } from "regira_modules/vue/entities/details"
 import { FormStates } from "regira_modules/vue/entities/form"
@@ -22,8 +23,22 @@ const { service } = useEntityStore()
 
 const { item, isLoading, overviewUrl, load } = useDetails(service)
 
-// (re)load once a token is present: sign-in, refresh, or a stored token restored on reload
-onAuthenticated(() => item.value == null && load(), { immediate: false })
+// (re)load once a token is present: sign-in, refresh, or a stored token restored on reload. Another
+// account (user and tenant)'s record goes first: it must not stay on screen, or be saved
+let shownFor = shownAccount() // whose record is on screen
+const shownToken = useAuth()?.tokenManager?.token // the stored token the mount fetch sends before onAuthenticated validates it
+onAuthenticated(
+    () => {
+        const account = shownAccount()
+        if (useGlobalAuth()?.authData?.token === shownToken) shownFor = account
+        if (account !== shownFor) item.value = undefined
+        if (item.value == null) {
+            shownFor = account
+            load()
+        }
+    },
+    { immediate: false }
+)
 
 const router = useRouter()
 function handleRemove() {
